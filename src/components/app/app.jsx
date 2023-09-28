@@ -12,7 +12,7 @@ function App() {
       <AppHeader/>
 
       <main className={styles.main}>
-        <BurgerIngredients />
+        <BurgerIngredients data={data} />
         <BurgerConstructor />
       </main>
     </React.Fragment>

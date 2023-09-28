@@ -6,7 +6,7 @@ function AppHeader(props) {
   return (
     <div className={styles.wrapper}>
       <header className={styles.header}>
-        <nav className={styles.nav}>
+        <nav><ul className={styles.list}>
           {/* #todo вместо styles.item_active и type="primary" - подставить переменные(?) которые по умолчанию имеют одно значение, а при выборе меняются (активное, подсвеченное состояние)*/}
           <li><a className={`${styles.item} ${styles.item_active}`}>
             <BurgerIcon type="primary" />
@@ -16,7 +16,7 @@ function AppHeader(props) {
             <ListIcon type="secondary" />
             Лента заказов
           </a></li>
-        </nav>
+        </ul></nav>
         <Logo />
         <button className={`${styles.item} ${styles.button}`}>
           <ProfileIcon type="secondary" />
