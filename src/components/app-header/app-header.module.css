@@ -1,0 +1,46 @@
+.wrapper {
+  background-color: #1C1C21;
+  margin: 40px;
+}
+
+.header {
+  max-width: 1280px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  /* gap: ; */
+
+  composes: pb-4 pt-4 from global;
+}
+
+.nav {
+  display: flex;
+  list-style-type: none;
+  gap: 8px;
+}
+
+.item {
+  display: flex;
+  gap: 8px;
+  border-radius: 40px;
+  color: var(--text-inactive-color);
+  composes: text text_type_main-default pl-5 pr-5 pb-4 pt-4 from global;
+}
+
+.item:hover {
+  opacity: .6;
+}
+
+.item_active {
+  color: var(--text-primary-color);
+}
+
+.button {
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+
+  cursor: pointer;
+  transition: opacity .35s ease-out;
+}

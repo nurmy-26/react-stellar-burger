@@ -1,7 +1,16 @@
 .app {
-  display: flex;
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   flex-direction: column;
   height: 100vh;
   background-color: #131316;
-  color: #f2f2f3;
+  color: #f2f2f3; */
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  max-width: 1240px;
+  gap: 40px;
 }
