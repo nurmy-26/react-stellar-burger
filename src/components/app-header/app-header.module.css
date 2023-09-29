@@ -1,6 +1,6 @@
 .wrapper {
   background-color: #1C1C21;
-  /* margin: 40px; */
+  /* margin: calc(var(--offset-base-size)*10); */
 }
 
 .header {
@@ -24,13 +24,16 @@
 .item {
   display: flex;
   gap: 8px;
-  border-radius: 40px;
+  border-radius: calc(var(--offset-base-size)*10);
   color: var(--text-dark-grey-secondary-text, #8585AD);
   composes: text text_type_main-default pl-5 pr-5 pb-4 pt-4 from global;
+
+  cursor: pointer;
+  transition: var(--common-transition);
 }
 
 .item:hover {
-  opacity: .6;
+  color: var(--text-primary-light-standart-text, #F2F2F3);
 }
 
 .item_active {
@@ -41,7 +44,4 @@
   border: 0;
   border-radius: 0;
   background-color: transparent;
-
-  cursor: pointer;
-  transition: opacity .35s ease-out;
 }

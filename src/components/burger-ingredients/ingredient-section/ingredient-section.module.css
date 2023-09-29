@@ -9,6 +9,6 @@
   row-gap: 32px;
   margin: 0;
   padding-top: 24px;
-  padding-bottom: 40px;
-  composes: pl-4 pr-4 from global;
+  padding-bottom: calc(var(--offset-base-size)*10);
+  composes: pl-4 pr-2 from global;
 }

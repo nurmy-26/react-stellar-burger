@@ -1,5 +1,5 @@
 html {
-  margin: 40px;
+  margin: calc(var(--offset-base-size)*10);
 }
 
 body {
