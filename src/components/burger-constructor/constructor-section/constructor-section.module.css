@@ -1,26 +1,18 @@
 .wrapper {
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: calc(var(--offset-base-size)*4);
 
-  margin: 0;
+  margin: calc(var(--offset-base-size)*4) 0;
   padding-top: 0;
   padding-right: calc(var(--offset-base-size)*2);
-  padding-bottom: calc(var(--offset-base-size)*10);
+  /* padding-bottom: calc(var(--offset-base-size)*10); */
   padding-left: calc(var(--offset-base-size)*4);
   list-style-type: none;
 
   max-width: 600px;
-  max-height: 60vh;
+  /* 464px в высоту */
+  max-height: calc(var(--offset-base-size)*116);
   overflow: auto;
   composes: custom-scroll from global;
-}
-
-.wrapper::-webkit-scrollbar {
-  /* margin-top: calc(var(--offset-base-size)*4);
-  margin-bottom: calc(var(--offset-base-size)*4); */
-  position: absolute;
-  top: 96px;
-  right: 0;
 }

@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: calc(var(--offset-base-size)*10);
+  margin-top: calc(var(--offset-base-size)*10);
+  margin-bottom: calc(var(--offset-base-size)*12.5);
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--offset-base-size)*2);
+  composes: text text_type_digits-medium from global;
+}
