@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./burger-ingredients.module.css";
-// import { data } from "../../utils/data";
 import IngredientSection from "./ingredient-section/ingredient-section";
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 

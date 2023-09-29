@@ -1,16 +1,18 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./ingredient-section.module.css";
 import IngredientCard from "../ingredient-card/ingredient-card";
+import {ingredientPropType} from "../../../utils/prop-types";
 
 // на вход data и type (какой тип будем прогонять через создание - булки, соуса и тд)
-function IngredientSection(props) {
-  const filteredList = props.data.filter(item => item.type == props.type);
+function IngredientSection({data, type}) {
+  const filteredList = data.filter(item => item.type == type);
   const section = filteredList.map((item) => {
     return <IngredientCard itemInfo={item} key={item._id} />;
   });
 
   let sectionTitle;
-  switch (props.type) {
+  switch (type) {
     case "bun":
       sectionTitle = "Булки";
       break;
@@ -31,6 +33,10 @@ function IngredientSection(props) {
       </ul>
     </section>
   );
+}
+
+IngredientSection.propTypes = {
+  data: PropTypes.arrayOf(ingredientPropType).isRequired
 }
 
 export default IngredientSection;

@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./constructor-item.module.css";
 import { DragIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 
-// на вход - ...
+// на вход - объект из data
 function ConstructorItem({item}) {
   const {name, price, image} = item;
 

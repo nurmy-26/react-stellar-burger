@@ -1,7 +1,3 @@
 html {
   margin: calc(var(--offset-base-size)*10);
 }
-
-body {
-  background-color: #131316;
-}

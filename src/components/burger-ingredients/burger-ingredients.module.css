@@ -44,11 +44,10 @@
 }
 
 .wrapper::-webkit-scrollbar-track {
-  margin-top: calc(var(--offset-base-size)*-4);
   margin-bottom: calc(var(--offset-base-size)*13);
   /* height: 400px; */
 }
 
-.wrapper::-webkit-scrollbar-button {
-  /* height: 100px; */
-}
+/* .wrapper::-webkit-scrollbar-button {
+  height: 100px;
+} */

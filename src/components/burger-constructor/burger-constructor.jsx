@@ -5,7 +5,10 @@ import ConstructorTotal from "./constructor-total/constructor-total";
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 
 function BurgerConstructor(props) {
+// фиксированное число - временное решение
+// будет подниматься из дочернего ConstructorSection, суммируя стоимость всех элементов
   const total = 610;
+
   return (
     <section aria-label="Ингредиенты" className={styles.section}>
       <div className={styles.item}>
