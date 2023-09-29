@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./ingredient-card.module.css";
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
+
 function IngredientCard({itemInfo}) {
   const {name, price, image} = itemInfo;
   return (

@@ -37,7 +37,6 @@
 
 .wrapper {
   max-width: 600px;
-  /* max-height: 70vh; */
   max-height: calc(var(--offset-base-size)*178);
   overflow: auto;
   composes: custom-scroll from global;
@@ -45,9 +44,4 @@
 
 .wrapper::-webkit-scrollbar-track {
   margin-bottom: calc(var(--offset-base-size)*13);
-  /* height: 400px; */
 }
-
-/* .wrapper::-webkit-scrollbar-button {
-  height: 100px;
-} */

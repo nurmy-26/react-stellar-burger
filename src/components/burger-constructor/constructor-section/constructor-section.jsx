@@ -4,6 +4,7 @@ import styles from "./constructor-section.module.css";
 import ConstructorItem from "../constructor-item/constructor-item";
 import {ingredientPropType} from "../../../utils/prop-types";
 
+
 // на вход data
 function ConstructorSection({data}) {
   // const section = props.data.map((item) => {

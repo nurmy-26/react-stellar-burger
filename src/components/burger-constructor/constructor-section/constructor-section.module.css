@@ -6,12 +6,10 @@
   margin: calc(var(--offset-base-size)*4) 0;
   padding-top: 0;
   padding-right: calc(var(--offset-base-size)*2);
-  /* padding-bottom: calc(var(--offset-base-size)*10); */
   padding-left: calc(var(--offset-base-size)*4);
   list-style-type: none;
 
   max-width: 600px;
-  /* 464px в высоту */
   max-height: calc(var(--offset-base-size)*116);
   overflow: auto;
   composes: custom-scroll from global;

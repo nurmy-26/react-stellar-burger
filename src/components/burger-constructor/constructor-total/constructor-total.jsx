@@ -1,6 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./constructor-total.module.css";
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+
 
 // на вход data
 function ConstructorTotal(props) {
@@ -18,5 +20,9 @@ function ConstructorTotal(props) {
 
   );
 };
+
+ConstructorTotal.propTypes = {
+  children: PropTypes.number.isRequired,
+  }
 
 export default ConstructorTotal;

@@ -4,6 +4,7 @@ import ConstructorSection from "./constructor-section/constructor-section";
 import ConstructorTotal from "./constructor-total/constructor-total";
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 
+
 function BurgerConstructor(props) {
 // фиксированное число - временное решение
 // будет подниматься из дочернего ConstructorSection, суммируя стоимость всех элементов

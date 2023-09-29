@@ -4,6 +4,7 @@ import styles from "./ingredient-section.module.css";
 import IngredientCard from "../ingredient-card/ingredient-card";
 import {ingredientPropType} from "../../../utils/prop-types";
 
+
 // на вход data и type (какой тип будем прогонять через создание - булки, соуса и тд)
 function IngredientSection({data, type}) {
   const filteredList = data.filter(item => item.type == type);
@@ -36,7 +37,8 @@ function IngredientSection({data, type}) {
 }
 
 IngredientSection.propTypes = {
-  data: PropTypes.arrayOf(ingredientPropType).isRequired
+  data: PropTypes.arrayOf(ingredientPropType).isRequired,
+  type: PropTypes.string.isRequired
 }
 
 export default IngredientSection;
