@@ -18,7 +18,7 @@ function AppHeader() {
             Лента заказов
           </a></li>
         </ul></nav>
-        <Logo />
+        <Logo className={styles.item_centered} />
         <button className={`${styles.item} ${styles.button}`}>
           <ProfileIcon type="secondary" />
           Личный кабинет

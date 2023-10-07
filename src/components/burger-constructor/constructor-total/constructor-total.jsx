@@ -11,7 +11,6 @@ function ConstructorTotal(props) {
     <div className={styles.wrapper}>
       <span className={styles.total}>
         {props.children}
-        {/* в библиотеке нет большой иконки валюты */}
         <CurrencyIcon type="primary" />
       </span>
 

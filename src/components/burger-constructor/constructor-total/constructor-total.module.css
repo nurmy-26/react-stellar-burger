@@ -13,3 +13,9 @@
   gap: calc(var(--offset-base-size)*2);
   composes: text text_type_digits-medium from global;
 }
+
+/* через className для CurrencyIcon не задается */
+.total svg {
+  width: calc(var(--offset-base-size)*9);
+  height: calc(var(--offset-base-size)*9);
+}
