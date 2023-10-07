@@ -12,6 +12,10 @@
   composes: pb-4 pt-4 from global;
 }
 
+.nav {
+  flex: 50%;
+}
+
 .list {
   margin: 0;
   padding: 0;
@@ -37,6 +41,19 @@
 
 .item_active {
   color: var(--text-primary-light-standart-text, #F2F2F3);
+}
+
+.item_centered {
+  flex: 33%; /* выравниваем по центру хедера несмотря на разное расстояние от элементов по бокам */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile {
+  flex: 50%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .button {
