@@ -1,0 +1,25 @@
+.header {
+  width: 640px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: calc(var(--offset-base-size)*9);
+}
+
+.btn {
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.btn svg {
+  transition: all .3s ease-out;
+}
+
+.btn:hover svg {
+  fill: #8585AD;
+}

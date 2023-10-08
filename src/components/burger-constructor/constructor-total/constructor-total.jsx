@@ -6,7 +6,7 @@ import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-co
 
 // на вход data
 function ConstructorTotal(props) {
-
+  const {onOpen} = props;
   return (
     <div className={styles.wrapper}>
       <span className={styles.total}>
@@ -14,7 +14,7 @@ function ConstructorTotal(props) {
         <CurrencyIcon type="primary" />
       </span>
 
-      <Button htmlType="button" type="primary" size="large">Оформить заказ</Button>
+      <Button onClick={onOpen} htmlType="button" type="primary" size="large">Оформить заказ</Button>
     </div>
 
   );
