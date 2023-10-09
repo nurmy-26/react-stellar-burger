@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import styles from "./modal.module.css";
 import ModalHeader from "./modal-header/modal-header";
 import ModalOverlay from "./modal-overlay/modal-overlay";
-import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 
 function Modal(props) {
@@ -26,7 +25,6 @@ function Modal(props) {
         <div className={styles.modal}>
           <ModalHeader onClose={onClose}>{header}</ModalHeader>
           {children}
-          <CloseIcon type="primary" onClick={onClose} />
         </div>
 
         <ModalOverlay onClose={onClose} />

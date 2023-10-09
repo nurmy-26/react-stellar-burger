@@ -32,13 +32,16 @@
   composes: text text_type_main-default pl-5 pr-5 pb-4 pt-4 from global;
 
   cursor: pointer;
-  transition: var(--common-transition);
 }
 
 .item:hover {
   color: var(--text-primary-light-standart-text, #F2F2F3);
 }
+.item:hover svg {
+  fill: var(--text-primary-light-standart-text, #F2F2F3);
+}
 
+/* стили для выбранного пункта навигации */
 .item_active {
   color: var(--text-primary-light-standart-text, #F2F2F3);
 }

@@ -8,7 +8,6 @@ function AppHeader() {
     <div className={styles.wrapper}>
       <header className={styles.header}>
         <nav className={styles.nav}><ul className={styles.list}>
-          {/* #todo вместо styles.item_active и type="primary" - подставить переменные(?) которые по умолчанию имеют одно значение, а при выборе меняются (активное, подсвеченное состояние)*/}
           <li><a className={`${styles.item} ${styles.item_active}`}>
             <BurgerIcon type="primary" />
             Конструктор
@@ -19,7 +18,7 @@ function AppHeader() {
           </a></li>
         </ul></nav>
 
-        <div className={styles.item_centered}><Logo /></div>
+        <a className={styles.item_centered} href="#"><Logo /></a>
 
         <div className={styles.profile}>
           <button className={`${styles.item} ${styles.button}`}>

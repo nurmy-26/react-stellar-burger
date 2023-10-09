@@ -4,21 +4,28 @@ import ConstructorSection from "./constructor-section/constructor-section";
 import ConstructorTotal from "./constructor-total/constructor-total";
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from "../modal/modal";
+import OrderDetails from "./order-details/order-details";
 
 
 function BurgerConstructor(props) {
 // фиксированное число - временное решение
-// будет подниматься из дочернего ConstructorSection, суммируя стоимость всех элементов
+// будет подниматься из дочернего ConstructorSection, суммируя стоимость всех выбранных элементов
   const total = 610;
+  // const [total, setTotal] = React.useState(0);
 
   const [visible, setVisible] = React.useState(false);
   function openModal() {
     setVisible(true);
-    console.log(openModal);
-    console.log(closeModal);
   }
   function closeModal() {
     setVisible(false)
+  }
+
+  // временно захардкоженные данные
+  const orderInfo = {
+    number: '034536',
+    status: 'Ваш заказ начали готовить',
+    substatus: 'Дождитесь готовности на орбитальной станции'
   }
 
   return (
@@ -35,9 +42,8 @@ function BurgerConstructor(props) {
 
       {
         visible &&
-        <Modal header="Внимание!" onCLose={closeModal}>
-          <p>Спасибо за внимание!</p>
-          <p>Открывай меня, если станет скучно</p>
+        <Modal header="" onClose={closeModal}>
+          <OrderDetails {...orderInfo} />
         </Modal>
       }
 

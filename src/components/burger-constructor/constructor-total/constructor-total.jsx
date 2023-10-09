@@ -16,7 +16,6 @@ function ConstructorTotal(props) {
 
       <Button onClick={onOpen} htmlType="button" type="primary" size="large">Оформить заказ</Button>
     </div>
-
   );
 };
 
