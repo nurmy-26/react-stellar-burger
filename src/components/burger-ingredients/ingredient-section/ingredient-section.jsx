@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import styles from "./ingredient-section.module.css";
 import IngredientCard from "../ingredient-card/ingredient-card";
-import {ingredientPropType} from "../../../utils/prop-types";
 import Modal from "../../modal/modal";
 import IngredientDetails from "./../ingredient-details/ingredient-details";
+import {ingredientPropType} from "../../../utils/prop-types";
 
 
 // memo - чтобы секция не перерисовывалась лишний раз

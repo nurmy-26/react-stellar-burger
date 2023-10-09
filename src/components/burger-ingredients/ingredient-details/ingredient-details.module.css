@@ -3,10 +3,6 @@
   composes: mb-5 from global;
 }
 
-.img {
-
-}
-
 .name {
   margin-bottom: calc(var(--offset-base-size)*8);
   composes: mt-4 text text_type_main-medium from global;

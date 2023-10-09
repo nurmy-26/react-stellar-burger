@@ -1,10 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
 import ConstructorSection from "./constructor-section/constructor-section";
 import ConstructorTotal from "./constructor-total/constructor-total";
-import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from "../modal/modal";
 import OrderDetails from "./order-details/order-details";
+import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import {ingredientPropType} from "../../utils/prop-types";
 
 
 function BurgerConstructor(props) {
@@ -50,5 +52,10 @@ function BurgerConstructor(props) {
     </section>
   );
 }
+
+BurgerConstructor.propTypes = {
+  data: PropTypes.arrayOf(ingredientPropType).isRequired
+}
+
 
 export default BurgerConstructor;

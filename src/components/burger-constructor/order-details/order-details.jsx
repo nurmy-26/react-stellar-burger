@@ -1,10 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./order-details.module.css";
 import orderAccepted from "../../../images/order-accepted.svg"
 
 
-function OrderDetails(props) {
-  const {number, status, substatus} = props;
+function OrderDetails({number, status, substatus}) {
   return (
     <div className={styles.details}>
       <h3 className={styles.number}>{number}</h3>
@@ -15,5 +15,11 @@ function OrderDetails(props) {
     </div>
   );
 };
+
+OrderDetails.propTypes = {
+  number: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  substatus: PropTypes.string.isRequired
+  }
 
 export default OrderDetails;

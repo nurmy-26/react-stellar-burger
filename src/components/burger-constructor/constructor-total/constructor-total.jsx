@@ -5,12 +5,11 @@ import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-co
 
 
 // на вход data
-function ConstructorTotal(props) {
-  const {onOpen} = props;
+function ConstructorTotal({children, onOpen}) {
   return (
     <div className={styles.wrapper}>
       <span className={styles.total}>
-        {props.children}
+        {children}
         <CurrencyIcon type="primary" />
       </span>
 
@@ -21,6 +20,7 @@ function ConstructorTotal(props) {
 
 ConstructorTotal.propTypes = {
   children: PropTypes.number.isRequired,
+  onOpen: PropTypes.func.isRequired
   }
 
 export default ConstructorTotal;

@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 import styles from "./modal.module.css";
 import ModalHeader from "./modal-header/modal-header";
 import ModalOverlay from "./modal-overlay/modal-overlay";
 
 
-function Modal(props) {
-  const {children, header, onClose} = props;
+function Modal({children, header, onClose}) {
   // слушатель по Ecs
   React.useEffect(() => {
     function closeByEsc (evt) {
@@ -32,5 +32,11 @@ function Modal(props) {
     ), document.getElementById("react-modals")
   );
 }
+
+Modal.propTypes = {
+  children: PropTypes.object.isRequired,
+  header: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired
+  }
 
 export default Modal;

@@ -1,5 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./ingredient-details.module.css";
+import {ingredientPropType} from "../../../utils/prop-types";
 
 
 function IngredientDetails({cardInfo}) {
@@ -30,5 +32,10 @@ function IngredientDetails({cardInfo}) {
     </div>
   );
 };
+
+IngredientDetails.propTypes = {
+  cardInfo: ingredientPropType
+}
+
 
 export default IngredientDetails;
