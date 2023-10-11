@@ -5,22 +5,23 @@ import IngredientCard from "../ingredient-card/ingredient-card";
 import Modal from "../../modal/modal";
 import IngredientDetails from "./../ingredient-details/ingredient-details";
 import {ingredientPropType} from "../../../utils/prop-types";
+import { useModal } from "../../../hooks/useModal"; // импорт кастомного хука
 
 
 // memo - чтобы секция не перерисовывалась лишний раз
 const IngredientSection = React.forwardRef(({data, type}, ref) => {
-  // state для навигации
-  const [currCard, setCard] = React.useState(false);
+  // деструктуризуем кастомный хук для управления модальным окном
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   // state для информации об ингредиенте
   const [info, setInfo] = React.useState({});
 
   const openTooltip = (el) => {
     setInfo(el);
-    setCard(true);
+    openModal();
   }
   const closeTooltip = () => {
-    setCard(false)
+    closeModal();
   }
 
   // возвращаем результат фильтрации data
@@ -58,7 +59,7 @@ const IngredientSection = React.forwardRef(({data, type}, ref) => {
       </ul>
 
       {
-        currCard &&
+        isModalOpen &&
         <Modal header="Детали ингредиента" onClose={closeTooltip}>
           <IngredientDetails cardInfo={info} />
         </Modal>

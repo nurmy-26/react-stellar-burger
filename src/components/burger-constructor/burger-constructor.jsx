@@ -7,6 +7,7 @@ import Modal from "../modal/modal";
 import OrderDetails from "./order-details/order-details";
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import {ingredientPropType} from "../../utils/prop-types";
+import { useModal } from "../../hooks/useModal"; // импорт кастомного хука
 
 
 function BurgerConstructor(props) {
@@ -15,13 +16,8 @@ function BurgerConstructor(props) {
   const total = 610;
   // const [total, setTotal] = React.useState(0);
 
-  const [visible, setVisible] = React.useState(false);
-  function openModal() {
-    setVisible(true);
-  }
-  function closeModal() {
-    setVisible(false)
-  }
+  // деструктуризуем кастомный хук для управления модальным окном
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   // временно захардкоженные данные
   const orderInfo = {
@@ -43,7 +39,7 @@ function BurgerConstructor(props) {
       <ConstructorTotal onOpen={openModal}>{total}</ConstructorTotal>
 
       {
-        visible &&
+        isModalOpen &&
         <Modal header="" onClose={closeModal}>
           <OrderDetails {...orderInfo} />
         </Modal>
