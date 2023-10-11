@@ -1,0 +1,10 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  margin-top: calc(var(--offset-base-size)*15);
+}
+
+/* без обертки напрямую повлиять на элемент из библиотеки не удается */
+.item {
+  margin-left: calc(var(--offset-base-size)*12);
+}

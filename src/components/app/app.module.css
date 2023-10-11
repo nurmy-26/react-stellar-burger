@@ -1,7 +1,8 @@
-.app {
+.main {
+  position: relative;
   display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background-color: #131316;
-  color: #f2f2f3;
+  justify-content: center;
+  max-width: 1240px;
+  gap: calc(var(--offset-base-size)*10);
+  margin: calc(var(--offset-base-size)*10) auto auto;
 }

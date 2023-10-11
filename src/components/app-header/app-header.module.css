@@ -1,0 +1,66 @@
+.wrapper {
+  background-color: #1C1C21;
+}
+
+.header {
+  max-width: 1280px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+
+  composes: pb-4 pt-4 from global;
+}
+
+.nav {
+  flex: 50%;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style-type: none;
+  gap: 8px;
+}
+
+.item {
+  display: flex;
+  gap: 8px;
+  border-radius: calc(var(--offset-base-size)*10);
+  color: var(--text-dark-grey-secondary-text, #8585AD);
+  composes: text text_type_main-default pl-5 pr-5 pb-4 pt-4 from global;
+
+  cursor: pointer;
+}
+
+.item:hover {
+  color: var(--text-primary-light-standart-text, #F2F2F3);
+}
+.item:hover svg {
+  fill: var(--text-primary-light-standart-text, #F2F2F3);
+}
+
+/* стили для выбранного пункта навигации */
+.item_active {
+  color: var(--text-primary-light-standart-text, #F2F2F3);
+}
+
+.item_centered {
+  flex: 33%; /* выравниваем по центру хедера несмотря на разное расстояние от элементов по бокам */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile {
+  flex: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button {
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+}

@@ -1,0 +1,34 @@
+.details {
+  text-align: center;
+  composes: mb-5 from global;
+}
+
+.name {
+  margin-bottom: calc(var(--offset-base-size)*8);
+  composes: mt-4 text text_type_main-medium from global;
+}
+
+.list {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  gap: calc(var(--offset-base-size)*5);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--offset-base-size)*2);
+  min-width: 112px;
+  max-width: 130px;
+}
+
+.category {
+  composes: text text_type_main-default text_color_inactive from global;
+}
+
+.number {
+  composes: text text_type_digits-default text_color_inactive from global;
+}
