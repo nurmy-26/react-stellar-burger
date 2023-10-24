@@ -6,10 +6,15 @@ import Modal from "../../modal/modal";
 import IngredientDetails from "./../ingredient-details/ingredient-details";
 import {ingredientPropType} from "../../../utils/prop-types";
 import { useModal } from "../../../hooks/useModal"; // импорт кастомного хука
+import { ConstructorContext } from "../../../services/orderContext";
 
 
 // memo - чтобы секция не перерисовывалась лишний раз
 const IngredientSection = React.forwardRef(({data, type}, ref) => {
+
+  // достаем из контекста деструктуризуемые данные
+  const {constructorState, orderDispatcher} = React.useContext(ConstructorContext)
+
   // деструктуризуем кастомный хук для управления модальным окном
   const { isModalOpen, openModal, closeModal } = useModal();
 
@@ -19,7 +24,13 @@ const IngredientSection = React.forwardRef(({data, type}, ref) => {
   const openTooltip = (el) => {
     setInfo(el);
     openModal();
+    // при клике на булку она заменится; на ингредиент - добавится в массив заказа (временно -> будет dnd)
+    el.type === "bun" ?
+    orderDispatcher({type: 'BUN', payload: el})
+    :
+    orderDispatcher({type: 'NO-BUN', payload: el})
   }
+
   const closeTooltip = () => {
     closeModal();
   }

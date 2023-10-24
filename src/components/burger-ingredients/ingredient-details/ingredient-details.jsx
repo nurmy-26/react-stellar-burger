@@ -6,7 +6,7 @@ import {ingredientPropType} from "../../../utils/prop-types";
 
 function IngredientDetails({cardInfo}) {
   const {image, image_large, name, calories, proteins, fat, carbohydrates} = cardInfo;
-  // const round = (number) => Math.round(number * 0.1) / 10; // если понадобится перевести странные числа из объекта (Б,Ж,У не похожи на нормальные, как будто их нужно поделить на 10)
+
   return (
     <div className={styles.details}>
       <img className={styles.img} src={image_large} alt={name} />

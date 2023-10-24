@@ -3,7 +3,7 @@
   justify-content: flex-end;
   align-items: center;
   gap: calc(var(--offset-base-size)*10);
-  margin-top: calc(var(--offset-base-size)*10);
+  margin-top: calc(var(--offset-base-size)*6);
   margin-bottom: calc(var(--offset-base-size)*12.5);
 }
 
