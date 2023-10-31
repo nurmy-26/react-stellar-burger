@@ -1,21 +1,25 @@
-import React, { useMemo } from "react";
-import PropTypes from "prop-types";
+import React from "react";
+// import PropTypes from "prop-types";
 import styles from "./constructor-section.module.css";
 import ConstructorItem from "../constructor-item/constructor-item";
-import {ingredientPropType} from "../../../utils/prop-types";
+// import {ingredientPropType} from "../../../utils/prop-types";
+import { ConstructorContext } from "../../../services/orderContext";
+import { v4 as uuidv4 } from 'uuid'; // библиотека для генерации случайного id
 
 
 // memo - чтобы секция реже рендерилась
-const ConstructorSection = React.memo(({data}) => {
-  // промежуточный вариант - берем из data (всё, кроме булки, её индекс 0)
-  // потом видимо ингредиенты будут браться по клику из меню слева
+const ConstructorSection = React.memo(() => {
+
+  // достаем из контекста деструктуризуемые данные
+  const {constructorState} = React.useContext(ConstructorContext)
+
+  // constructorState["ingredients"] - список ингредиентов в заказе, формирующийся по клику (потом - dnd)
   const section = React.useMemo(() => {
-    return data.filter((item, index) => {
-      return index !== 0
-    }).map((item) => {
-      return <ConstructorItem item={item} key={item._id} />;
+    return constructorState["ingredients"].map((item) => {
+      const itemKey = uuidv4(); // генерируем случайный id для key
+      return <ConstructorItem item={item} key={itemKey} />;
     })
-  }, [data])
+  }, [constructorState])
 
   return (
     <ul className={styles.wrapper}>
@@ -25,8 +29,8 @@ const ConstructorSection = React.memo(({data}) => {
 });
 
 
-ConstructorSection.propTypes = {
-  data: PropTypes.arrayOf(ingredientPropType).isRequired
-}
+// ConstructorSection.propTypes = {
+//   data: PropTypes.arrayOf(ingredientPropType).isRequired
+// }
 
 export default React.memo(ConstructorSection);
