@@ -1,13 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styles from "./order-details.module.css";
 import orderAccepted from "../../../images/order-accepted.svg"
-import { OrderContext } from "../../../services/orderContext";
+import { useSelector } from "react-redux";
+import { getOrderDetails } from "../../../services/selectors/order";
 
 
 function OrderDetails() {
-  // достаем из контекста деструктуризуемые данные
-  const {orderInfo} = React.useContext(OrderContext);
+  const orderInfo = useSelector(getOrderDetails);
 
   return (
     <div className={styles.details}>
@@ -19,11 +18,5 @@ function OrderDetails() {
     </div>
   );
 };
-
-// OrderDetails.propTypes = {
-//   number: PropTypes.string.isRequired,
-//   status: PropTypes.string.isRequired,
-//   substatus: PropTypes.string.isRequired
-// }
 
 export default OrderDetails;

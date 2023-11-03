@@ -1,11 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styles from "./ingredient-details.module.css";
-import {ingredientPropType} from "../../../utils/prop-types";
+import { useSelector } from "react-redux";
+import { getIngredientDetails } from "../../../services/selectors/details";
 
 
-function IngredientDetails({cardInfo}) {
-  const {image, image_large, name, calories, proteins, fat, carbohydrates} = cardInfo;
+function IngredientDetails() {
+  const detailsData = useSelector(getIngredientDetails);
+  const {image, image_large, name, calories, proteins, fat, carbohydrates} = detailsData;
 
   return (
     <div className={styles.details}>
@@ -32,10 +33,5 @@ function IngredientDetails({cardInfo}) {
     </div>
   );
 };
-
-IngredientDetails.propTypes = {
-  cardInfo: ingredientPropType
-}
-
 
 export default IngredientDetails;

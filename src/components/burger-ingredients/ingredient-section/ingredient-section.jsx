@@ -4,41 +4,40 @@ import styles from "./ingredient-section.module.css";
 import IngredientCard from "../ingredient-card/ingredient-card";
 import Modal from "../../modal/modal";
 import IngredientDetails from "./../ingredient-details/ingredient-details";
-import {ingredientPropType} from "../../../utils/prop-types";
 import { useModal } from "../../../hooks/useModal"; // импорт кастомного хука
-import { ConstructorContext } from "../../../services/orderContext";
+import { useSelector, useDispatch } from "react-redux";
+import { addBun, addIngredient } from "../../../services/actions/burger-constructor";
+import { getIngredientsList } from "../../../services/selectors/ingredients";
+import { setIngredientInfo, resetIngredientInfo } from "../../../services/actions/details"
+import { getIngredientDetails } from "../../../services/selectors/details";
 
 
 // memo - чтобы секция не перерисовывалась лишний раз
-const IngredientSection = React.forwardRef(({data, type}, ref) => {
-
-  // достаем из контекста деструктуризуемые данные
-  const {constructorState, orderDispatcher} = React.useContext(ConstructorContext)
+const IngredientSection = React.forwardRef(({type}, ref) => {
+  const ingredientsList = useSelector(getIngredientsList);
+  const details = useSelector(getIngredientDetails)
+  const dispatch = useDispatch();
 
   // деструктуризуем кастомный хук для управления модальным окном
   const { isModalOpen, openModal, closeModal } = useModal();
 
-  // state для информации об ингредиенте
-  const [info, setInfo] = React.useState({});
-
+  // при открытии модалки записываем инфо об ингредиенте в store (и добавляем его в конструктор)
   const openTooltip = (el) => {
-    setInfo(el);
+    dispatch(setIngredientInfo(el));
     openModal();
-    // при клике на булку она заменится; на ингредиент - добавится в массив заказа (временно -> будет dnd)
-    el.type === "bun" ?
-    orderDispatcher({type: 'BUN', payload: el})
-    :
-    orderDispatcher({type: 'NO-BUN', payload: el})
+    el.type === "bun" ? dispatch(addBun(el)) : dispatch(addIngredient(el));
   }
 
+  // при закрытии модалки сбрасываем инфо об ингредиенте в store
   const closeTooltip = () => {
     closeModal();
+    dispatch(resetIngredientInfo());
   }
 
-  // возвращаем результат фильтрации data
+  // возвращаем результат фильтрации ingredientsList (со всеми элементами для секции конкретного типа)
   const filteredList = React.useMemo(() => {
-    return data.filter(item => item.type === type);
-  }, [data]);
+    return ingredientsList.filter(item => item.type === type);
+  }, [ingredientsList]);
   // useMemo в обоих случаях - чтобы не было лишних рендеров
   const section = React.useMemo(() => {
     return filteredList.map((item) => {
@@ -49,21 +48,25 @@ const IngredientSection = React.forwardRef(({data, type}, ref) => {
 
   // устанавливаем название секции в зависимости от типа ингредиентов
   let sectionTitle;
+  let sectionClass;
   switch (type) {
     case "bun":
       sectionTitle = "Булки";
-      break;
-    case "main":
-      sectionTitle = "Начинки";
+      sectionClass = 'bun';
       break;
     case "sauce":
       sectionTitle = "Соусы";
+      sectionClass = 'sauce';
+      break;
+    case "main":
+      sectionTitle = "Начинки";
+      sectionClass = 'main';
       break;
   }
 
 
   return (
-    <section>
+    <section className={sectionClass}>
       <h2 ref={ref} className={styles.title}>{sectionTitle}</h2>
       <ul className={styles.list}>
         {section}
@@ -72,7 +75,7 @@ const IngredientSection = React.forwardRef(({data, type}, ref) => {
       {
         isModalOpen &&
         <Modal header="Детали ингредиента" onClose={closeTooltip}>
-          <IngredientDetails cardInfo={info} />
+          <IngredientDetails />
         </Modal>
       }
     </section>
@@ -80,7 +83,6 @@ const IngredientSection = React.forwardRef(({data, type}, ref) => {
 })
 
 IngredientSection.propTypes = {
-  data: PropTypes.arrayOf(ingredientPropType).isRequired,
   type: PropTypes.string.isRequired
 }
 
