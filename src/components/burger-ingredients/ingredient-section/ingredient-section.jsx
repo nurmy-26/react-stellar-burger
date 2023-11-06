@@ -9,13 +9,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { addBun, addIngredient } from "../../../services/actions/burger-constructor";
 import { getIngredientsList } from "../../../services/selectors/ingredients";
 import { setIngredientInfo, resetIngredientInfo } from "../../../services/actions/details"
-import { getIngredientDetails } from "../../../services/selectors/details";
 
 
 // memo - чтобы секция не перерисовывалась лишний раз
 const IngredientSection = React.forwardRef(({type}, ref) => {
   const ingredientsList = useSelector(getIngredientsList);
-  const details = useSelector(getIngredientDetails)
   const dispatch = useDispatch();
 
   // деструктуризуем кастомный хук для управления модальным окном
@@ -25,7 +23,7 @@ const IngredientSection = React.forwardRef(({type}, ref) => {
   const openTooltip = (el) => {
     dispatch(setIngredientInfo(el));
     openModal();
-    el.type === "bun" ? dispatch(addBun(el)) : dispatch(addIngredient(el));
+    // el.type === "bun" ? dispatch(addBun(el)) : dispatch(addIngredient(el));
   }
 
   // при закрытии модалки сбрасываем инфо об ингредиенте в store

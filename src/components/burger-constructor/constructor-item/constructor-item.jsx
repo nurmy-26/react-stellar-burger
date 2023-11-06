@@ -20,4 +20,4 @@ ConstructorItem.propTypes = {
   item: ingredientPropType
 }
 
-export default ConstructorItem;
+export default React.memo(ConstructorItem);

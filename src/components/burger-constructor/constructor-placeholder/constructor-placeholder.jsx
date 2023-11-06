@@ -32,4 +32,4 @@ ConstructorPlaceholder.propTypes = {
   type: PropTypes.string.isRequired
 }
 
-export default ConstructorPlaceholder;
+export default React.memo(ConstructorPlaceholder);

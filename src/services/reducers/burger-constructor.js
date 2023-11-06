@@ -20,17 +20,17 @@ export const constructorReducer = (store = constructorInitialState, action) => {
       };
     }
     case ADD_INGREDIENT:
-      let array = [...store.ingredients];
       // при добавлении ингредиента в конструктор присваиваем ему сгенерированный ключ
       const newItem = {
         ...action.item,
         key: action.key
       }
-      array.push(newItem);
-
       return {
         ...store,
-        ingredients: array,
+        ingredients: [
+          ...store.ingredients,
+          newItem
+        ],
         totalPrice: store.totalPrice + action.item.price
       };
     default: {

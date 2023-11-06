@@ -17,7 +17,8 @@
 }
 
 .center {
-  margin-left: calc(var(--offset-base-size)*12);
+  margin-left: calc(var(--offset-base-size)*8);
+  height: calc(var(--offset-base-size)*116);
 }
 
 .bottom {

@@ -12,6 +12,7 @@ import { getConstructorData } from "../../services/selectors/burger-constructor"
 import { getOrderDetails } from "../../services/selectors/order";
 import { requestOrder } from "../../services/actions/order";
 import { resetOrder } from "../../services/actions/order"
+import BunContainer from "./bun-container/bun-container";
 
 
 function BurgerConstructor() {
@@ -37,33 +38,23 @@ function BurgerConstructor() {
     dispatch(resetOrder())
   }
 
+  // мемоизация компонентов верхней и нижней булок (для остановки ререндера нужно вызывать именно здесь)
+  const MemoBunContainer = React.memo(BunContainer);
+
   return (
     <section aria-label="Ингредиенты" className={styles.section}>
-      <div className={styles.item}>
-        {
-          constructorData.bun === null ?
-          (<ConstructorPlaceholder type="top" />)
-          :
-          (<ConstructorElement type="top" isLocked={true} text={`${constructorData.bun.name} (верх)`} price={constructorData.bun.price} thumbnail={constructorData.bun.image} />)
-        }
-      </div>
 
-      {
+      <MemoBunContainer type="top" />
+
+      {/* {
         constructorData.ingredients.length > 0 ?
         (<ConstructorSection />)
         :
         (<ConstructorPlaceholder type="center" />)
-      }
+      } */}
+      <ConstructorSection />
 
-
-      <div className={styles.item}>
-        {
-          constructorData.bun === null ?
-          (<ConstructorPlaceholder type="bottom" />)
-          :
-          (<ConstructorElement type="bottom" isLocked={true} text={`${constructorData.bun.name} (низ)`} price={constructorData.bun.price} thumbnail={constructorData.bun.image} />)
-        }
-      </div>
+      <MemoBunContainer type="bottom" />
 
       <ConstructorTotal onOpen={sendOrder}>{constructorData.totalPrice}</ConstructorTotal>
 

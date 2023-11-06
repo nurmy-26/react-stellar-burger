@@ -6,14 +6,18 @@ import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-co
 
 // на вход data
 function ConstructorTotal({children, onOpen}) {
+  // мемоизация компонентов из библиотеки
+  const MemoCurrencyIcon = React.memo(CurrencyIcon);
+  const MemoButton = React.memo(Button);
+
   return (
     <div className={styles.wrapper}>
       <span className={styles.total}>
         {children}
-        <CurrencyIcon type="primary" />
+        <MemoCurrencyIcon type="primary" />
       </span>
 
-      <Button onClick={onOpen} htmlType="button" type="primary" size="large">Оформить заказ</Button>
+      <MemoButton onClick={onOpen} htmlType="button" type="primary" size="large">Оформить заказ</MemoButton>
     </div>
   );
 };
@@ -23,4 +27,4 @@ ConstructorTotal.propTypes = {
   onOpen: PropTypes.func.isRequired
   }
 
-export default ConstructorTotal;
+export default React.memo(ConstructorTotal);
