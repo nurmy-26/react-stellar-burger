@@ -1,4 +1,4 @@
-@keyframes moving {
+@keyframes movingWide {
   0% {
     opacity: 0;
     left: 0;
@@ -19,12 +19,38 @@
   }
 }
 
+@keyframes moving {
+  0% {
+    opacity: 0;
+    left: 0%;
+  }
+  25% {
+    opacity: 100%;
+  }
+  50% {
+    opacity: 0;
+    left: 30%;
+  }
+  75% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 0;
+    left: 0%;
+  }
+}
+
 .rotation {
-  animation: moving 20s linear infinite;
+  margin-top: calc(var(--offset-base-size)*4);
+  animation: moving 5s linear infinite;
+}
+
+.rotationWide {
+  margin-top: calc(var(--offset-base-size)*10);
+  animation: movingWide 20s linear infinite;
 }
 
 .text {
   position: absolute;
-  margin-top: calc(var(--offset-base-size)*10);
   composes: text text_type_main-large from global;
 }

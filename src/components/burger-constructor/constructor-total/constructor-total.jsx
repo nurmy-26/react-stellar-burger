@@ -24,7 +24,7 @@ function ConstructorTotal({children, onOpen}) {
 
 ConstructorTotal.propTypes = {
   children: PropTypes.number.isRequired,
-  onOpen: PropTypes.func.isRequired
+  // onOpen: PropTypes.func.isRequired
   }
 
 export default React.memo(ConstructorTotal);

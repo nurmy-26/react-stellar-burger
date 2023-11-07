@@ -3,6 +3,11 @@
   composes: mb-5 from global;
 }
 
+.img {
+  width: 480px;
+  height: 240px;
+}
+
 .name {
   margin-bottom: calc(var(--offset-base-size)*8);
   composes: mt-4 text text_type_main-medium from global;

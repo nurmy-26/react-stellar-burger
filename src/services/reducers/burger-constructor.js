@@ -2,7 +2,8 @@ import {
   ADD_BUN,
   ADD_INGREDIENT,
   DELETE_INGREDIENT,
-  EXCHANGE_ORDER
+  EXCHANGE_ORDER,
+  CLEAR_ORDER
 } from '../actions/burger-constructor';
 
 const constructorInitialState = {
@@ -52,6 +53,13 @@ export const constructorReducer = (store = constructorInitialState, action) => {
       return {
         ...store,
         ingredients: newOrder
+    }
+    case CLEAR_ORDER:
+      return {
+        ...store,
+        bun: null,
+        ingredients: [],
+        totalPrice: 0
     }
     default: {
       return store;

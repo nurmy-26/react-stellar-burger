@@ -20,3 +20,7 @@
   width: calc(var(--offset-base-size)*9);
   height: calc(var(--offset-base-size)*9);
 }
+
+.btn:disabled button {
+  background-color: var(--colors-button-inactive);
+}

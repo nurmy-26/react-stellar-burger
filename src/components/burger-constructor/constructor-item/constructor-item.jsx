@@ -15,7 +15,7 @@ function ConstructorItem({item, index}) {
   const dispatch = useDispatch();
   const ref = React.useRef(null);
 
-  const [{isDragging}, draggableRef ] = useDrag({
+  const [{isDragging}, draggableRef, dragPreview ] = useDrag({
     type: "order",
     item: {...item, index},
     collect: monitor => ({
@@ -23,11 +23,8 @@ function ConstructorItem({item, index}) {
     })
   });
 
-  const [{isHover}, dropRef ] = useDrop({
+  const [, dropRef ] = useDrop({
     accept: "order",
-    collect: monitor => ({
-      isHover: monitor.isOver(),
-    }),
     hover(item, monitor) {
       // если ref не успел привязаться - return
       if (!ref.current) {
@@ -67,15 +64,14 @@ function ConstructorItem({item, index}) {
     dispatch(deleteIngredient(item));
   }
 
-  draggableRef(dropRef(ref)); // чтобы привязать ref одновременно и к drag, и к drop
+  dragPreview(dropRef(ref)); // чтобы привязать ref одновременно и к dragPreview, и к drop
 
-    // стили для визуализации перетаскивания
-    let itemClass = styles.item + ' ' + (isHover ? styles.hovered : '')
-    // + ' ' + (isDragging && !isHover ? styles.dragging : '');
+  // стили для визуализации перетаскивания
+  const itemClass = styles.item + ' ' + (isDragging ? styles.dragging : '');
 
   return (
     <li ref={ref} className={itemClass}>
-      <DragIcon type="primary" />
+      <span ref={draggableRef} className={styles.dragIcon}><DragIcon type="primary" /></span>
       <ConstructorElement text={name} price={price} thumbnail={image} handleClose={() => handleDelete(item)} />
     </li>
   );

@@ -5,6 +5,7 @@ export const ADD_BUN = 'ADD_BUN';
 export const ADD_INGREDIENT = 'ADD_INGREDIENT';
 export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
 export const EXCHANGE_ORDER = 'EXCHANGE_ORDER';
+export const CLEAR_ORDER = 'CLEAR_ORDER';
 
 // генератор экшена для типа 'ADD_BUN'
 export const addBun = (item) => {
@@ -37,5 +38,12 @@ export const exchangeOrder = (dragIndex, hoverIndex) => {
     type: EXCHANGE_ORDER,
     dragIndex: dragIndex,
     hoverIndex: hoverIndex
+  }
+}
+
+// генератор экшена для типа 'CLEAR_ORDER'
+export const clearOrder = () => {
+  return {
+    type: CLEAR_ORDER
   }
 }

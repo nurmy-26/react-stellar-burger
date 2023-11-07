@@ -2,16 +2,23 @@
   display: flex;
   align-items: center;
   gap: calc(var(--offset-base-size)*2);
+  opacity: 1;
+  transition: var(--common-transition);
 }
 
 .item div {
   width: 536px;
 }
 
-.hovered {
-  opacity: 0;
+.dragIcon {
+  cursor: grab;
+  transition: var(--common-transition);
+}
+
+.dragIcon:hover {
+  opacity: .5;
 }
 
 .dragging {
-
+  opacity: 0;
 }

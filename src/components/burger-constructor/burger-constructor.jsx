@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getConstructorData } from "../../services/selectors/burger-constructor";
 import { getOrderDetails } from "../../services/selectors/order";
 import { requestOrder, resetOrder } from "../../services/actions/order";
+import { clearOrder } from "../../services/actions/burger-constructor";
 import BunContainer from "./bun-container/bun-container";
 
 
@@ -22,6 +23,7 @@ function BurgerConstructor() {
 
   // ф-я, отправляющая запрос с заказом на сервер
   const sendOrder = () => {
+    openModal();
     const bunId = constructorData.bun._id;
     const ingredientsArr = constructorData.ingredients.map(item => item._id)
     const constructorIdList = [bunId, ...ingredientsArr, bunId]
@@ -31,8 +33,9 @@ function BurgerConstructor() {
 
   // ф-я, закрывающая модальное окно и сбрасывающая инфо заказа
   const closeOrderModal = () => {
+    dispatch(clearOrder()); // возвращаем конструктор в исходное состояние
     closeModal();
-    dispatch(resetOrder())
+    dispatch(resetOrder()); // очищаем информацию в модальном окне
   }
 
   // мемоизация компонентов верхней и нижней булок (для остановки ререндера нужно вызывать именно здесь)
@@ -47,10 +50,11 @@ function BurgerConstructor() {
 
       <MemoBunContainer type="bottom" />
 
-      <ConstructorTotal onOpen={sendOrder}>{constructorData.totalPrice}</ConstructorTotal>
+      <ConstructorTotal {...(constructorData["bun"] !== null && {onOpen: sendOrder})}>{constructorData.totalPrice}</ConstructorTotal>
 
       {
-        !isModalOpen && orderInfo.success &&
+        // !isModalOpen && orderInfo.success &&
+        isModalOpen &&
         <Modal header="" onClose={closeOrderModal}>
           <OrderDetails />
         </Modal>
