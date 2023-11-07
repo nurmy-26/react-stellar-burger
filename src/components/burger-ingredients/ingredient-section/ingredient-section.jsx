@@ -23,7 +23,6 @@ const IngredientSection = React.forwardRef(({type}, ref) => {
   const openTooltip = (el) => {
     dispatch(setIngredientInfo(el));
     openModal();
-    // el.type === "bun" ? dispatch(addBun(el)) : dispatch(addIngredient(el));
   }
 
   // при закрытии модалки сбрасываем инфо об ингредиенте в store
@@ -36,10 +35,12 @@ const IngredientSection = React.forwardRef(({type}, ref) => {
   const filteredList = React.useMemo(() => {
     return ingredientsList.filter(item => item.type === type);
   }, [ingredientsList]);
+
+  const MemoIngredientCard = React.memo(IngredientCard)
   // useMemo в обоих случаях - чтобы не было лишних рендеров
   const section = React.useMemo(() => {
     return filteredList.map((item) => {
-      return <IngredientCard onOpen={() => openTooltip(item)} itemInfo={item} key={item._id} />;
+      return <MemoIngredientCard onOpen={() => openTooltip(item)} itemInfo={item} key={item._id} />;
     })
   }, [filteredList])
 

@@ -3,3 +3,7 @@
   align-items: center;
   gap: calc(var(--offset-base-size)*2);
 }
+
+.item div {
+  width: 536px;
+}

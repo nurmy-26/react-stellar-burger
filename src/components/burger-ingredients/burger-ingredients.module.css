@@ -43,5 +43,15 @@
 }
 
 .wrapper::-webkit-scrollbar-track {
-  margin-bottom: calc(var(--offset-base-size)*13);
+  margin-bottom: calc(var(--offset-base-size)*12);
+}
+
+.wrapper::-webkit-scrollbar {
+  width: calc(var(--offset-base-size)*2);
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+  height: calc(var(--offset-base-size)*123);
+  border-radius: 0;
+  border: none;
 }

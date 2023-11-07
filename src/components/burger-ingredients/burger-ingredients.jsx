@@ -65,7 +65,6 @@ function BurgerIngredients() {
   };
 
 
-
   React.useEffect(() => {
     const sectionWithScroll = document.querySelector('.custom-scroll');
     sectionWithScroll.addEventListener("scroll", handleScroll);

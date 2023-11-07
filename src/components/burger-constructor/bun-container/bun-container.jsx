@@ -6,7 +6,7 @@ import { useDrop } from "react-dnd";
 import { getConstructorData } from "../../../services/selectors/burger-constructor";
 import ConstructorPlaceholder from "./../constructor-placeholder/constructor-placeholder";
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import { addBun } from "../../../services/actions/burger-constructor";
+import { addBun, unlockBun } from "../../../services/actions/burger-constructor";
 
 
 function BunContainer({type}) {
@@ -46,7 +46,7 @@ function BunContainer({type}) {
         constructorData.bun === null ?
         (<ConstructorPlaceholder type={type} />)
         :
-        (<ConstructorElement type={type} isLocked={true} text={`${constructorData.bun.name} ${typeText}`} price={constructorData.bun.price} thumbnail={constructorData.bun.image} />)
+        (<ConstructorElement type={type} isLocked={constructorData.bun.isLocked} text={`${constructorData.bun.name} ${typeText}`} price={constructorData.bun.price} thumbnail={constructorData.bun.image} />)
       }
     </div>
   );

@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import { getConstructorData } from "../../../services/selectors/burger-constructor";
 import { addIngredient } from "../../../services/actions/burger-constructor";
-import { v4 as uuidv4 } from 'uuid'; // библиотека для генерации случайного id
 
 
 // memo - чтобы секция реже рендерилась
@@ -15,33 +14,32 @@ const ConstructorSection = React.memo(() => {
   const dispatch = useDispatch();
 
   const [{isHover, isDragging}, dropRef ] = useDrop({
-    // accept: ["sauce", "main"],
-    accept: "sauce",
+    accept: ["sauce", "main"],
     collect: monitor => ({
       isHover: monitor.isOver(),
       isDragging: monitor.canDrop(),
     }),
     drop(item) {
       dispatch(addIngredient(item));
-
-      console.log(item.key);
-      console.log(constructorData["ingredients"]);
     }
   });
 
-  // constructorData["ingredients"] - список ингредиентов в заказе, формирующийся по клику (потом - dnd)
+  // constructorData["ingredients"] - список ингредиентов в заказе, формирующийся по dnd
   const section = React.useMemo(() => {
     return constructorData["ingredients"].map((item) => {
       return <ConstructorItem item={item} key={item.key} />;
     })
   }, [constructorData])
 
+  // стили для визуализации перетаскивания
+  let containerClass = styles.wrapper + ' ' + (isHover ? styles.hovered : '') + ' ' + (isDragging && !isHover ? styles.dragging : '');
+
   return (
-    <ul ref={dropRef} className={styles.wrapper}>
+    <ul ref={dropRef} className={containerClass}>
       {
-        // constructorData.ingredients.length > 0 ?
-        // {section}
-        // :
+        constructorData.ingredients.length > 0 ?
+        section
+        :
         (<ConstructorPlaceholder type="center" />)
       }
     </ul>

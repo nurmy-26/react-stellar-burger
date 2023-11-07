@@ -5,6 +5,7 @@
   gap: calc(var(--offset-base-size)*10);
   margin-top: calc(var(--offset-base-size)*6);
   margin-bottom: calc(var(--offset-base-size)*12.5);
+  composes: pl-4 pr-4 from global;
 }
 
 .total {
