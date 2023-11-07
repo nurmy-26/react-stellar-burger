@@ -26,8 +26,8 @@ const ConstructorSection = React.memo(() => {
 
   // constructorData["ingredients"] - список ингредиентов в заказе, формирующийся по dnd
   const section = React.useMemo(() => {
-    return constructorData["ingredients"].map((item) => {
-      return <ConstructorItem item={item} key={item.key} />;
+    return constructorData["ingredients"].map((item, index) => {
+      return <ConstructorItem index={index} item={item} key={item.key} />;
     })
   }, [constructorData])
 

@@ -1,7 +1,8 @@
 import {
   ADD_BUN,
   ADD_INGREDIENT,
-  DELETE_INGREDIENT
+  DELETE_INGREDIENT,
+  EXCHANGE_ORDER
 } from '../actions/burger-constructor';
 
 const constructorInitialState = {
@@ -40,6 +41,17 @@ export const constructorReducer = (store = constructorInitialState, action) => {
         ...store,
         ingredients: store.ingredients.filter(item => item.key !== action.item.key),
         totalPrice: store.totalPrice - action.item.price
+    }
+    case EXCHANGE_ORDER:
+      const newOrder = [...store.ingredients];
+      const dragCard = store.ingredients[action.dragIndex];
+      // вырезаем из массива перетаскиваемую карточку
+      newOrder.splice(action.dragIndex, 1);
+      // заменяем карточку, на которую навели курсор, на перетаскиваемую
+      newOrder.splice(action.hoverIndex, 0, dragCard);
+      return {
+        ...store,
+        ingredients: newOrder
     }
     default: {
       return store;

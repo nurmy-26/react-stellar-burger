@@ -13,7 +13,7 @@ function IngredientCard({itemInfo, onOpen}) {
   const constructorData = useSelector(getConstructorData);
   const [, draggableIngredientRef, previewRef ] = useDrag({
     type: type,
-    item: {...itemInfo, isLocked: type === "bun" ? true : false}
+    item: itemInfo,
   });
 
   const amount = React.useMemo(() => {

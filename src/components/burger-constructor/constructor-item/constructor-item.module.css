@@ -7,3 +7,11 @@
 .item div {
   width: 536px;
 }
+
+.hovered {
+  opacity: 0;
+}
+
+.dragging {
+
+}
