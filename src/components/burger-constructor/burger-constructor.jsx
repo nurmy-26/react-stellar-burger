@@ -7,7 +7,6 @@ import OrderDetails from "./order-details/order-details";
 import { useModal } from "../../hooks/useModal"; // импорт кастомного хука
 import { useDispatch, useSelector } from "react-redux";
 import { getConstructorData } from "../../services/selectors/burger-constructor";
-import { getOrderDetails } from "../../services/selectors/order";
 import { requestOrder, resetOrder } from "../../services/actions/order";
 import { clearOrder } from "../../services/actions/burger-constructor";
 import BunContainer from "./bun-container/bun-container";
@@ -15,7 +14,6 @@ import BunContainer from "./bun-container/bun-container";
 
 function BurgerConstructor() {
   const constructorData = useSelector(getConstructorData);
-  const orderInfo = useSelector(getOrderDetails);
   const dispatch = useDispatch();
 
   // деструктуризуем кастомный хук для управления модальным окном
@@ -23,12 +21,12 @@ function BurgerConstructor() {
 
   // ф-я, отправляющая запрос с заказом на сервер
   const sendOrder = () => {
-    openModal();
     const bunId = constructorData.bun._id;
     const ingredientsArr = constructorData.ingredients.map(item => item._id)
     const constructorIdList = [bunId, ...ingredientsArr, bunId]
 
     dispatch(requestOrder(constructorIdList));
+    openModal();
   }
 
   // ф-я, закрывающая модальное окно и сбрасывающая инфо заказа
@@ -50,10 +48,9 @@ function BurgerConstructor() {
 
       <MemoBunContainer type="bottom" />
 
-      <ConstructorTotal {...(constructorData["bun"] !== null && {onOpen: sendOrder})}>{constructorData.totalPrice}</ConstructorTotal>
+      <ConstructorTotal onOpen={sendOrder}>{constructorData.totalPrice}</ConstructorTotal>
 
       {
-        // !isModalOpen && orderInfo.success &&
         isModalOpen &&
         <Modal header="" onClose={closeOrderModal}>
           <OrderDetails />
