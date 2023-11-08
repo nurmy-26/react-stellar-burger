@@ -11,16 +11,16 @@ export function requestIngredientsData() {
       type: GET_INGREDIENTS
     });
     getIngredients().then(res => {
-      if (res && res.success) {
-        dispatch({
-          type: GET_INGREDIENTS_SUCCESS,
-          ingredients: res.data
-        });
-      } else {
-        dispatch({
-          type: GET_INGREDIENTS_FAILED
-        });
-      }
-    });
-  };
+      dispatch({
+        type: GET_INGREDIENTS_SUCCESS,
+        ingredients: res.data
+      })
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_INGREDIENTS_FAILED
+      })
+      console.log(err)
+    })
+  }
 }

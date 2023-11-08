@@ -28,12 +28,10 @@ function App() {
         {
           // если запрос прошел (и прошел успешно), рендерим ингредиенты и конструктор
         (ingredientsData.ingredients.length > 0 && !ingredientsData.isLoading && !ingredientsData.hasError) ? (
-          <>
-            <DndProvider backend={HTML5Backend}>
-              <BurgerIngredients />
-              <BurgerConstructor />
-            </DndProvider>
-          </>
+          <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </DndProvider>
         ) : (
           // иначе - рендерим компонент загрузки
         <Loading />

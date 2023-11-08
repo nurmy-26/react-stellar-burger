@@ -19,16 +19,16 @@ export function requestOrder(arr) {
       type: ORDER_REQUEST
     });
     postOrder(arr).then(res => {
-      if (res && res.success) {
-        dispatch({
-          type: ORDER_REQUEST_SUCCESS,
-          order: res
-        });
-      } else {
-        dispatch({
-          type: ORDER_REQUEST_FAILED
-        });
-      }
-    });
-  };
+      dispatch({
+        type: ORDER_REQUEST_SUCCESS,
+        order: res
+      })
+    })
+    .catch(err => {
+      dispatch({
+        type: ORDER_REQUEST_FAILED
+      })
+      console.log(err)
+    })
+  }
 }
