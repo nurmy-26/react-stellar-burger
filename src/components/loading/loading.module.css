@@ -1,25 +1,4 @@
-@keyframes movingWide {
-  0% {
-    opacity: 0;
-    left: 0;
-  }
-  25% {
-    opacity: 100%;
-  }
-  50% {
-    opacity: 0;
-    left: 800px;
-  }
-  75% {
-    opacity: 100%;
-  }
-  100% {
-    opacity: 0;
-    left: 0;
-  }
-}
-
-@keyframes moving {
+@keyframes slicing {
   0% {
     opacity: 0;
     left: 0%;
@@ -29,7 +8,7 @@
   }
   50% {
     opacity: 0;
-    left: 30%;
+    left: 70%;
   }
   75% {
     opacity: 100%;
@@ -40,17 +19,22 @@
   }
 }
 
-.rotation {
-  margin-top: calc(var(--offset-base-size)*4);
-  animation: moving 5s linear infinite;
+@keyframes points {
+  to {
+    clip-path: inset(0 -1ch 0 0)
+  }
 }
 
-.rotationWide {
-  margin-top: calc(var(--offset-base-size)*10);
-  animation: movingWide 20s linear infinite;
-}
-
-.text {
+.slowSlicing {
   position: absolute;
+  top: 0;
+  left: 0;
   composes: text text_type_main-large from global;
+  margin-top: calc(var(--offset-base-size)*10);
+  animation: slicing 20s linear infinite;
+}
+
+.loadingPoints {
+  clip-path: inset(0 3ch 0 0);
+  animation: points 2.5s steps(4) infinite;
 }

@@ -36,7 +36,7 @@ export const getIngredients = () => {
   })
 }
 
-// отправка данных на сервер
+// отправка данных о заказе на сервер
 export const postOrder = (arr) => {
   return request('orders', {
     method: 'POST',

@@ -15,8 +15,8 @@ const orderInitialState = {
   success: false,
   isLoading: true,
   hasError: false,
-  status: 'Ваш заказ начали готовить',
-  substatus: 'Дождитесь готовности на орбитальной станции'
+  status: '',
+  substatus: ''
 };
 
 export const orderReducer = (store = orderInitialState, action) => {
@@ -37,7 +37,9 @@ export const orderReducer = (store = orderInitialState, action) => {
           number: action.order.order.number
         },
         success: action.order.success,
-        isLoading: false
+        isLoading: false,
+        status: 'Ваш заказ начали готовить',
+        substatus: 'Дождитесь готовности на орбитальной станции'
       };
     }
     case ORDER_REQUEST_FAILED: {
