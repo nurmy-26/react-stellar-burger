@@ -6,7 +6,6 @@ import Modal from "../../modal/modal";
 import IngredientDetails from "./../ingredient-details/ingredient-details";
 import { useModal } from "../../../hooks/useModal"; // импорт кастомного хука
 import { useSelector, useDispatch } from "react-redux";
-import { addBun, addIngredient } from "../../../services/actions/burger-constructor";
 import { getIngredientsList } from "../../../services/selectors/ingredients";
 import { setIngredientInfo, resetIngredientInfo } from "../../../services/actions/details"
 

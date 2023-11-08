@@ -14,13 +14,11 @@ const constructorInitialState = {
 
 export const constructorReducer = (store = constructorInitialState, action) => {
   switch (action.type) {
-    // булку можно выбрать 1 раз (если уже выбрана, то ничего не происходит)
     case ADD_BUN: {
       return {
         ...store,
-        // если булки еще нет - добавится перетаскиваемая, иначе - останется старая (т.к. булка заблокирована)
-        bun: store.bun === null ? action.item : store.bun,
-        totalPrice: store.totalPrice + (store.bun === null ? (action.item.price*2) : 0)
+        bun: action.item,
+        totalPrice: store.totalPrice + action.item.price*2 + (store.bun === null ? 0 : -store.bun.price*2)
       };
     }
     case ADD_INGREDIENT:

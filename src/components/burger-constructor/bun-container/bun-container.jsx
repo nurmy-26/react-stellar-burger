@@ -34,11 +34,7 @@ function BunContainer({type}) {
       break;
   }
 
-  let containerClass = styles.bun
-  // если в контейнере уже есть булка, то перетащить новую нельзя; если нет - применятся стили для "подсветки" целевого элемента
-  if (constructorData.bun === null) {
-    containerClass = styles.bun + ' ' + (isHover ? styles.hovered : '') + ' ' + (isDragging && !isHover ? styles.dragging : '')
-  }
+  const containerClass = styles.bun + ' ' + (isHover ? styles.hovered : '') + ' ' + (isDragging && !isHover ? styles.dragging : '');
 
   return (
     <div ref={dropRef} className={containerClass}>
