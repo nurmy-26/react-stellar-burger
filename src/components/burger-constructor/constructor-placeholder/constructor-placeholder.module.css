@@ -1,0 +1,26 @@
+.wrapper {
+  padding: 16px 24px;
+  padding: calc(var(--offset-base-size)*4) calc(var(--offset-base-size)*6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--common-border-radius-s);
+  background: var(--background-element);
+  width: 536px;
+  min-height: 80px;
+  flex-grow: 1;
+  box-sizing: border-box;
+}
+
+.top {
+  border-radius: var(--top-constructor-item-border-radius);
+}
+
+.center {
+  margin-left: calc(var(--offset-base-size)*8);
+  height: calc(var(--offset-base-size)*116);
+}
+
+.bottom {
+  border-radius: var(--bottom-constructor-item-border-radius);
+}

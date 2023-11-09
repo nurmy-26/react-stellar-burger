@@ -1,0 +1,11 @@
+.bun {
+  margin-left: calc(var(--offset-base-size)*12);
+}
+
+.hovered {
+  opacity: .5;
+}
+
+.dragging {
+  opacity: .8;
+}

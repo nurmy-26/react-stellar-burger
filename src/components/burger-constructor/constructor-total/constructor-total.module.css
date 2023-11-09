@@ -5,6 +5,7 @@
   gap: calc(var(--offset-base-size)*10);
   margin-top: calc(var(--offset-base-size)*6);
   margin-bottom: calc(var(--offset-base-size)*12.5);
+  composes: pl-4 pr-4 from global;
 }
 
 .total {
@@ -18,4 +19,8 @@
 .total svg {
   width: calc(var(--offset-base-size)*9);
   height: calc(var(--offset-base-size)*9);
+}
+
+.btn:disabled button {
+  background-color: var(--colors-button-inactive);
 }

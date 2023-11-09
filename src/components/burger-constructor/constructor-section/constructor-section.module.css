@@ -14,3 +14,20 @@
   overflow: auto;
   composes: custom-scroll from global;
 }
+
+.wrapper::-webkit-scrollbar {
+  width: calc(var(--offset-base-size)*2);
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  border: none;
+}
+
+.hovered {
+  opacity: .5;
+}
+
+.dragging {
+  opacity: .8;
+}

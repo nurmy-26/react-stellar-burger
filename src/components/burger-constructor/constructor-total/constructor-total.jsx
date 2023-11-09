@@ -1,19 +1,26 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import styles from "./constructor-total.module.css";
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { getConstructorData } from "../../../services/selectors/burger-constructor";
 
 
 // на вход data
 function ConstructorTotal({children, onOpen}) {
+  const constructorData = useSelector(getConstructorData);
+  // мемоизация компонентов из библиотеки
+  const MemoCurrencyIcon = React.memo(CurrencyIcon);
+  const MemoButton = React.memo(Button);
+
   return (
     <div className={styles.wrapper}>
       <span className={styles.total}>
         {children}
-        <CurrencyIcon type="primary" />
+        <MemoCurrencyIcon type="primary" />
       </span>
 
-      <Button onClick={onOpen} htmlType="button" type="primary" size="large">Оформить заказ</Button>
+      <MemoButton onClick={onOpen} disabled={constructorData["bun"] === null} htmlType="button" type="primary" size="large">Оформить заказ</MemoButton>
     </div>
   );
 };
@@ -23,4 +30,4 @@ ConstructorTotal.propTypes = {
   onOpen: PropTypes.func.isRequired
   }
 
-export default ConstructorTotal;
+export default React.memo(ConstructorTotal);

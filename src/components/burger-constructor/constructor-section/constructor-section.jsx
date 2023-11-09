@@ -1,36 +1,49 @@
 import React from "react";
-// import PropTypes from "prop-types";
 import styles from "./constructor-section.module.css";
 import ConstructorItem from "../constructor-item/constructor-item";
-// import {ingredientPropType} from "../../../utils/prop-types";
-import { ConstructorContext } from "../../../services/orderContext";
-import { v4 as uuidv4 } from 'uuid'; // библиотека для генерации случайного id
+import ConstructorPlaceholder from "./../constructor-placeholder/constructor-placeholder";
+import { useDispatch, useSelector } from "react-redux";
+import { useDrop } from "react-dnd";
+import { getConstructorData } from "../../../services/selectors/burger-constructor";
+import { addIngredient } from "../../../services/actions/burger-constructor";
 
 
 // memo - чтобы секция реже рендерилась
 const ConstructorSection = React.memo(() => {
+  const constructorData = useSelector(getConstructorData);
+  const dispatch = useDispatch();
 
-  // достаем из контекста деструктуризуемые данные
-  const {constructorState} = React.useContext(ConstructorContext)
+  const [{isHover, isDragging}, dropRef ] = useDrop({
+    accept: ["sauce", "main"],
+    collect: monitor => ({
+      isHover: monitor.isOver(),
+      isDragging: monitor.canDrop(),
+    }),
+    drop(item) {
+      dispatch(addIngredient(item));
+    }
+  });
 
-  // constructorState["ingredients"] - список ингредиентов в заказе, формирующийся по клику (потом - dnd)
+  // constructorData["ingredients"] - список ингредиентов в заказе, формирующийся по dnd
   const section = React.useMemo(() => {
-    return constructorState["ingredients"].map((item) => {
-      const itemKey = uuidv4(); // генерируем случайный id для key
-      return <ConstructorItem item={item} key={itemKey} />;
+    return constructorData["ingredients"].map((item, index) => {
+      return <ConstructorItem index={index} item={item} key={item.key} />;
     })
-  }, [constructorState])
+  }, [constructorData])
+
+  // стили для визуализации перетаскивания
+  let containerClass = styles.wrapper + ' ' + (isHover ? styles.hovered : '') + ' ' + (isDragging && !isHover ? styles.dragging : '');
 
   return (
-    <ul className={styles.wrapper}>
-      {section}
+    <ul ref={dropRef} className={containerClass}>
+      {
+        constructorData.ingredients.length > 0 ?
+        section
+        :
+        (<ConstructorPlaceholder type="center" />)
+      }
     </ul>
   );
 });
 
-
-// ConstructorSection.propTypes = {
-//   data: PropTypes.arrayOf(ingredientPropType).isRequired
-// }
-
-export default React.memo(ConstructorSection);
+export default ConstructorSection;
