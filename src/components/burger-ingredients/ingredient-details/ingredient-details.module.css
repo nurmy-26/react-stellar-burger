@@ -14,20 +14,21 @@
 }
 
 .list {
-  display: flex;
-  justify-content: center;
   margin: 0;
   padding: 0;
-  list-style-type: none;
+
+  display: flex;
+  justify-content: center;
   gap: calc(var(--offset-base-size)*5);
+  list-style-type: none;
 }
 
 .item {
   display: flex;
-  flex-direction: column;
-  gap: calc(var(--offset-base-size)*2);
   min-width: 112px;
   max-width: 130px;
+  flex-direction: column;
+  gap: calc(var(--offset-base-size)*2);
 }
 
 .category {

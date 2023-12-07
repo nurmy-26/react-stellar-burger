@@ -1,7 +1,8 @@
 .header {
+  display: flex;
   width: 640px;
   min-height: 64px;
-  display: flex;
+
   justify-content: space-between;
   align-items: center;
   gap: calc(var(--offset-base-size)*9);
@@ -9,13 +10,14 @@
 }
 
 .btn {
-  height: 24px;
   margin: 0;
   padding: 0;
   border: 0;
   border-radius: 0;
-  background-color: transparent;
+
+  height: 24px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background-color: transparent;
   cursor: pointer;
 }
 

@@ -15,6 +15,7 @@
 .list {
   margin: 0;
   padding: 0;
+
   display: flex;
   list-style-type: none;
 }
@@ -24,6 +25,7 @@
   color: var(--text-dark-grey-secondary-text, #8585AD);
   padding-left: calc(var(--offset-base-size)*10);
   padding-right: calc(var(--offset-base-size)*10);
+
   composes: text text_type_main-default pb-4 pt-4 from global;
 }
 
@@ -36,9 +38,10 @@
 }
 
 .wrapper {
+  overflow: auto;
   max-width: 600px;
   max-height: calc(var(--offset-base-size)*178);
-  overflow: auto;
+
   composes: custom-scroll from global;
 }
 
@@ -52,6 +55,6 @@
 
 .wrapper::-webkit-scrollbar-thumb {
   height: calc(var(--offset-base-size)*123);
-  border-radius: 0;
   border: none;
+  border-radius: 0;
 }

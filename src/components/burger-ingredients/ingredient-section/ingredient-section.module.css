@@ -7,8 +7,10 @@
   grid-template-columns: repeat(2, 272px);
   column-gap: 24px;
   row-gap: 32px;
+
   margin: 0;
   padding-top: 24px;
   padding-bottom: calc(var(--offset-base-size)*10);
+
   composes: pl-4 pr-2 from global;
 }

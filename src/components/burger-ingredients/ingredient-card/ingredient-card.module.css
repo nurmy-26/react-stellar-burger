@@ -1,11 +1,14 @@
 .card {
+  position: relative;
+
+  display: flex;
   width: 272px;
   min-height: 208px;
-  position: relative;
-  display: flex;
+
+  flex-direction: column;
   align-items: center;
   gap: 8px;
-  flex-direction: column;
+
   composes: text text_type_main-default from global;
   cursor: pointer;
 }
@@ -20,6 +23,7 @@
   z-index: 10;
   width: 240px;
   height: 120px;
+
   object-fit: cover;
   composes: ml-4 mr-4 from global;
 }
