@@ -1,0 +1,14 @@
+.title {
+  composes: mb-6 text text_type_main-medium from global;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--offset-base-size)*6);
+  composes: mb-20 from global;
+}
+
+.form button {
+  align-self: center;
+}

@@ -1,43 +1,32 @@
 import React from "react";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import styles from "./app.module.css";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AppHeader from "../app-header/app-header";
-import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import BurgerConstructor from "../burger-constructor/burger-constructor";
-import Loading from "../loading/loading";
-import { requestIngredientsData } from '../../services/actions/ingredients'
-import { useDispatch, useSelector } from "react-redux";
-import { getIngredientsData } from "../../services/selectors/ingredients";
+import { ForgotPasswordPage, LoginPage, MainPage, NotFound404,
+  ProfilePage, RegisterPage, ResetPasswordPage } from "../../pages";
+import ProfileInfo from "../profile-info/profile-info";
+import ProfileHistory from "../profile-history/profile-history";
 
 
 function App() {
-  const ingredientsData = useSelector(getIngredientsData);
-  const dispatch = useDispatch();
-
-  // запрос списка ингредиентов при монтировании
-  React.useEffect(() => {
-    dispatch(requestIngredientsData())
-  }, [])
 
   return (
-    <React.Fragment>
+    <Router>
       <AppHeader/>
 
-      <main className={styles.main}>
-        {
-          // если запрос прошел (и прошел успешно), рендерим ингредиенты и конструктор
-        (ingredientsData.ingredients.length > 0 && !ingredientsData.isLoading && !ingredientsData.hasError) ? (
-          <DndProvider backend={HTML5Backend}>
-            <BurgerIngredients />
-            <BurgerConstructor />
-          </DndProvider>
-        ) : (
-          // иначе - рендерим компонент загрузки
-        <Loading />
-        )}
-      </main>
-    </React.Fragment>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route path="/profile" element={<ProfilePage />}>
+          <Route path="/profile" element={<ProfileInfo />} />
+          <Route path="/profile/orders" element={<ProfileHistory />} />
+        </Route>
+        {/* <Route path="/ingredients/:id" element={<IngredientPage />} /> */}
+        <Route path="*" element={<NotFound404 />} />
+      </Routes>
+    </Router>
   );
 }
 
