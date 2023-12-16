@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import styles from "./action-string.module.css";
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -15,6 +16,12 @@ function ActionString({ children, label, path }) {
       </Link>
     </p>
   );
+}
+
+ActionString.propTypes = {
+  children: PropTypes.node,
+  label: PropTypes.string,
+  path: PropTypes.string.isRequired
 }
 
 export default ActionString;

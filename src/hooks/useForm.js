@@ -5,27 +5,21 @@ import React from "react";
 export const useForm = (inputValues={}) => {
   const [values, setValues] = React.useState(inputValues);
   const [visible, setVisible] = React.useState(true);
-  const [edit, setEdit] = React.useState(true);
 
-  const handleChange = e => {
+  const handleChange = React.useCallback((e) => {
     setValues({...values, [e.target.name]: e.target.value})
-  }
+  }, []);
 
-  const handleVisible = () => {
+  // смена иконки между двумя вариантами
+  const toggleIcon = React.useCallback(() => {
     setVisible(!visible)
-  }
-
-  const handleEdit = () => {
-    setEdit(!edit)
-  }
+  }, []);
 
   return {
     handleChange,
     values,
     setValues,
     visible,
-    handleVisible,
-    edit,
-    handleEdit
+    toggleIcon
   };
 };

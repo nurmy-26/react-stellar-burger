@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./ingredient-details.module.css";
 import { useSelector } from "react-redux";
+import styles from "./ingredient-details.module.css";
 import { getIngredientDetails } from "../../../services/selectors/details";
 
 

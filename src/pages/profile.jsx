@@ -1,20 +1,30 @@
 import React from "react";
-import styles from "./page.module.css";
-import MainContainer from "../components/main-container/main-container";
-import AsideNav from "../components/aside-nav/aside-nav";
-// import ProfileInfo from "../components/profile-info/profile-info";
+import { useSelector, useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
+import styles from "./page.module.css";
+import { getAuthChecked, getUser } from "../services/selectors/auth";
+import MainContainer from "../components/common/main-container/main-container";
+import ProfileNav from "../components/profile-nav/profile-nav";
+import Loading from "../components/common/loading/loading"
 
 
 function ProfilePage() {
+  // const authChecked = useSelector(getAuthChecked);
 
   return (
     <MainContainer extraClass={styles.marginMedium}>
-      <AsideNav />
+      <ProfileNav />
 
       <div className={styles.content}>
-        {/* {location.pathname === '/profile' &&
-          (<ProfileInfo />)
+        {/* #todo */}
+        {/* {
+        // если данные юзера загрузились - рендерим содержимое; иначе - лоадер
+        (authChecked) ? (
+          <Outlet />
+        ) : (
+          // иначе - рендерим компонент загрузки
+        <Loading type='loadingPoints' extraClass={styles.load}>Загружаем данные профиля...</Loading>
+        )
         } */}
         <Outlet />
       </div>

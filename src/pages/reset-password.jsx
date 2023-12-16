@@ -1,40 +1,73 @@
 import React from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import styles from "./page.module.css";
-import MainContainer from "../components/main-container/main-container";
-import RequestForm from "../components/request-form/request-form";
-import ActionString from "../components/action-string/action-string";
-import { Button, EmailInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import MainContainer from "../components/common/main-container/main-container";
+import RequestForm from "../components/common/request-form/request-form";
+import ActionString from "../components/common/action-string/action-string";
+import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useForm } from "../hooks/useForm";
+import { updatePassword } from "../utils/api";
 
 
 function ResetPasswordPage() {
-  const { handleChange, values } = useForm({
-    email: ''
+  const navigate = useNavigate();
+  const hasSendPassword = localStorage.getItem("hasSendPassword")
+
+  const { handleChange, values, visible, toggleIcon } = useForm({
+    token: '', password: ''
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
+    updatePassword(values)
+      .then(() => {
+        localStorage.removeItem("hasSendPassword");
+        navigate("/login", { replace: true });
+      })
+      .catch((err) => {
+        console.error(`Ошибка: ${err}`);
+      })
   }
 
-  return (
-    <MainContainer extraClass={styles.marginLarge}>
+  // на страницу пустит только при наличии переменной в localStorage, записанной на предыдущем роуте
+  return hasSendPassword ?
+    (<MainContainer extraClass={styles.marginLarge}>
 
       <RequestForm title="Восстановление пароля" formName="reset-password" onSubmit={handleSubmit}>
 
-        <EmailInput
-          placeholder={'Укажите e-mail'}
+        <PasswordInput
+          type={visible ? "text" : "password"}
+          autoComplete='off'
+          placeholder={'Введите новый пароль'}
           onChange={handleChange}
-          value={values.email}
-          name={'email'}
-          isIcon={false}
+          icon={visible ? 'ShowIcon' : 'HideIcon'}
+          value={values.password}
+          name={'password'}
+          error={false}
+          onIconClick={toggleIcon}
+          errorText={'Ошибка'}
+          size={'default'}
         />
 
-        <Button htmlType="button" type="primary" size="large">Восстановить</Button>
+        <Input
+          type={'text'}
+          placeholder={'Введите код из письма'}
+          onChange={handleChange}
+          value={values.token}
+          name={'token'}
+          error={false}
+          errorText={'Ошибка'}
+          size={'default'}
+        />
+
+        <Button htmlType="submit" type="primary" size="large">Сохранить</Button>
       </RequestForm>
 
       <ActionString label="Войти" path="/login">Вспомнили пароль?</ActionString>
-    </MainContainer>
-  );
+    </MainContainer>)
+    :
+    (<Navigate to="/login" />)
 }
 
 export default ResetPasswordPage;

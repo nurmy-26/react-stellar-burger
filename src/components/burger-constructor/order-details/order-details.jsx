@@ -1,13 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styles from "./order-details.module.css";
+import { InfoIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { getOrderDetails } from "../../../services/selectors/order";
+import Loading from "../../common/loading/loading";
 import orderAccepted from "../../../images/order-accepted.svg"
 import pentagonA from "../../../images/pentagon-1.svg"
 import pentagonB from "../../../images/pentagon-2.svg"
 import pentagonC from "../../../images/pentagon-3.svg"
-import { useSelector } from "react-redux";
-import { getOrderDetails } from "../../../services/selectors/order";
-import { InfoIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import Loading from "../../loading/loading";
 
 
 function OrderDetails() {

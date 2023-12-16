@@ -18,5 +18,10 @@
 }
 
 .content {
+  display: flex;
   width: 880px;
+}
+
+.load {
+  margin: auto;
 }

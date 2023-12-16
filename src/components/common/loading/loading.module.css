@@ -25,6 +25,10 @@
   }
 }
 
+.commonStyle {
+  composes: text text_type_main-medium from global;
+}
+
 .slowSlicing {
   position: absolute;
   top: 0;

@@ -1,13 +1,13 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import styles from "./ingredient-section.module.css";
-import IngredientCard from "../ingredient-card/ingredient-card";
-import Modal from "../../modal/modal";
-import IngredientDetails from "./../ingredient-details/ingredient-details";
-import { useModal } from "../../../hooks/useModal"; // импорт кастомного хука
-import { useSelector, useDispatch } from "react-redux";
+import { useModal } from "../../../hooks/useModal";
 import { getIngredientsList } from "../../../services/selectors/ingredients";
 import { setIngredientInfo, resetIngredientInfo } from "../../../services/actions/details"
+import Modal from "../../modal/modal";
+import IngredientCard from "../ingredient-card/ingredient-card";
+import IngredientDetails from "./../ingredient-details/ingredient-details";
 
 
 // memo - чтобы секция не перерисовывалась лишний раз

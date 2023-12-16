@@ -1,11 +1,11 @@
 import React from "react";
-import styles from "./constructor-section.module.css";
-import ConstructorItem from "../constructor-item/constructor-item";
-import ConstructorPlaceholder from "./../constructor-placeholder/constructor-placeholder";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
+import styles from "./constructor-section.module.css";
 import { getConstructorData } from "../../../services/selectors/burger-constructor";
 import { addIngredient } from "../../../services/actions/burger-constructor";
+import ConstructorItem from "../constructor-item/constructor-item";
+import ConstructorPlaceholder from "./../constructor-placeholder/constructor-placeholder";
 
 
 // memo - чтобы секция реже рендерилась

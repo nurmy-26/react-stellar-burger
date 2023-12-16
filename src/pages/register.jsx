@@ -1,19 +1,25 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./page.module.css";
-import MainContainer from "../components/main-container/main-container";
-import RequestForm from "../components/request-form/request-form";
-import ActionString from "../components/action-string/action-string";
-import { Button, EmailInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useForm } from "../hooks/useForm";
+import { register } from "../services/actions/auth";
+import MainContainer from "../components/common/main-container/main-container";
+import RequestForm from "../components/common/request-form/request-form";
+import ActionString from "../components/common/action-string/action-string";
 
 
 function RegisterPage() {
-  const { handleChange, values, visible, handleVisible } = useForm({
+  const dispatch = useDispatch();
+
+  const { handleChange, values, visible, toggleIcon } = useForm({
     name: '', email: '', password: ''
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
+    dispatch(register(values));
   }
 
   return (
@@ -38,7 +44,7 @@ function RegisterPage() {
           isIcon={false}
         />
 
-        <Input
+        <PasswordInput
           type={visible ? "text" : "password"}
           autoComplete='off'
           placeholder={'Пароль'}
@@ -47,12 +53,12 @@ function RegisterPage() {
           value={values.password}
           name={'password'}
           error={false}
-          onIconClick={handleVisible}
+          onIconClick={toggleIcon}
           errorText={'Ошибка'}
           size={'default'}
         />
 
-        <Button htmlType="button" type="primary" size="large">Зарегистрироваться</Button>
+        <Button htmlType="submit" type="primary" size="large">Зарегистрироваться</Button>
       </RequestForm>
 
       <ActionString label="Войти" path="/login">Уже зарегистрированы?</ActionString>

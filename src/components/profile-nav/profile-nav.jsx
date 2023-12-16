@@ -1,20 +1,30 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import styles from "./aside-nav.module.css";
-import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { NavLink } from "react-router-dom";
+import styles from "./profile-nav.module.css";
+import { logout } from "../../services/actions/auth";
+import Logout from "./logout/logout";
 
 
-function AsideNav() {
+function ProfileNav() {
+  const dispatch = useDispatch();
   let location = useLocation();
+
   const activeClasses = styles.link + ' ' + styles.link_active;
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(logout())
+  }
 
   return (
     <aside className={styles.container}>
       <nav className="mb-20">
         <ul className={styles.list}>
           <li>
-            <NavLink to="/profile" className={({isActive}) => isActive ? activeClasses : styles.link}>
+            {/* end для более четкого сопоставления path */}
+            <NavLink to="/profile" end className={({isActive}) => isActive ? activeClasses : styles.link}>
               Профиль
             </NavLink>
           </li>
@@ -26,9 +36,7 @@ function AsideNav() {
           </li>
 
           <li>
-            <NavLink to="/login" className={({isActive}) => isActive ? activeClasses : styles.link}>
-              Выход
-            </NavLink>
+            <Logout onClick={handleLogout}>Выход</Logout>
           </li>
         </ul>
       </nav>
@@ -48,4 +56,4 @@ function AsideNav() {
   );
 }
 
-export default AsideNav;
+export default ProfileNav;

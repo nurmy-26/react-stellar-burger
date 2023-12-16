@@ -1,19 +1,37 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styles from "./page.module.css";
-import MainContainer from "../components/main-container/main-container";
-import RequestForm from "../components/request-form/request-form";
-import ActionString from "../components/action-string/action-string";
-import { Button, EmailInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { getCookie } from "../utils/cookie";
 import { useForm } from "../hooks/useForm";
+import { login } from "../services/actions/auth";
+import { getAuthChecked, getUser } from "../services/selectors/auth";
+import MainContainer from "../components/common/main-container/main-container";
+import RequestForm from "../components/common/request-form/request-form";
+import ActionString from "../components/common/action-string/action-string";
 
 
 function LoginPage() {
-  const { handleChange, values, visible, handleVisible } = useForm({
+  const user = useSelector(getUser)
+  const isAuthChecked = useSelector(getAuthChecked)
+  const dispatch = useDispatch();
+
+  const { handleChange, values, visible, toggleIcon } = useForm({
     email: '', password: ''
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login(values))
+  }
 
+  // #todo - удалить
+  const consolelog = () => {
+    console.log(`refreshToken из куков: ${getCookie('refreshToken')}`)
+    console.log(`token из куков: ${getCookie('token')}`)
+    console.log(user)
+    console.log(isAuthChecked)
   }
 
   return (
@@ -28,7 +46,7 @@ function LoginPage() {
           isIcon={false}
         />
 
-        <Input
+        <PasswordInput
           type={visible ? "text" : "password"}
           autoComplete='off'
           placeholder={'Пароль'}
@@ -37,12 +55,13 @@ function LoginPage() {
           value={values.password}
           name={'password'}
           error={false}
-          onIconClick={handleVisible}
+          onIconClick={toggleIcon}
           errorText={'Ошибка'}
           size={'default'}
         />
 
         <Button htmlType="submit" type="primary" size="large">Войти</Button>
+        <Button htmlType="button" type="primary" size="large" onClick={consolelog}>Console</Button>
       </RequestForm>
 
       <ActionString label="Зарегистрироваться" path="/register">Вы&nbsp;&mdash; новый пользователь?</ActionString>
