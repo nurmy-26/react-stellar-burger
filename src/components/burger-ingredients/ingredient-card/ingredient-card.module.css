@@ -1,3 +1,8 @@
+.link {
+  text-decoration: none;
+  color: var(--text-primary-light-standart-text, #F2F2F3);
+}
+
 .card {
   position: relative;
 

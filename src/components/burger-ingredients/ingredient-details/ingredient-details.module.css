@@ -1,4 +1,5 @@
 .details {
+  min-height: calc(var(--offset-base-size)*28);
   text-align: center;
   composes: mb-5 from global;
 }
