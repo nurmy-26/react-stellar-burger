@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styles from "./ingredient-details.module.css";
 import { getIngredientsData, getIngredientsList } from "../../../services/selectors/ingredients";
-import Loading from "../../../components/common/loading/loading";
+import ModalLoader from "../../modal/modal-loader/modal-loader";
 
 
 function IngredientDetails() {
@@ -19,8 +19,8 @@ function IngredientDetails() {
 
   return (
     <>
-      {isLoading && <Loading type='loadingPoints'>Отправляем ваш заказ...</Loading>}
-      {hasError && <p>Ой! Что-то пошло не так...</p>}
+      {isLoading && <ModalLoader />}
+      {hasError && <ModalLoader hasError={true} />}
       {detailsData && !isLoading && !hasError && (
         <div className={styles.details}>
         <img className={styles.img} src={detailsData.image_large} alt={detailsData.name} />

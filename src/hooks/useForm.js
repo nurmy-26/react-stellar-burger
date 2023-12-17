@@ -6,14 +6,14 @@ export const useForm = (inputValues={}) => {
   const [values, setValues] = React.useState(inputValues);
   const [visible, setVisible] = React.useState(true);
 
-  const handleChange = React.useCallback((e) => {
+  const handleChange = (e) => {
     setValues({...values, [e.target.name]: e.target.value})
-  }, []);
+  }
 
   // смена иконки между двумя вариантами
-  const toggleIcon = React.useCallback(() => {
+  const toggleIcon = () => {
     setVisible(!visible)
-  }, []);
+  }
 
   return {
     handleChange,

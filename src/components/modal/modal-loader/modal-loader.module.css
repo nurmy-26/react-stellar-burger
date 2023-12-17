@@ -1,0 +1,91 @@
+/* картинка */
+@keyframes clockwise {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.3) rotate(0.5turn);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1) rotate(1turn);
+  }
+}
+
+@keyframes counterclockwise {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.5) rotate(-0.5turn);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1) rotate(-1turn);
+  }
+}
+
+/* текст */
+@keyframes points {
+  to {
+    clip-path: inset(0 -1ch 0 0)
+  }
+}
+
+.container {
+  min-height: 382px;
+  text-align: center;
+  composes: mt-4 from global;
+}
+
+.containerMedium {
+  margin-top: 136px;
+  min-height: 442px;
+}
+
+/* область "вертушки" */
+.stub {
+  position: relative;
+
+  display: flex;
+  min-height: calc(var(--offset-base-size)*31);
+  justify-content: center;
+  align-items: center;
+  margin: calc(var(--offset-base-size)*15) 0;
+}
+
+.stub svg {
+  width: calc(var(--offset-base-size)*10);
+  height: calc(var(--offset-base-size)*10);
+}
+
+.penta {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.pentaA {
+  animation: counterclockwise 10s linear infinite;
+}
+.pentaB {
+  animation: clockwise 10s linear infinite;
+}
+
+.status {
+  display: inline-block;
+  min-height: calc(var(--offset-base-size)*7.5);
+  margin-top: calc(var(--offset-base-size)*8);
+  composes: text text_type_main-medium from global;
+}
+
+.animated {
+  clip-path: inset(0 3ch 0 0);
+  animation: points 2.5s steps(4) infinite;
+}
+
+.substatus {
+  display: flex;
+  min-height: calc(var(--offset-base-size)*6);
+  justify-content: center;
+  align-items: center;
+  gap: calc(var(--offset-base-size)*2);
+  composes: pt-8 text text_type_main-default text_color_inactive from global;
+}

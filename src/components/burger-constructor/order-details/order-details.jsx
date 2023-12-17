@@ -1,66 +1,33 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import styles from "./order-details.module.css";
-import { InfoIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getOrderDetails } from "../../../services/selectors/order";
-import Loading from "../../common/loading/loading";
 import orderAccepted from "../../../images/order-accepted.svg"
-import pentagonA from "../../../images/pentagon-1.svg"
-import pentagonB from "../../../images/pentagon-2.svg"
-import pentagonC from "../../../images/pentagon-3.svg"
+import ModalLoader from "../../modal/modal-loader/modal-loader";
 
 
 function OrderDetails() {
   const orderInfo = useSelector(getOrderDetails);
-  let text = "";
-  let done = false;
-  let error = false;
-
-  if (!orderInfo.isLoading && !orderInfo.hasError) {
-    text = "идентификатор заказа";
-    done = true;
-  } else if (orderInfo.isLoading) {
-    text = (<Loading type='loadingPoints'>Отправляем ваш заказ...</Loading>);
-  } else {
-    text = "Что-то пошло не так :(";
-    error = true;
-  }
 
   return (
-    <div className={styles.details}>
-      <h3 className={styles.number}>{orderInfo.order.number}</h3>
-      <p className={styles.order}>
-        {text}
-      </p>
-      <div className={styles.stub}>
-        {/* картинка для удачного запроса */}
-        {done &&
-          <img className={styles.img} src={orderAccepted} alt="галочка" />
-        }
-
-        {/* вертушка для загрузки и ошибки */}
-        {!done &&
-          <>
-            <img className={`${styles.penta} ${styles.pentaA}`} src={pentagonA} alt="фоновый вектор" />
-            <img className={`${styles.penta} ${styles.pentaA}`} src={pentagonB} alt="фоновый вектор" />
-            <img className={`${styles.penta} ${styles.pentaB}`} src={pentagonC} alt="фоновый вектор" />
-          </>
-        }
-      </div>
-      <p className={styles.status}>{orderInfo.status}</p>
-      <p className={`${styles.status} ${styles.substatus}`}>
-        {orderInfo.substatus}
-
-        {/* картинка для ошибки */}
-        {error &&
-          <>
-            <InfoIcon type="secondary" />
-            <span>Обратитесь в службу межгалактической поддержки</span>
-          </>
-        }
-      </p>
-    </div>
-  );
+    <>
+      {orderInfo.isLoading && <ModalLoader size="m" loadingText="Отправляем ваш заказ..." />}
+      {orderInfo.hasError && <ModalLoader size="m" hasError={true} />}
+      {orderInfo && !orderInfo.isLoading && !orderInfo.hasError && (
+        <div className={styles.details}>
+          <h3 className={styles.number}>{orderInfo.order.number}</h3>
+          <p className={styles.order}>идентификатор заказа</p>
+          <div className={styles.stub}>
+            <img className={styles.img} src={orderAccepted} alt="галочка" />
+          </div>
+          <p className={styles.status}>{orderInfo.status}</p>
+          <p className={`${styles.status} ${styles.substatus}`}>
+            {orderInfo.substatus}
+          </p>
+        </div>
+      )}
+    </>
+  )
 };
 
 export default OrderDetails;
