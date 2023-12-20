@@ -1,0 +1,9 @@
+.text {
+  display: flex;
+  gap: calc(var(--offset-base-size)*2);
+  composes: mb-4 text text_type_main-default text_color_inactive from global;
+}
+
+.btn {
+  padding: 0;
+}

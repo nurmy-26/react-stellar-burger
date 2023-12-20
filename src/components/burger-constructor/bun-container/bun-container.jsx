@@ -1,12 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
-import styles from "./bun-container.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
-import { getConstructorData } from "../../../services/selectors/burger-constructor";
-import ConstructorPlaceholder from "./../constructor-placeholder/constructor-placeholder";
+import PropTypes from "prop-types";
+import styles from "./bun-container.module.css";
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import { getConstructorData } from "../../../services/selectors/burger-constructor";
 import { addBun } from "../../../services/actions/burger-constructor";
+import ConstructorPlaceholder from "./../constructor-placeholder/constructor-placeholder";
 
 
 function BunContainer({type}) {
@@ -50,6 +50,6 @@ function BunContainer({type}) {
 
 BunContainer.propTypes = {
   type: PropTypes.string.isRequired
-  }
+}
 
 export default React.memo(BunContainer);

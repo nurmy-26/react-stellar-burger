@@ -1,15 +1,15 @@
 .wrapper {
-  padding: 16px 24px;
-  padding: calc(var(--offset-base-size)*4) calc(var(--offset-base-size)*6);
+  box-sizing: border-box;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: var(--common-border-radius-s);
-  background: var(--background-element);
+  flex-grow: 1;
   width: 536px;
   min-height: 80px;
-  flex-grow: 1;
-  box-sizing: border-box;
+
+  justify-content: center;
+  align-items: center;
+  padding: calc(var(--offset-base-size)*4) calc(var(--offset-base-size)*6);
+  border-radius: var(--common-border-radius-s);
+  background: var(--background-element);
 }
 
 .top {

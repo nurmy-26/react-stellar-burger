@@ -1,34 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import styles from "./ingredient-section.module.css";
-import IngredientCard from "../ingredient-card/ingredient-card";
-import Modal from "../../modal/modal";
-import IngredientDetails from "./../ingredient-details/ingredient-details";
-import { useModal } from "../../../hooks/useModal"; // импорт кастомного хука
-import { useSelector, useDispatch } from "react-redux";
 import { getIngredientsList } from "../../../services/selectors/ingredients";
-import { setIngredientInfo, resetIngredientInfo } from "../../../services/actions/details"
+import IngredientCard from "../ingredient-card/ingredient-card";
 
 
 // memo - чтобы секция не перерисовывалась лишний раз
 const IngredientSection = React.forwardRef(({type}, ref) => {
   const ingredientsList = useSelector(getIngredientsList);
-  const dispatch = useDispatch();
-
-  // деструктуризуем кастомный хук для управления модальным окном
-  const { isModalOpen, openModal, closeModal } = useModal();
-
-  // при открытии модалки записываем инфо об ингредиенте в store (и добавляем его в конструктор)
-  const openTooltip = (el) => {
-    dispatch(setIngredientInfo(el));
-    openModal();
-  }
-
-  // при закрытии модалки сбрасываем инфо об ингредиенте в store
-  const closeTooltip = () => {
-    closeModal();
-    dispatch(resetIngredientInfo());
-  }
 
   // возвращаем результат фильтрации ingredientsList (со всеми элементами для секции конкретного типа)
   const filteredList = React.useMemo(() => {
@@ -39,7 +19,7 @@ const IngredientSection = React.forwardRef(({type}, ref) => {
   // useMemo в обоих случаях - чтобы не было лишних рендеров
   const section = React.useMemo(() => {
     return filteredList.map((item) => {
-      return <MemoIngredientCard onOpen={() => openTooltip(item)} itemInfo={item} key={item._id} />;
+      return <MemoIngredientCard itemInfo={item} key={item._id} />;
     })
   }, [filteredList])
 
@@ -69,13 +49,6 @@ const IngredientSection = React.forwardRef(({type}, ref) => {
       <ul className={styles.list}>
         {section}
       </ul>
-
-      {
-        isModalOpen &&
-        <Modal header="Детали ингредиента" onClose={closeTooltip}>
-          <IngredientDetails />
-        </Modal>
-      }
     </section>
   );
 })

@@ -4,63 +4,74 @@
 
 .header {
   max-width: 1280px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin: 0 auto;
 
   composes: pb-4 pt-4 from global;
 }
 
-.nav {
-  flex: 50%;
+.header a {
+  text-decoration: none; /* убираем подчеркивание NavLink по умолчанию */
 }
 
 .list {
   margin: 0;
   padding: 0;
+
   display: flex;
+  justify-content: space-between;
   list-style-type: none;
-  gap: 8px;
+  gap: calc(var(--offset-base-size)*2);
 }
 
-.item {
+.link {
   display: flex;
-  gap: 8px;
+  gap: calc(var(--offset-base-size)*2);
   border-radius: calc(var(--offset-base-size)*10);
   color: var(--text-dark-grey-secondary-text, #8585AD);
   composes: text text_type_main-default pl-5 pr-5 pb-4 pt-4 from global;
 
   cursor: pointer;
 }
+.link svg {
+  fill: var(--text-dark-grey-secondary-text, #8585AD);
+}
 
-.item:hover {
+.link:hover {
   color: var(--text-primary-light-standart-text, #F2F2F3);
 }
-.item:hover svg {
+.link:hover svg {
   fill: var(--text-primary-light-standart-text, #F2F2F3);
 }
 
 /* стили для выбранного пункта навигации */
-.item_active {
+.link_active {
   color: var(--text-primary-light-standart-text, #F2F2F3);
 }
-
-.item_centered {
-  flex: 33%; /* выравниваем по центру хедера несмотря на разное расстояние от элементов по бокам */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.link_active svg {
+  fill: var(--text-primary-light-standart-text, #F2F2F3);
 }
 
-.profile {
+.link_start {
   flex: 50%;
+
+  display: flex;
+  justify-content: flex-start;
+}
+
+.link_centered {
+  flex: 33%; /* выравниваем по центру хедера несмотря на разное расстояние от элементов по бокам */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.link_centered a {
+  max-height: 50px;
+}
+
+.link_end {
+  flex: 50%;
+
   display: flex;
   justify-content: flex-end;
-}
-
-.button {
-  border: 0;
-  border-radius: 0;
-  background-color: transparent;
 }

@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import styles from "./loading.module.css";
 
 
-function Loading({type = 'slowSlicing', children}) {
-  let commonStyle;
+function Loading({ children, extraClass, type = 'slowSlicing' }) {
+  let commonStyle = styles.commonStyle;
 
   switch(type) {
     case "slowSlicing":
@@ -15,8 +15,10 @@ function Loading({type = 'slowSlicing', children}) {
       break;
   }
 
+  const loaderClasses = commonStyle + ' ' + extraClass;
+
   return (
-    <span className={commonStyle}>
+    <span className={loaderClasses}>
       {!children ? "Идет загрузка..." : children}
     </span>
   );
@@ -24,6 +26,8 @@ function Loading({type = 'slowSlicing', children}) {
 
 Loading.propTypes = {
   children: PropTypes.string,
+  extraClass: PropTypes.string,
+  type: PropTypes.string
 }
 
 export default Loading;

@@ -1,31 +1,47 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import styles from "./app-header.module.css";
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 
 function AppHeader() {
+  const activeClasses = styles.link + ' ' + styles.link_active;
+
   return (
     <div className={styles.wrapper}>
       <header className={styles.header}>
-        <nav className={styles.nav}><ul className={styles.list}>
-          <li><a className={`${styles.item} ${styles.item_active}`}>
-            <BurgerIcon type="primary" />
-            Конструктор
-          </a></li>
-          <li><a className={styles.item}>
-            <ListIcon type="secondary" />
-            Лента заказов
-          </a></li>
-        </ul></nav>
+        <nav>
+          <ul className={styles.list}>
 
-        <a className={styles.item_centered} href="#"><Logo /></a>
+            <ul className={`${styles.list} ${styles.link_start}`}>
+              <li>
+                <NavLink to="/" className={({isActive}) => isActive ? activeClasses : styles.link}>
+                    <BurgerIcon />
+                    Конструктор
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/login" className={({isActive}) => isActive ? activeClasses : styles.link}>
+                  <ListIcon />
+                  Лента заказов
+                </NavLink>
+              </li>
+            </ul>
 
-        <div className={styles.profile}>
-          <button className={`${styles.item} ${styles.button}`}>
-            <ProfileIcon type="secondary" />
-            Личный кабинет
-          </button>
-        </div>
+            <li className={styles.link_centered}>
+              <NavLink to="/">
+                <Logo />
+              </NavLink>
+            </li>
+
+            <li className={styles.link_end}>
+              <NavLink to="/profile" className={({isActive}) => isActive ? activeClasses : styles.link}>
+                <ProfileIcon />
+                Личный кабинет
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
       </header>
     </div>
   );
