@@ -16,11 +16,11 @@ import Modal from "../modal/modal";
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  let location = useLocation();
+  const location = useLocation();
 
   // существует ли state у текущего роута; если да - присвоим переменной значение state.background (в т.ч. undefined)
   // т.о. мы запоминаем страницу, с которой открыли модалку (для дальнейшего использования её в кач-ве подложки)
-  let background = location.state && location.state.background
+  const background = location.state && location.state.background
 
   // при закрытии модалки возвращаемся на роут, с которого её открывали (и который записан в background)
   const closeTooltip = () => {

@@ -21,10 +21,7 @@ export const config = {
 
 // универсальная ф-я проверки ответа от сервера
 export const checkResponse = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Ошибка: ${res.status}`);
+  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 }
 
 // универсальная ф-я проверки ответа от сервера для запросов, требущих авторизации
@@ -50,19 +47,18 @@ export const request = (endpoint, options) => {
 
 // ф-я обновления токена для запросов, требущих авторизации
 export const updateToken = () => {
-  return fetch(`${config.BASE_URL}${config.TOKEN_ENDPOINT}`, {
+  return request(config.TOKEN_ENDPOINT, {
     method: 'POST',
     headers: config.headers,
     body: JSON.stringify({
       token: getCookie('refreshToken')
     })
-  }).then(checkAuthResponse);
+  })
 }
 
 // ф-я для выполнения и проверки запросов, требующих авторизации
 export const authorizedRequest = (endpoint, options) => {
-  return fetch(`${config.BASE_URL}${endpoint}`, options)
-    .then(checkAuthResponse)
+  return request(endpoint, options)
     .catch((err) => {
       if (err.message === "jwt expired" || err.message === "jwt malformed") {
         return updateToken()
@@ -83,7 +79,7 @@ export const authorizedRequest = (endpoint, options) => {
 
             return fetch(`${config.BASE_URL}${endpoint}`, updatedOptions);
           })
-          .then(checkAuthResponse);
+          .then(checkResponse);
       } else {
         return Promise.reject(err);
       }
