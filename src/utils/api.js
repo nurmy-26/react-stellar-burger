@@ -2,9 +2,11 @@ import { getCookie, setCookie } from "./cookie";
 
 export const config = {
   BASE_URL: 'https://norma.nomoreparties.space/api/',
+  WS_ALL: 'wss://norma.nomoreparties.space/orders/all',
+  WS_USER: 'wss://norma.nomoreparties.space/orders',
+
   INGREDIENTS_ENDPOINT: 'ingredients',
   ORDERS_ENDPOINT: 'orders',
-
   REGISTER_ENDPOINT: 'auth/register',
   LOGIN_ENDPOINT: 'auth/login',
   USER_ENDPOINT: 'auth/user',
@@ -54,6 +56,13 @@ export const updateToken = () => {
       token: getCookie('refreshToken')
     })
   })
+  .then(refreshData => {
+    if (!refreshData.success) {
+      return Promise.reject(refreshData);
+    }
+    setCookie('refreshToken', refreshData.refreshToken);
+    setCookie('token', refreshData.accessToken.split("Bearer ")[1], { expires: 1200 });
+  })
 }
 
 // ф-я для выполнения и проверки запросов, требующих авторизации
@@ -61,25 +70,17 @@ export const authorizedRequest = (endpoint, options) => {
   return request(endpoint, options)
     .catch((err) => {
       if (err.message === "jwt expired" || err.message === "jwt malformed") {
-        return updateToken()
-          .then(refreshData => {
-            if (!refreshData.success) {
-              return Promise.reject(refreshData);
-            }
-            setCookie('refreshToken', refreshData.refreshToken);
-            setCookie('token', refreshData.accessToken.split("Bearer ")[1], { expires: 1200 });
+        updateToken()
 
-            const updatedOptions = {
-              ...options,
-              headers: {
-                ...options.headers,
-                'Authorization': refreshData.accessToken
-              }
-            };
+        const updatedOptions = {
+          ...options,
+          headers: {
+            ...options.headers,
+            'Authorization': getCookie('token')
+          }
+        };
 
-            return fetch(`${config.BASE_URL}${endpoint}`, updatedOptions);
-          })
-          .then(checkResponse);
+        return request(endpoint, updatedOptions);
       } else {
         return Promise.reject(err);
       }

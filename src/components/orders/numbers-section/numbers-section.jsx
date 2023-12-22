@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import styles from "./numbers-section.module.css";
 
 
-function NumbersSection({ type }) {
+function NumbersSection({ orderNumbers, type }) {
+  // текст заголовка и цвет цифр зависят от type
   let text;
   let numberStyle;
   switch(type) {
@@ -17,21 +18,8 @@ function NumbersSection({ type }) {
       break;
   }
 
-  // #todo - удалить хардкод
-  const orderNumbers = ['034531', '034532', '034533', '034534', '034535', ];
-  // const orderNumbers = ['034531', '034532', '034533', '034534', '034535', '034536', '034537', '034538',
-  //   '034539', '034540', '034541', '034542', '034543', '034544', '034531', '034532', '034533', '034534',
-  //   '034535', '034536', '034537', '034538', '034539', '034540', '034541', '034542', '034543', '034544',
-  //   '034539', '034540', '034541', '034542', '034543', '034544', '034531', '034532', '034533', '034534',
-  //   '034535', '034536', '034537', '034538', '034539', '034540', '034541', '034542', '034543', '034544']
-
-  // const renderOrders = React.useMemo(() => {
-  //   return orderNumbers.map((number, index) => {
-  //     return <li key={index}>{number}</li>;
-  //   })
-  // }, [orderNumbers])
-
-  const renderOrders = () => {
+  // порядок заполнения колонок номерами заказов
+  const renderOrders = React.useCallback(() => {
     let columnIndex = 1;
     let rowIndex = 1;
 
@@ -57,7 +45,7 @@ function NumbersSection({ type }) {
         </li>
       );
     });
-  };
+  }, [orderNumbers])
 
 
   return (
@@ -71,7 +59,8 @@ function NumbersSection({ type }) {
 }
 
 NumbersSection.propTypes = {
-  // type: PropTypes.string.isRequired,
+  orderNumbers: PropTypes.arrayOf(PropTypes.number),
+  type: PropTypes.string.isRequired
 }
 
 export default NumbersSection;

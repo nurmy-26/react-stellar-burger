@@ -1,37 +1,17 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./order-feed.module.css";
 import OrderCard from "../order-card/order-card";
+import { orderPropType } from "../../../utils/prop-types";
 
 
-// #todo - удалить хардкод
-function createMultipleOrders(orderData, quantity) {
-  const orders = [];
-
-  for(let i = 0; i < quantity; i++) {
-    orders.push({...orderData});
-  }
-
-  return orders;
-}
-
-
-function OrderFeed({type}) {
-
-  const orderData = {
-    name: 'Death Star Starship Main бургер',
-    number: '#' + '034535'
-  };
-  const quantity = 6;
-  const orders = createMultipleOrders(orderData, quantity); // создаем 6 дубликатов заказа
-
-
-  const MemoOrderCard = React.memo(OrderCard)
-  // useMemo в обоих случаях - чтобы не было лишних рендеров
+function OrderFeed({type, orderList}) {
+  const MemoOrderCard = React.memo(OrderCard);
   const section = React.useMemo(() => {
-    return orders.map((item, index) => {
-      return <MemoOrderCard orderInfo={item} key={index} />;
+    return orderList.map((item) => {
+      return <MemoOrderCard orderInfo={item} key={item._id} />;
     })
-  }, [orders])
+  }, [orderList])
 
 
   // #todo проверки isLoading, hasError
@@ -40,6 +20,11 @@ function OrderFeed({type}) {
       {section}
     </ul>
   );
+}
+
+OrderFeed.propTypes = {
+  type: PropTypes.string,
+  orderList: PropTypes.arrayOf(orderPropType)
 }
 
 export default OrderFeed;

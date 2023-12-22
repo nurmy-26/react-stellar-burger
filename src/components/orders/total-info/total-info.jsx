@@ -15,7 +15,7 @@ function TotalInfo({ children, extraClass, text }) {
 }
 
 TotalInfo.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.number.isRequired,
   extraClass: PropTypes.string,
   text: PropTypes.string,
 }

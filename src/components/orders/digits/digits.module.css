@@ -1,0 +1,9 @@
+.section {
+  width: 580px;
+}
+
+.numbers {
+  display: flex;
+  gap: calc(var(--offset-base-size)*9);
+  composes: mb-15 from global;
+}

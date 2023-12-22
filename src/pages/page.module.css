@@ -25,9 +25,3 @@
 .load {
   margin: auto;
 }
-
-.twoColumns {
-  display: flex;
-  gap: calc(var(--offset-base-size)*9);
-  composes: mb-15 from global;
-}
