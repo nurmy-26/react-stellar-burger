@@ -15,13 +15,11 @@
 }
 
 .list {
-  margin: 0;
-  padding: 0;
-
   display: flex;
   justify-content: center;
   gap: calc(var(--offset-base-size)*5);
-  list-style-type: none;
+
+  composes: list-reset from global;
 }
 
 .item {

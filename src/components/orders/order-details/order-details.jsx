@@ -1,13 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import styles from "./order-details.module.css";
-import { getOrderDetails } from "../../../services/selectors/order";
+import { getOrderData } from "../../../services/selectors/order";
 import orderAccepted from "../../../images/order-accepted.svg"
 import ModalLoader from "../../modal/modal-loader/modal-loader";
 
 
 function OrderDetails() {
-  const orderInfo = useSelector(getOrderDetails);
+  // #todo - доделать, когда будут реальные данные
+  // const orderInfo = useSelector(getOrderData);
 
   return (
     <>

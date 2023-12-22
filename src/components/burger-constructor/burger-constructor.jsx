@@ -10,7 +10,7 @@ import { getUser } from "../../services/selectors/auth";
 import Modal from "../modal/modal";
 import ConstructorSection from "./constructor-section/constructor-section";
 import ConstructorTotal from "./constructor-total/constructor-total";
-import OrderDetails from "./order-details/order-details";
+import OrderNumber from "./order-number/order-number";
 import BunContainer from "./bun-container/bun-container";
 
 
@@ -36,6 +36,11 @@ function BurgerConstructor() {
     const constructorIdList = [bunId, ...ingredientsArr, bunId]
 
     dispatch(requestOrder(constructorIdList));
+    console.log(constructorIdList.length);
+    function filterUniqueElements(array) {
+      return array.filter((value, index, self) => self.indexOf(value) === index);
+    }
+    console.log(filterUniqueElements(constructorIdList))
     openModal();
   }
 
@@ -63,7 +68,7 @@ function BurgerConstructor() {
       {
         isModalOpen &&
         <Modal header="" onClose={closeOrderModal}>
-          <OrderDetails />
+          <OrderNumber />
         </Modal>
       }
     </section>

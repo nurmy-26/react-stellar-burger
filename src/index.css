@@ -1,3 +1,15 @@
+:root {
+  --button-normal: linear-gradient(63.18deg, #801ab3 0%, #4c4cff 100%);
+  --text-primary-light-standart-text: #F2F2F3;
+}
+
 html {
   margin: calc(var(--offset-base-size)*10);
+}
+
+/* reset list-style */
+.list-reset {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }

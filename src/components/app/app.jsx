@@ -5,10 +5,11 @@ import { checkUserAuth } from "../../services/actions/auth";
 import { requestIngredientsData } from '../../services/actions/ingredients'
 import AppHeader from "../app-header/app-header";
 import { OnlyAuth, OnlyUnAuth } from "../protected-component";
-import { ForgotPasswordPage, LoginPage, MainPage, NotFound404,
+import { FeedPage, ForgotPasswordPage, LoginPage, MainPage, NotFound404,
   ProfilePage, RegisterPage, ResetPasswordPage } from "../../pages";
 import ProfileInfo from "../profile-info/profile-info";
-import ProfileHistory from "../profile-history/profile-history";
+import OrderFeed from "../orders/order-feed/order-feed";
+import DetailsWrapper from "../common/details-wrapper/details-wrapper";
 import IngredientDetails from "../burger-ingredients/ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
 
@@ -40,7 +41,10 @@ function App() {
       {/* передавая location в Routes, мы не позволим ему использовать фактическое location, если задан background */}
       <Routes location={ background || location }>
         <Route path="/" element={<MainPage />} />
-        <Route path="/ingredients/:id" element={<IngredientDetails />} />
+        <Route path="/ingredients/:id"
+          element={<DetailsWrapper component={<IngredientDetails />} title="Детали ингредиента" />} />
+        <Route path="/feed" element={<FeedPage />} />
+        {/* <Route path="/feed/:number" element={<МОДАЛКА ЗАКАЗА />} /> */}
 
         {/* только для не авторизованных */}
         <Route path="/login" element={<OnlyUnAuth component={<LoginPage />} />} />
@@ -51,7 +55,8 @@ function App() {
         {/* только для авторизованных */}
         <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />}>
           <Route path="/profile" element={<OnlyAuth component={<ProfileInfo />} />} />
-          <Route path="/profile/orders" element={<OnlyAuth component={<ProfileHistory />} />} />
+          <Route path="/profile/orders" element={<OnlyAuth component={<OrderFeed type="history" />} />} />
+          {/* <Route path="/profile/orders/:number" element={<МОДАЛКА ЗАКАЗА />} /> */}
         </Route>
 
         <Route path="*" element={<NotFound404 />} />
@@ -65,6 +70,11 @@ function App() {
             <IngredientDetails />
           </Modal>
         } />
+        {/* <Route path="/profile/orders/:number" element={
+          <Modal header="НОМЕР ЗАКАЗА" type="order-modal" onClose={closeTooltip}>
+            <МОДАЛКА ЗАКАЗА />
+          </Modal>
+        } /> */}
       </Routes>
 
       }

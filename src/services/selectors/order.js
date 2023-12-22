@@ -1,1 +1,1 @@
-export const getOrderDetails = (store) => store.orderDetails;
+export const getOrderData = (store) => store.orderData;

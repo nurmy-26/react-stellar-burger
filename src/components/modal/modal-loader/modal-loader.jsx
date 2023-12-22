@@ -40,6 +40,6 @@ ModalLoader.propTypes = {
   hasError: PropTypes.bool,
   errorMessage: PropTypes.string,
   loadingText: PropTypes.string
-  }
+}
 
 export default ModalLoader;

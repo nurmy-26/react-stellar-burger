@@ -9,6 +9,6 @@ export const rootReducer = combineReducers({
   // например, store.ingredientsData.ingredients - доступ к списку ингредиентов
   ingredientsData: ingredientsReducer,
   constructorData: constructorReducer,
-  orderDetails: orderReducer,
+  orderData: orderReducer,
   auth: authReducer
 });

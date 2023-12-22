@@ -21,7 +21,7 @@ function AppHeader() {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/login" className={({isActive}) => isActive ? activeClasses : styles.link}>
+                <NavLink to="/feed" className={({isActive}) => isActive ? activeClasses : styles.link}>
                   <ListIcon />
                   Лента заказов
                 </NavLink>

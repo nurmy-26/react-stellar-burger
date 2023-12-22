@@ -1,0 +1,23 @@
+.list {
+  display: flex;
+  position: relative;
+  composes: list-reset from global;
+}
+
+.overflowCount {
+  z-index: 1;
+  box-sizing: border-box;
+  position: relative;
+  top: 2px;
+  left: -142px;
+  display: flex;
+  width: 60px;
+  height: 60px;
+
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(28, 28, 33, .6);
+  border-radius: 50%;
+
+  composes: text text text_type_main-default from global;
+}
