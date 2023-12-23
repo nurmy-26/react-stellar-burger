@@ -19,7 +19,6 @@ export const socketMiddleware = (wsActions) => {
         // подписываемся на события сокета
         socket.onopen = (event) => {
           dispatch({ type: onOpen });
-          console.log(event)
         }
 
         socket.onerror = () => {
@@ -39,7 +38,6 @@ export const socketMiddleware = (wsActions) => {
 
         socket.onclose = event => {
           dispatch({ type: onClose });
-          console.log(event)
         }
       }
 

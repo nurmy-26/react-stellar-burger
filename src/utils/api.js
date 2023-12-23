@@ -14,6 +14,7 @@ export const config = {
   TOKEN_ENDPOINT: 'auth/token',
   PASSWORD_RESET_ENDPOINT: 'password-reset',
   PASSWORD_UPDATE_ENDPOINT: 'password-reset/reset',
+  GET_ORDER_INFO: 'orders/ ',
 
   headers: {
     'Content-Type': 'application/json; charset=UTF-8'
@@ -188,5 +189,13 @@ export const updateUserInfo = (form) => {
       password: form.password,
       name: form.name
     })
+  })
+}
+
+// получение данных об открытом заказе
+export const getOrderInfo = (number) => {
+  return request(`${config.GET_ORDER_INFO}${number}`, {
+    method: 'GET',
+    headers: config.headers
   })
 }

@@ -10,6 +10,7 @@ import { FeedPage, ForgotPasswordPage, LoginPage, MainPage, NotFound404,
 import ProfileInfo from "../profile-info/profile-info";
 import OrderFeed from "../orders/order-feed/order-feed";
 import DetailsWrapper from "../common/details-wrapper/details-wrapper";
+import OrderDetailsWrapper from "../orders/order-details/order-details-wrapper/order-details-wrapper";
 import IngredientDetails from "../burger-ingredients/ingredient-details/ingredient-details";
 import OrderDetails from "../orders/order-details/order-details";
 import Modal from "../modal/modal";
@@ -48,7 +49,7 @@ function App() {
           element={<DetailsWrapper component={<IngredientDetails />} title="Детали ингредиента" />} />
         <Route path="/feed" element={<FeedPage />} />
         <Route path="/feed/:number"
-          element={<DetailsWrapper component={<OrderDetails />} />} />
+          element={<OrderDetailsWrapper component={<OrderDetails />} />} />
 
         {/* только для не авторизованных */}
         <Route path="/login" element={<OnlyUnAuth component={<LoginPage />} />} />

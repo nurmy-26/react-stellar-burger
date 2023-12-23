@@ -1,0 +1,4 @@
+.wrapper {
+  text-align: center;
+  composes: mt-30 from global;
+}
