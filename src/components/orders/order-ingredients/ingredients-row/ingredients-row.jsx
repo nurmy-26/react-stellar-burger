@@ -8,12 +8,15 @@ import IngredientCircle from "../ingredient-circle/ingredient-circle";
 
 
 function IngredientsRow({ id, count }) {
+  const MemoImgCircle = React.memo(IngredientCircle)
   const ingredientList = useSelector(getIngredientsList);
 
   // находим ингредиент, совпадающий по id с id из url (= открытый)
   const ingredient = ingredientList.find(item => item._id === id)
 
-  const MemoImgCircle = React.memo(IngredientCircle)
+  if (!ingredient) {
+    return null
+  }
 
   return (
     <li className={styles.row}>

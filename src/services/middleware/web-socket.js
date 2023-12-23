@@ -32,7 +32,6 @@ export const socketMiddleware = (wsActions) => {
             updateToken()
           } else {
             dispatch({ type: onMessage, payload: parsedData });
-            console.log(parsedData)
           }
         };
 

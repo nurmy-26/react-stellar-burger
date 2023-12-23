@@ -1,4 +1,7 @@
 .wrapper {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--offset-base-size)*5);
   composes: mt-30 from global;
 }

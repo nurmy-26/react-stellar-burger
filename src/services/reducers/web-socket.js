@@ -23,7 +23,6 @@ const wsInitialState = {
 export const wsReducer = (store = wsInitialState, action) => {
   switch (action.type) {
     case WS_CONNECTION_START: {
-      console.log('WS_CONNECTION_START')
       return {
         ...store,
         wsConnection: socketStates.CONNECTING,
@@ -32,7 +31,6 @@ export const wsReducer = (store = wsInitialState, action) => {
       };
     }
     case WS_CONNECTION_SUCCESS: {
-      console.log('WS_CONNECTION_SUCCESS')
       return {
         ...store,
         wsConnection: socketStates.OPEN,
@@ -41,7 +39,6 @@ export const wsReducer = (store = wsInitialState, action) => {
       };
     }
     case WS_CONNECTION_ERROR: {
-      console.log('WS_CONNECTION_ERROR')
       return {
         ...store,
         error: action.payload,
@@ -50,7 +47,6 @@ export const wsReducer = (store = wsInitialState, action) => {
       };
     }
     case WS_CONNECTION_CLOSED: {
-      console.log('WS_CONNECTION_CLOSED')
       return {
         ...store,
         wsConnection: socketStates.CLOSED,
@@ -60,14 +56,12 @@ export const wsReducer = (store = wsInitialState, action) => {
       };
     }
     case WS_GET_MESSAGE: {
-      console.log('WS_GET_MESSAGE')
       return {
         ...store,
         orders: action.payload
       };
     }
     case GET_ORDER: {
-      console.log('GET_ORDER')
       return {
         ...store,
         isLoading: true,
@@ -75,7 +69,6 @@ export const wsReducer = (store = wsInitialState, action) => {
       };
     }
     case SET_ORDER_INFO: {
-      console.log('SET_ORDER_INFO')
       return {
         ...store,
         openedOrder: action.payload,
@@ -83,7 +76,6 @@ export const wsReducer = (store = wsInitialState, action) => {
       };
     }
     case GET_ORDER_FAILED: {
-      console.log('GET_ORDER_FAILED')
       return {
         ...store,
         isLoading: false,

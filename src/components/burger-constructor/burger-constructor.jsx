@@ -36,11 +36,6 @@ function BurgerConstructor() {
     const constructorIdList = [bunId, ...ingredientsArr, bunId]
 
     dispatch(requestOrder(constructorIdList));
-    console.log(constructorIdList.length);
-    function filterUniqueElements(array) {
-      return array.filter((value, index, self) => self.indexOf(value) === index);
-    }
-    console.log(filterUniqueElements(constructorIdList))
     openModal();
   }
 
