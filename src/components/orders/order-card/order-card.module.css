@@ -22,3 +22,7 @@
   display: flex;
   justify-content: space-between;
 }
+
+.statusDone {
+  color: var(--colors-interface-success, #0CC);
+}

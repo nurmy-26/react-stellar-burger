@@ -3,7 +3,7 @@ import { getCookie, setCookie } from "./cookie";
 export const config = {
   BASE_URL: 'https://norma.nomoreparties.space/api/',
   WS_ALL: 'wss://norma.nomoreparties.space/orders/all',
-  WS_USER: 'wss://norma.nomoreparties.space/orders',
+  WS_AUTH: 'wss://norma.nomoreparties.space/orders',
 
   INGREDIENTS_ENDPOINT: 'ingredients',
   ORDERS_ENDPOINT: 'orders',
@@ -95,11 +95,14 @@ export const getIngredients = () => {
   })
 }
 
-// отправка данных о заказе на сервер
+// отправка данных о заказе на сервер (теперь с авторизацией)
 export const postOrder = (arr) => {
   return request(config.ORDERS_ENDPOINT, {
     method: 'POST',
-    headers: config.headers,
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      Authorization: 'Bearer ' + getCookie('token')
+    },
     body: JSON.stringify({
       ingredients: arr,
     })

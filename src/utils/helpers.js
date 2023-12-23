@@ -1,3 +1,8 @@
+// достаем рандомную фразу из массива
+export const randomPhrase = (phrases) => {
+  return phrases[Math.floor(Math.random() * phrases.length)];
+}
+
 // фильтрация массива на уникальные итемы
 export const getUniqueItems = (arr) => {
   return arr.filter((item, index, array) => array.indexOf(item) === index);

@@ -9,7 +9,7 @@ function OrderFeed({type, orderList}) {
   const MemoOrderCard = React.memo(OrderCard);
   const section = React.useMemo(() => {
     return orderList.map((item) => {
-      return <MemoOrderCard orderInfo={item} key={item._id} />;
+      return <MemoOrderCard orderInfo={item} key={item._id} type={type === 'history' ? 'history' : ''} />;
     })
   }, [orderList])
 

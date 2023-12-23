@@ -14,6 +14,7 @@ import OrderDetailsWrapper from "../orders/order-details/order-details-wrapper/o
 import IngredientDetails from "../burger-ingredients/ingredient-details/ingredient-details";
 import OrderDetails from "../orders/order-details/order-details";
 import Modal from "../modal/modal";
+import ProfileHistory from "../profile-history/profile-history";
 
 
 function App() {
@@ -60,7 +61,7 @@ function App() {
         {/* только для авторизованных */}
         <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />}>
           <Route path="/profile" element={<OnlyAuth component={<ProfileInfo />} />} />
-          <Route path="/profile/orders" element={<OnlyAuth component={<OrderFeed type="history" />} />} />
+          <Route path="/profile/orders" element={<OnlyAuth component={<ProfileHistory type="history" />} />} />
           {/* <Route path="/profile/orders/:number" element={<МОДАЛКА ЗАКАЗА />} /> */}
         </Route>
 

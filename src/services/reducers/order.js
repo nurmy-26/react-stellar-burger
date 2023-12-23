@@ -25,7 +25,9 @@ export const orderReducer = (store = orderInitialState, action) => {
       return {
         ...store,
         isLoading: true,
-        hasError: false
+        hasError: false,
+        status: 'Ваш заказ будет готов через ',
+        substatus: 'Дождитесь готовности на орбитальной станции'
       };
     }
     case ORDER_REQUEST_SUCCESS: {
@@ -38,8 +40,8 @@ export const orderReducer = (store = orderInitialState, action) => {
         },
         success: action.order.success,
         isLoading: false,
-        status: 'Ваш заказ начали готовить',
-        substatus: 'Дождитесь готовности на орбитальной станции'
+        status: 'Заказ готов!',
+        substatus: 'Вы можете просмотреть все свои заказы в Личном кабинете'
       };
     }
     case ORDER_REQUEST_FAILED: {

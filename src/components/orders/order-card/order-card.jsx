@@ -18,6 +18,7 @@ function OrderCard({orderInfo, type='feed'}) {
   const {createdAt, ingredients, name, number, status} = orderInfo;
 
   let statusText;
+  let statusClasses = "text text_type_main-default mt-2"
   switch(status) {
     case "created":
       statusText = "Создан";
@@ -27,6 +28,7 @@ function OrderCard({orderInfo, type='feed'}) {
       break;
     case "done":
       statusText = "Выполнен";
+      statusClasses += " " + styles.statusDone
       break;
   }
 
@@ -51,7 +53,7 @@ function OrderCard({orderInfo, type='feed'}) {
 
           <div>
             <h2 className="text text_type_main-medium">{name}</h2>
-            {type === 'history' && <p className="text text_type_main-default mt-2">{status}</p>}
+            {type === 'history' && <p className={statusClasses}>{statusText}</p>}
           </div>
 
 

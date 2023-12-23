@@ -1,14 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import PropTypes from "prop-types";
 import styles from "./order-details-wrapper.module.css";
 import { requestOrderInfo } from "../../../../services/actions/web-socket";
 import { getOrder } from "../../../../services/selectors/web-socket";
 import OrderDetails from "../order-details";
 
 
-const OrderDetailsWrapper = ({ title }) => {
+const OrderDetailsWrapper = () => {
   const { number } = useParams();
   const dispatch = useDispatch()
 
@@ -19,19 +18,15 @@ const OrderDetailsWrapper = ({ title }) => {
 
   // и передаем эту информацию в OrderDetails
   const orderInfo = useSelector(getOrder);
+  const MemoOrderDetails = React.memo(OrderDetails);
 
   return (
     <div className={styles.wrapper}>
       <h2 className="text text_type_digits-default">{"#" + number}</h2>
 
-      <OrderDetails orderByRequest={orderInfo} />
+      <MemoOrderDetails orderByRequest={orderInfo} />
     </div>
   );
 };
-
-OrderDetailsWrapper.propTypes = {
-  component: PropTypes.node.isRequired,
-  title: PropTypes.string
-}
 
 export default OrderDetailsWrapper;

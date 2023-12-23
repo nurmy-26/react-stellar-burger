@@ -1,4 +1,6 @@
-import { updateToken } from "../../utils/api";
+import { updateToken, config } from "../../utils/api";
+import { getCookie } from "../../utils/cookie";
+let token = getCookie('token');
 
 export const socketMiddleware = (wsActions) => {
   return store => {
@@ -6,18 +8,31 @@ export const socketMiddleware = (wsActions) => {
 
     return next => action => {
       const { dispatch } = store;
-      const { type } = action;
+      const { type, payload } = action;
 
       // записываем в поля нужные нам экшены из переданного объекта wsActions
       const { wsConnect, wsDisconnect, wsConnecting, onOpen, onClose, onError, onMessage } = wsActions;
 
       // если задиспатчили connect - создаем ws-соединение
       if (type === wsConnect) {
-        socket = new WebSocket(action.payload);
+
+        // если переданный url - WS_ALL, то обычный сокет
+        if (payload === config.WS_ALL) {
+          socket = new WebSocket(payload);
+          // если переданный url - WS_AUTH, то сокет для авторизованных пользователей
+        } else if (payload === config.WS_AUTH && token) {
+          // const token = getCookie('token');
+          socket = new WebSocket(`${payload}?token=${token}`);
+        } else if (payload === config.WS_AUTH && !token) {
+          updateToken()
+          token = getCookie('token');
+          socket = new WebSocket(`${payload}?token=${token}`);
+        }
+
         dispatch({ type: wsConnecting });
 
         // подписываемся на события сокета
-        socket.onopen = (event) => {
+        socket.onopen = () => {
           dispatch({ type: onOpen });
         }
 
@@ -35,7 +50,7 @@ export const socketMiddleware = (wsActions) => {
           }
         };
 
-        socket.onclose = event => {
+        socket.onclose = () => {
           dispatch({ type: onClose });
         }
       }
