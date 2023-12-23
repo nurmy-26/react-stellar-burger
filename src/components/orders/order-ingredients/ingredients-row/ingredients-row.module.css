@@ -1,0 +1,6 @@
+.row {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  align-items: center;
+  gap: calc(var(--offset-base-size)*4);
+}

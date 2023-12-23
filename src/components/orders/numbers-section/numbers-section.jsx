@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./numbers-section.module.css";
+import { renderOrderNumbers } from "../../../utils/helpers";
 
 
 function NumbersSection({ orderNumbers, type }) {
@@ -18,41 +19,40 @@ function NumbersSection({ orderNumbers, type }) {
       break;
   }
 
-  // порядок заполнения колонок номерами заказов
-  const renderOrders = React.useCallback(() => {
-    let columnIndex = 1;
-    let rowIndex = 1;
+  // получаем список номеров
+  const numbersList = React.useMemo(() =>
+    renderOrderNumbers(orderNumbers),
+  [orderNumbers]);
 
-    return orderNumbers.map((order, index) => {
-      if (index % 10 === 0 && index !== 0) {
-        // переходим к след. колонке при достижении 10 заказов
-        columnIndex++;
-        rowIndex = 1; // сбрасываем индекс строки
+  // горизонтальный скролл
+  const containerRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const container = containerRef.current;
+    const handleWheel = (event) => {
+      event.preventDefault();
+      if(container){
+        container.scrollLeft += event.deltaY;
       }
+    };
 
-      // задаем позицию в зависимости от индекса элемента
-      const itemStyle = {
-        gridColumn: columnIndex,
-        gridRow: rowIndex,
-      };
+    if (container) {
+      container.addEventListener('wheel', handleWheel);
+    }
 
-      rowIndex++; // увеличиваем индекс строки
-
-      // возвращаем элемент списка
-      return (
-        <li key={index} style={itemStyle}>
-          {order}
-        </li>
-      );
-    });
-  }, [orderNumbers])
+    return () => {
+      if (container) {
+        container.removeEventListener('wheel', handleWheel);
+      }
+    };
+  }, []);
 
 
   return (
     <div>
       <h2 className="mb-6 text text_type_main-medium">{text}</h2>
-      <ul className={`${styles.list} ${numberStyle}`}>
-        {renderOrders()}
+      <ul ref={containerRef} className={`${styles.list} ${numberStyle}`}>
+        {numbersList}
       </ul>
     </div>
   );
@@ -63,4 +63,4 @@ NumbersSection.propTypes = {
   type: PropTypes.string.isRequired
 }
 
-export default NumbersSection;
+export default React.memo(NumbersSection);

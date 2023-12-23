@@ -20,4 +20,4 @@ TotalInfo.propTypes = {
   text: PropTypes.string,
 }
 
-export default TotalInfo;
+export default React.memo(TotalInfo);

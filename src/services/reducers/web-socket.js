@@ -5,13 +5,13 @@ import {
   WS_CONNECTION_CLOSED,
   WS_GET_MESSAGE
 } from '../actions/web-socket';
+import { socketStates } from '../middleware/socket-states';
 
 
 const wsInitialState = {
-  wsConnected: false,
+  wsConnection: socketStates.CLOSED,
   orders: [],
-  error: undefined,
-  hasError: false
+  error: undefined
 };
 
 export const wsReducer = (store = wsInitialState, action) => {
@@ -19,29 +19,26 @@ export const wsReducer = (store = wsInitialState, action) => {
     case WS_CONNECTION_START: {
       return {
         ...store,
-        wsConnected: true,
-        error: undefined
+        wsConnection: socketStates.CONNECTING
       };
     }
     case WS_CONNECTION_SUCCESS: {
       return {
         ...store,
-        wsConnected: true,
+        wsConnection: socketStates.OPEN,
         error: undefined
       };
     }
     case WS_CONNECTION_ERROR: {
       return {
         ...store,
-        wsConnected: false,
-        error: action.payload,
-        hasError: true
+        error: action.payload
       };
     }
     case WS_CONNECTION_CLOSED: {
       return {
         ...store,
-        wsConnected: false,
+        wsConnection: socketStates.CLOSED,
         error: undefined,
         orders: []
       };
@@ -49,7 +46,6 @@ export const wsReducer = (store = wsInitialState, action) => {
     case WS_GET_MESSAGE: {
       return {
         ...store,
-        error: undefined,
         orders: action.payload
       };
     }

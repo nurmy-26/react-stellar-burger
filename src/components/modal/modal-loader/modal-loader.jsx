@@ -10,7 +10,7 @@ import pentagonC from "../../../images/pentagon-3.svg"
 function ModalLoader({
   hasError=false,
   errorMessage='Что-то пошло не так :(',
-  loadingText='Запрос выполняется...',
+  loadingText='Ожидаем данные...',
   size='s'}) {
 
   const containerClasses = styles.container + ' ' + (size === 'm' ? styles.containerMedium : '')

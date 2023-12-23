@@ -3,10 +3,12 @@ import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./order-card.module.css";
-import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
+import { FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { orderPropType } from "../../../utils/prop-types";
+import { calculateTotalCost } from "../../../utils/helpers";
 import { getIngredientsList } from "../../../services/selectors/ingredients";
-import IngredientsRow from "../ingredients-row/ingredients-row";
+import PriceCount from "../../common/price-count/price-count";
+import ImagesRow from "../order-ingredients/images-row/images-row";
 
 
 function OrderCard({orderInfo, type='feed'}) {
@@ -29,33 +31,20 @@ function OrderCard({orderInfo, type='feed'}) {
   }
 
   // высчитываем стоимость заказа
-  const calculateOrderCost = React.useCallback(() => {
-    let totalCost = 0;
+  const totalCost = React.useMemo(() =>
+    calculateTotalCost(ingredients, ingredientList),
+  [ingredients, ingredientList]);
 
-    // для каждого id в заказе ищем нужный ингредиент в общем списке ингредиентов
-    ingredients.forEach((id) => {
-      const ingredient = ingredientList.find((ingredient) => ingredient._id === id);
-
-      // если нашли, прибавляем его стоимость к общей
-      if (ingredient) {
-        totalCost += ingredient.price;
-      }
-    });
-
-    return totalCost;
-  }, [ingredientList, ingredients]);
+  const MemoFormattedDate = React.memo(FormattedDate);
 
 
-  const MemoCurrencyIcon = React.memo(CurrencyIcon);
-
-  // #todo - доделать модалку
   return (
       <li className={styles.card}>
         <Link className={styles.link} to={`${location.pathname}/${number}`} state={{ background: location }}>
           <div className={styles.row}>
             <p className="text text_type_digits-default">#{number}</p>
             <span className="text text_type_main-default text_color_inactive">
-              <FormattedDate date={new Date(createdAt)} />
+              <MemoFormattedDate date={new Date(createdAt)} />
               &nbsp;i-GMT+3
             </span>
           </div>
@@ -67,12 +56,9 @@ function OrderCard({orderInfo, type='feed'}) {
 
 
           <div className={styles.row}>
-            <IngredientsRow idList={ingredients} />
+            <ImagesRow idList={ingredients} />
 
-            <span className={styles.total}>
-              {calculateOrderCost()}
-              <MemoCurrencyIcon type="primary" />
-            </span>
+            <PriceCount>{totalCost}</PriceCount>
           </div>
 
         </Link>

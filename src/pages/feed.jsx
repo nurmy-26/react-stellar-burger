@@ -26,6 +26,7 @@ function FeedPage() {
   if (!orders) {
     return <Loading />
   }
+  const MemoOrderFeed = React.memo(OrderFeed);
 
 
   return (
@@ -34,7 +35,7 @@ function FeedPage() {
 
       <section>
         <h1 className="text text_type_main-large mb-5">Лента заказов</h1>
-        <OrderFeed type="feed" orderList={orders} />
+        <MemoOrderFeed type="feed" orderList={orders} />
       </section>
 
       <Digits orderList={orders} total={total} totalToday={totalToday} />

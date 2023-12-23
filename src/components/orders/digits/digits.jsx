@@ -44,4 +44,4 @@ Digits.propTypes = {
   totalToday: PropTypes.number.isRequired
 }
 
-export default Digits;
+export default React.memo(Digits);

@@ -11,6 +11,7 @@ import ProfileInfo from "../profile-info/profile-info";
 import OrderFeed from "../orders/order-feed/order-feed";
 import DetailsWrapper from "../common/details-wrapper/details-wrapper";
 import IngredientDetails from "../burger-ingredients/ingredient-details/ingredient-details";
+import OrderDetails from "../orders/order-details/order-details";
 import Modal from "../modal/modal";
 
 
@@ -34,9 +35,11 @@ function App() {
     // запрашиваем список ингредиентов именно здесь (1 раз при запуске приложения), а не в компоненте ингредиентов, чтобы не посылать запрос каждый раз при ре-рендере секции
   }, []);
 
+  const MemoAppHeader = React.memo(AppHeader);
+
   return (
     <>
-      <AppHeader/>
+      <MemoAppHeader/>
 
       {/* передавая location в Routes, мы не позволим ему использовать фактическое location, если задан background */}
       <Routes location={ background || location }>
@@ -44,7 +47,8 @@ function App() {
         <Route path="/ingredients/:id"
           element={<DetailsWrapper component={<IngredientDetails />} title="Детали ингредиента" />} />
         <Route path="/feed" element={<FeedPage />} />
-        {/* <Route path="/feed/:number" element={<МОДАЛКА ЗАКАЗА />} /> */}
+        <Route path="/feed/:number"
+          element={<DetailsWrapper component={<OrderDetails />} />} />
 
         {/* только для не авторизованных */}
         <Route path="/login" element={<OnlyUnAuth component={<LoginPage />} />} />
@@ -70,8 +74,13 @@ function App() {
             <IngredientDetails />
           </Modal>
         } />
+        <Route path="/feed/:number" element={
+          <Modal type="number" onClose={closeTooltip}>
+            <OrderDetails />
+          </Modal>
+        } />
         {/* <Route path="/profile/orders/:number" element={
-          <Modal header="НОМЕР ЗАКАЗА" type="order-modal" onClose={closeTooltip}>
+          <Modal header="НОМЕР ЗАКАЗА" onClose={closeTooltip}>
             <МОДАЛКА ЗАКАЗА />
           </Modal>
         } /> */}

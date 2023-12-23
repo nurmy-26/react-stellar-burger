@@ -1,0 +1,21 @@
+.total {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--offset-base-size)*2);
+}
+
+.totalS {
+  composes: text text_type_digits-default from global;
+}
+.totalM svg {
+  width: calc(var(--offset-base-size)*6);
+  height: calc(var(--offset-base-size)*6);
+}
+
+.totalM {
+  composes: text text_type_digits-medium from global;
+}
+.totalM svg {
+  width: calc(var(--offset-base-size)*9);
+  height: calc(var(--offset-base-size)*9);
+}

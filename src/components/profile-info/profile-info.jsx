@@ -103,4 +103,4 @@ function ProfileInfo() {
   );
 }
 
-export default ProfileInfo;
+export default React.memo(ProfileInfo);

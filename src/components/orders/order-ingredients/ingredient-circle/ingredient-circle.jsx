@@ -5,25 +5,29 @@ import styles from "./ingredient-circle.module.css";
 import { getIngredientsList } from "../../../../services/selectors/ingredients";
 
 
-function IngredientCircle({ itemId, style }) {
-
+function IngredientCircle({ itemId, style, tag='div' }) {
+  const Tag = tag;
   const ingredientList = useSelector(getIngredientsList);
   // находим ингредиент по переданному id
   const detailsData = ingredientList.find(item => item._id === itemId);
 
   return (
-    <li className={styles.circleBack} style={style}>
+    <Tag className={styles.circleBack} style={style}>
       <div className={styles.circleFront}>
         { detailsData &&
           <img className={styles.img} src={detailsData.image} alt={detailsData.name} />}
       </div>
-    </li>
+    </Tag>
   );
 }
 
 IngredientCircle.propTypes = {
-  // src: PropTypes.string.isRequired,
-  // alt: PropTypes.string.isRequired
+  itemId: PropTypes.string,
+  style: PropTypes.shape({
+    left: PropTypes.number.isRequired,
+    zIndex: PropTypes.number.isRequired,
+  }),
+  tag: PropTypes.string,
 }
 
 export default IngredientCircle;
