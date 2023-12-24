@@ -1,13 +1,13 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./page.module.css";
-import Loading from "../components/common/loading/loading";
+import { config } from "../utils/api";
+import { connect, disconnect } from "../services/actions/web-socket";
+import { getOrderList, getTotal, getTotalToday } from "../services/selectors/web-socket";
 import MainContainer from "../components/common/main-container/main-container";
 import OrderFeed from "../components/orders/order-feed/order-feed";
 import Digits from "../components/orders/digits/digits";
-import { useDispatch, useSelector } from "react-redux";
-import { connect, disconnect } from "../services/actions/web-socket";
-import { config } from "../utils/api";
-import { getOrderList, getTotal, getTotalToday } from "../services/selectors/web-socket";
+import Loading from "../components/common/loading/loading";
 
 
 function FeedPage() {
@@ -22,7 +22,6 @@ function FeedPage() {
     return () => { dispatch(disconnect()) };
   }, []);
 
-  // #todo - ПОМЕНЯТЬ Loader (на полупрозрачное стекло с точками по центру)
   if (!orders) {
     return <Loading />
   }
@@ -30,7 +29,6 @@ function FeedPage() {
 
 
   return (
-    // #todo - добавить Loader и условия
     <MainContainer extraClass={styles.marginMedium}>
 
       <section>

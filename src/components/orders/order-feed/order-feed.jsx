@@ -14,7 +14,6 @@ function OrderFeed({type, orderList}) {
   }, [orderList])
 
 
-  // #todo проверки isLoading, hasError
   return (
     <ul className={`${styles.list} ${type === 'history' ? styles.historyList : styles.feedList}`}>
       {section}

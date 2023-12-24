@@ -26,7 +26,7 @@ export const orderReducer = (store = orderInitialState, action) => {
         ...store,
         isLoading: true,
         hasError: false,
-        status: 'Ваш заказ будет готов через ',
+        status: 'Ваш последний заказ будет готов через ',
         substatus: 'Дождитесь готовности на орбитальной станции'
       };
     }

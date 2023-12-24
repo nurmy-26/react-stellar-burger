@@ -8,11 +8,9 @@ import {
   SET_ORDER_INFO,
   GET_ORDER_FAILED
 } from '../actions/web-socket';
-import { socketStates } from '../middleware/socket-states';
 
 
 const wsInitialState = {
-  wsConnection: socketStates.CLOSED,
   orders: [],
   error: undefined,
   openedOrder: null,
@@ -25,7 +23,6 @@ export const wsReducer = (store = wsInitialState, action) => {
     case WS_CONNECTION_START: {
       return {
         ...store,
-        wsConnection: socketStates.CONNECTING,
         isLoading: true,
         hasError: false
       };
@@ -33,7 +30,6 @@ export const wsReducer = (store = wsInitialState, action) => {
     case WS_CONNECTION_SUCCESS: {
       return {
         ...store,
-        wsConnection: socketStates.OPEN,
         error: undefined,
         isLoading: false
       };
@@ -49,7 +45,6 @@ export const wsReducer = (store = wsInitialState, action) => {
     case WS_CONNECTION_CLOSED: {
       return {
         ...store,
-        wsConnection: socketStates.CLOSED,
         error: undefined,
         orders: [],
         isLoading: false,

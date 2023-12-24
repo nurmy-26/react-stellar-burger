@@ -1,6 +1,5 @@
 import { updateToken, config } from "../../utils/api";
 import { getCookie } from "../../utils/cookie";
-let token = getCookie('token');
 
 export const socketMiddleware = (wsActions) => {
   return store => {
@@ -15,17 +14,14 @@ export const socketMiddleware = (wsActions) => {
 
       // если задиспатчили connect - создаем ws-соединение
       if (type === wsConnect) {
+        let token = getCookie('token');
 
         // если переданный url - WS_ALL, то обычный сокет
         if (payload === config.WS_ALL) {
           socket = new WebSocket(payload);
+
           // если переданный url - WS_AUTH, то сокет для авторизованных пользователей
-        } else if (payload === config.WS_AUTH && token) {
-          // const token = getCookie('token');
-          socket = new WebSocket(`${payload}?token=${token}`);
-        } else if (payload === config.WS_AUTH && !token) {
-          updateToken()
-          token = getCookie('token');
+        } else if (payload === config.WS_AUTH) {
           socket = new WebSocket(`${payload}?token=${token}`);
         }
 
@@ -43,8 +39,14 @@ export const socketMiddleware = (wsActions) => {
         socket.onmessage = event => {
           const { data } = event;
           const parsedData = JSON.parse(data);
-          if (data.message === 'Invalid or missing token') {
-            updateToken()
+          if (parsedData.message === 'Invalid or missing token') {
+            updateToken().then(() => {
+              token = getCookie('token');
+              socket.close();
+              socket = new WebSocket(`${payload}?token=${token}`);
+            }).catch(error => {
+              console.log(error)
+            });
           } else {
             dispatch({ type: onMessage, payload: parsedData });
           }

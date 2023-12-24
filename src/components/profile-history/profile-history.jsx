@@ -10,7 +10,7 @@ import Loading from "../common/loading/loading";
 
 function ProfileHistory() {
   const dispatch = useDispatch();
-  const orders = useSelector(getOrderList);
+  const orders = useSelector(getOrderList)?.slice().reverse();
 
   React.useEffect(() => {
     dispatch(connect(config.WS_AUTH))

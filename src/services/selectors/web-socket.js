@@ -1,5 +1,4 @@
 export const getWSocketData = (store) => store.socket;
-export const getWsConnection = (store) => store.socket.wsConnection;
 export const getWsError = (store) => store.socket.error;
 export const getOrder = (store) => store.socket.openedOrder;
 export const getisOrderLoading = (store) => store.socket.isLoading;

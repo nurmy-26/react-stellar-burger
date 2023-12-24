@@ -8,7 +8,6 @@ import { OnlyAuth, OnlyUnAuth } from "../protected-component";
 import { FeedPage, ForgotPasswordPage, LoginPage, MainPage, NotFound404,
   ProfilePage, RegisterPage, ResetPasswordPage } from "../../pages";
 import ProfileInfo from "../profile-info/profile-info";
-import OrderFeed from "../orders/order-feed/order-feed";
 import DetailsWrapper from "../common/details-wrapper/details-wrapper";
 import OrderDetailsWrapper from "../orders/order-details/order-details-wrapper/order-details-wrapper";
 import IngredientDetails from "../burger-ingredients/ingredient-details/ingredient-details";
@@ -62,8 +61,9 @@ function App() {
         <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />}>
           <Route path="/profile" element={<OnlyAuth component={<ProfileInfo />} />} />
           <Route path="/profile/orders" element={<OnlyAuth component={<ProfileHistory type="history" />} />} />
-          {/* <Route path="/profile/orders/:number" element={<МОДАЛКА ЗАКАЗА />} /> */}
         </Route>
+        <Route path="/profile/orders/:number"
+          element={<OrderDetailsWrapper component={<OrderDetails />} />} />
 
         <Route path="*" element={<NotFound404 />} />
       </Routes>
@@ -81,11 +81,11 @@ function App() {
             <OrderDetails />
           </Modal>
         } />
-        {/* <Route path="/profile/orders/:number" element={
-          <Modal header="НОМЕР ЗАКАЗА" onClose={closeTooltip}>
-            <МОДАЛКА ЗАКАЗА />
+        <Route path="/profile/orders/:number" element={
+          <Modal type="number" onClose={closeTooltip}>
+            <OrderDetails />
           </Modal>
-        } /> */}
+        } />
       </Routes>
 
       }

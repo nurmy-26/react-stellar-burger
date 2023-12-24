@@ -62,7 +62,8 @@ export const updateToken = () => {
       return Promise.reject(refreshData);
     }
     setCookie('refreshToken', refreshData.refreshToken);
-    setCookie('token', refreshData.accessToken.split("Bearer ")[1], { expires: 1200 });
+    setCookie('token', refreshData.accessToken.split("Bearer ")[1]);
+    return Promise.resolve();
   })
 }
 
@@ -71,17 +72,16 @@ export const authorizedRequest = (endpoint, options) => {
   return request(endpoint, options)
     .catch((err) => {
       if (err.message === "jwt expired" || err.message === "jwt malformed") {
-        updateToken()
-
-        const updatedOptions = {
-          ...options,
-          headers: {
-            ...options.headers,
-            'Authorization': getCookie('token')
-          }
-        };
-
-        return request(endpoint, updatedOptions);
+        return updateToken().then(() => {
+          const updatedOptions = {
+            ...options,
+            headers: {
+              ...options.headers,
+              'Authorization': `Bearer ${getCookie('token')}`
+            }
+          };
+          return request(endpoint, updatedOptions);
+        });
       } else {
         return Promise.reject(err);
       }
@@ -97,7 +97,7 @@ export const getIngredients = () => {
 
 // отправка данных о заказе на сервер (теперь с авторизацией)
 export const postOrder = (arr) => {
-  return request(config.ORDERS_ENDPOINT, {
+  return authorizedRequest(config.ORDERS_ENDPOINT, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json; charset=UTF-8',

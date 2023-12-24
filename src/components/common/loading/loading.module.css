@@ -1,45 +1,54 @@
-@keyframes slicing {
-  0% {
-    opacity: 0;
-    left: 0%;
-  }
-  25% {
-    opacity: 100%;
-  }
-  50% {
-    opacity: 0;
-    left: 70%;
-  }
-  75% {
-    opacity: 100%;
-  }
-  100% {
-    opacity: 0;
-    left: 0%;
-  }
-}
-
-@keyframes points {
-  to {
-    clip-path: inset(0 -1ch 0 0)
-  }
-}
-
-.commonStyle {
-  composes: text text_type_main-medium from global;
-}
-
-.slowSlicing {
-  position: absolute;
+.overlay {
+  z-index: 30;
+  position: fixed;
   top: 0;
   left: 0;
-  margin-top: calc(var(--offset-base-size)*10);
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,.5);
 
-  composes: text text_type_main-large from global;
-  animation: slicing 20s linear infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.loadingPoints {
-  clip-path: inset(0 3ch 0 0);
-  animation: points 2.5s steps(4) infinite;
+.container {
+  position: relative;
+  margin: 0;
+  width: 100px;
+  height: 50px;
+  background: var(--interface-modal-bg, #1C1C21);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--text-dark-grey-secondary-text, #8585AD);
+  animation: pulse 1.8s infinite;
+}
+
+.dot:nth-child(2) {
+  animation-delay: .3s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: .6s;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1.2);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(0.75);
+  }
 }

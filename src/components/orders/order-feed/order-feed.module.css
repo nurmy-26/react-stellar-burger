@@ -1,7 +1,6 @@
 .list {
   display: flex;
-  max-height: 916px;
-  /* max-height: 80vh; */
+  max-height: 80vh;
   flex-direction: column;
 
   overflow: auto;
