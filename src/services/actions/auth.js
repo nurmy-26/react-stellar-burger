@@ -25,7 +25,7 @@ export function register(form) {
 
     return registerRequest(form).then(res => {
       setCookie('refreshToken', res.refreshToken);
-      setCookie('token', res.accessToken.split("Bearer ")[1], {expires: 1200});
+      setCookie('token', res.accessToken.split("Bearer ")[1]);
 
       dispatch({
         type: USER_REQUEST_SUCCESS,
@@ -49,7 +49,7 @@ export function login(form) {
 
     return loginRequest(form).then(res => {
       setCookie('refreshToken', res.refreshToken);
-      setCookie('token', res.accessToken.split("Bearer ")[1], {expires: 1200});
+      setCookie('token', res.accessToken.split("Bearer ")[1]);
 
       dispatch({
         type: USER_REQUEST_SUCCESS,

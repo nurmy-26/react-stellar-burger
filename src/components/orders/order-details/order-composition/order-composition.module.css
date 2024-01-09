@@ -1,0 +1,23 @@
+.section {
+  height: 360px;
+  composes: mb-10 from global;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  max-height: 312px;
+  gap: calc(var(--offset-base-size)*4);
+
+  overflow: auto;
+  composes: pr-6 custom-scroll list-reset from global;
+}
+
+.list::-webkit-scrollbar {
+  width: calc(var(--offset-base-size)*2);
+}
+
+.list::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  border: none;
+}

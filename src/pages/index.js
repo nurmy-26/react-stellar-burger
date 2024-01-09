@@ -1,3 +1,4 @@
+import FeedPage from "./feed";
 import ForgotPasswordPage from "./forgot-password";
 import LoginPage from "./login";
 import MainPage from "./main";
@@ -7,4 +8,4 @@ import RegisterPage from "./register";
 import ResetPasswordPage from "./reset-password";
 
 
-export { ForgotPasswordPage, LoginPage, MainPage, NotFound404, ProfilePage, RegisterPage, ResetPasswordPage }
+export { FeedPage, ForgotPasswordPage, LoginPage, MainPage, NotFound404, ProfilePage, RegisterPage, ResetPasswordPage }

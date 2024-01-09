@@ -22,7 +22,7 @@ function IngredientDetails() {
       {isLoading && <ModalLoader />}
       {hasError && <ModalLoader hasError={true} />}
       {detailsData && !isLoading && !hasError && (
-        <div className={styles.details}>
+        <article className={styles.details}>
         <img className={styles.img} src={detailsData.image_large} alt={detailsData.name} />
         <h3 className={styles.name}>{detailsData.name}</h3>
         <ul className={styles.list}>
@@ -43,7 +43,7 @@ function IngredientDetails() {
             <p className={styles.number}>{detailsData.carbohydrates}</p>
           </li>
         </ul>
-      </div>
+      </article>
       )}
     </>
   )

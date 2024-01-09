@@ -1,17 +1,23 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import styles from "./order-details.module.css";
-import { getOrderDetails } from "../../../services/selectors/order";
+import styles from "./order-number.module.css";
+import { getOrderData } from "../../../services/selectors/order";
 import orderAccepted from "../../../images/order-accepted.svg"
 import ModalLoader from "../../modal/modal-loader/modal-loader";
+import { cookingPhrases } from "../../../utils/data";
+import { randomPhrase } from "../../../utils/helpers";
 
 
-function OrderDetails() {
-  const orderInfo = useSelector(getOrderDetails);
+function OrderNumber() {
+  const orderInfo = useSelector(getOrderData);
+
+  const randomText = React.useMemo(() => {
+    return randomPhrase(cookingPhrases);
+  }, [cookingPhrases]);
 
   return (
     <>
-      {orderInfo.isLoading && <ModalLoader size="m" loadingText="Отправляем ваш заказ..." />}
+      {orderInfo.isLoading && <ModalLoader size="m" loadingText={randomText} type='sendOrder' />}
       {orderInfo.hasError && <ModalLoader size="m" hasError={true} />}
       {orderInfo && !orderInfo.isLoading && !orderInfo.hasError && (
         <div className={styles.details}>
@@ -30,4 +36,4 @@ function OrderDetails() {
   )
 };
 
-export default OrderDetails;
+export default OrderNumber;

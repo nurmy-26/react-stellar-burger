@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 import { getAuthChecked, getUser } from "../services/selectors/auth";
@@ -29,6 +30,11 @@ const Protected = ({ onlyUnAuth = false, component }) => {
   // если тип пользователя и тип маршрута совпадают, то рендерим компонент
   return component;
 };
+
+Protected.propTypes = {
+  onlyUnAuth: PropTypes.bool,
+  component: PropTypes.node.isRequired
+}
 
 export const OnlyAuth = Protected;
 export const OnlyUnAuth = ({ component }) => (

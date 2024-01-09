@@ -1,0 +1,28 @@
+.card {
+  border-radius: 40px;
+  background: var(--background, #1C1C21);
+  box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.04),
+    0px 0px 2px 0px rgba(0, 0, 0, 0.06),
+    0px 4px 8px 0px rgba(0, 0, 0, 0.04);
+}
+
+.link {
+  text-decoration: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--offset-base-size)*6);
+  color: var(--text-primary-light-standart-text, #F2F2F3);
+
+  composes: p-6 from global;
+  cursor: pointer;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.statusDone {
+  color: var(--colors-interface-success, #0CC);
+}

@@ -1,0 +1,15 @@
+.details {
+  width: 640px;
+  min-height: calc(var(--offset-base-size)*122.5);
+  text-align: left;
+  composes: mt-5 from global;
+}
+
+.name {
+  min-height: calc(var(--offset-base-size)*7.5);
+  composes: mb-2 text text_type_main-medium from global;
+}
+
+.statusDone {
+  color: var(--colors-interface-success, #0CC);
+}

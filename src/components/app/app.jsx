@@ -5,12 +5,15 @@ import { checkUserAuth } from "../../services/actions/auth";
 import { requestIngredientsData } from '../../services/actions/ingredients'
 import AppHeader from "../app-header/app-header";
 import { OnlyAuth, OnlyUnAuth } from "../protected-component";
-import { ForgotPasswordPage, LoginPage, MainPage, NotFound404,
+import { FeedPage, ForgotPasswordPage, LoginPage, MainPage, NotFound404,
   ProfilePage, RegisterPage, ResetPasswordPage } from "../../pages";
 import ProfileInfo from "../profile-info/profile-info";
-import ProfileHistory from "../profile-history/profile-history";
+import DetailsWrapper from "../common/details-wrapper/details-wrapper";
+import OrderDetailsWrapper from "../orders/order-details/order-details-wrapper/order-details-wrapper";
 import IngredientDetails from "../burger-ingredients/ingredient-details/ingredient-details";
+import OrderDetails from "../orders/order-details/order-details";
 import Modal from "../modal/modal";
+import ProfileHistory from "../profile-history/profile-history";
 
 
 function App() {
@@ -33,14 +36,20 @@ function App() {
     // запрашиваем список ингредиентов именно здесь (1 раз при запуске приложения), а не в компоненте ингредиентов, чтобы не посылать запрос каждый раз при ре-рендере секции
   }, []);
 
+  const MemoAppHeader = React.memo(AppHeader);
+
   return (
     <>
-      <AppHeader/>
+      <MemoAppHeader/>
 
       {/* передавая location в Routes, мы не позволим ему использовать фактическое location, если задан background */}
       <Routes location={ background || location }>
         <Route path="/" element={<MainPage />} />
-        <Route path="/ingredients/:id" element={<IngredientDetails />} />
+        <Route path="/ingredients/:id"
+          element={<DetailsWrapper component={<IngredientDetails />} title="Детали ингредиента" />} />
+        <Route path="/feed" element={<FeedPage />} />
+        <Route path="/feed/:number"
+          element={<OrderDetailsWrapper component={<OrderDetails />} />} />
 
         {/* только для не авторизованных */}
         <Route path="/login" element={<OnlyUnAuth component={<LoginPage />} />} />
@@ -51,8 +60,10 @@ function App() {
         {/* только для авторизованных */}
         <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />}>
           <Route path="/profile" element={<OnlyAuth component={<ProfileInfo />} />} />
-          <Route path="/profile/orders" element={<OnlyAuth component={<ProfileHistory />} />} />
+          <Route path="/profile/orders" element={<OnlyAuth component={<ProfileHistory type="history" />} />} />
         </Route>
+        <Route path="/profile/orders/:number"
+          element={<OrderDetailsWrapper component={<OrderDetails />} />} />
 
         <Route path="*" element={<NotFound404 />} />
       </Routes>
@@ -63,6 +74,16 @@ function App() {
         <Route path="/ingredients/:id" element={
           <Modal header="Детали ингредиента" onClose={closeTooltip}>
             <IngredientDetails />
+          </Modal>
+        } />
+        <Route path="/feed/:number" element={
+          <Modal type="number" onClose={closeTooltip}>
+            <OrderDetails />
+          </Modal>
+        } />
+        <Route path="/profile/orders/:number" element={
+          <Modal type="number" onClose={closeTooltip}>
+            <OrderDetails />
           </Modal>
         } />
       </Routes>

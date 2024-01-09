@@ -1,12 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./modal.module.css";
 import ModalHeader from "./modal-header/modal-header";
 import ModalOverlay from "./modal-overlay/modal-overlay";
 
 
-function Modal({children, header, onClose}) {
+function Modal({children, header, onClose, type}) {
+  // для модалки заказа достаем number из url
+  const { number } = useParams();
+
   // слушатель по Ecs
   React.useEffect(() => {
     function closeByEsc (evt) {
@@ -23,7 +27,9 @@ function Modal({children, header, onClose}) {
     (
       <>
         <div className={styles.modal}>
-          <ModalHeader onClose={onClose}>{header}</ModalHeader>
+          <ModalHeader onClose={onClose} extraClass={!type ? '' : "text text_type_digits-default"}>
+            {!type ? header : "#" + number}
+          </ModalHeader>
           {children}
         </div>
 
@@ -35,8 +41,8 @@ function Modal({children, header, onClose}) {
 
 Modal.propTypes = {
   children: PropTypes.object.isRequired,
-  header: PropTypes.string.isRequired,
+  header: PropTypes.string,
   onClose: PropTypes.func.isRequired
-  }
+}
 
 export default Modal;

@@ -71,26 +71,29 @@ function BurgerIngredients() {
     return () => sectionWithScroll.removeEventListener("scroll", handleScroll);
   });
 
+  const MemoIngredientSection = React.memo(IngredientSection);
+  const MemoTab = React.memo(Tab);
+
   return (
     <section className={styles.section}>
       <h1 className={styles.title}>Соберите бургер</h1>
 
       <nav className={styles.nav}>
-        <Tab value="bun" active={current === 'bun'} onClick={() => onNavClick(bun)}>
+        <MemoTab value="bun" active={current === 'bun'} onClick={() => onNavClick(bun)}>
           Булки
-        </Tab>
-        <Tab value="sauce" active={current === 'sauce'} onClick={() => onNavClick(sauce)}>
+        </MemoTab>
+        <MemoTab value="sauce" active={current === 'sauce'} onClick={() => onNavClick(sauce)}>
           Соусы
-        </Tab>
-        <Tab value="main" active={current === 'main'} onClick={() => onNavClick(main)}>
+        </MemoTab>
+        <MemoTab value="main" active={current === 'main'} onClick={() => onNavClick(main)}>
           Начинки
-        </Tab>
+        </MemoTab>
       </nav>
 
       <div className={styles.wrapper}>
-        <IngredientSection ref={bun} type="bun" />
-        <IngredientSection ref={sauce} type="sauce" />
-        <IngredientSection ref={main} type="main" />
+        <MemoIngredientSection ref={bun} type="bun" />
+        <MemoIngredientSection ref={sauce} type="sauce" />
+        <MemoIngredientSection ref={main} type="main" />
       </div>
     </section>
   );

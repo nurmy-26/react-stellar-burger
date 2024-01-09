@@ -6,10 +6,11 @@ import ProfileNav from "../components/profile-nav/profile-nav";
 
 
 function ProfilePage() {
+  const MemoProfileNav = React.memo(ProfileNav)
 
   return (
     <MainContainer extraClass={styles.marginMedium}>
-      <ProfileNav />
+      <MemoProfileNav />
 
       <div className={styles.content}>
         <Outlet />

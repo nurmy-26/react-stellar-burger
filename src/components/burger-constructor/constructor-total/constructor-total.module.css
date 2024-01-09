@@ -10,19 +10,6 @@
   composes: pl-4 pr-4 from global;
 }
 
-.total {
-  display: flex;
-  align-items: center;
-  gap: calc(var(--offset-base-size)*2);
-
-  composes: text text_type_digits-medium from global;
-}
-
-.total svg {
-  width: calc(var(--offset-base-size)*9);
-  height: calc(var(--offset-base-size)*9);
-}
-
 .btn:disabled button {
   background-color: var(--colors-button-inactive);
 }

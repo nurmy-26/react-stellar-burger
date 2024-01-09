@@ -2,9 +2,11 @@ import { getCookie, setCookie } from "./cookie";
 
 export const config = {
   BASE_URL: 'https://norma.nomoreparties.space/api/',
+  WS_ALL: 'wss://norma.nomoreparties.space/orders/all',
+  WS_AUTH: 'wss://norma.nomoreparties.space/orders',
+
   INGREDIENTS_ENDPOINT: 'ingredients',
   ORDERS_ENDPOINT: 'orders',
-
   REGISTER_ENDPOINT: 'auth/register',
   LOGIN_ENDPOINT: 'auth/login',
   USER_ENDPOINT: 'auth/user',
@@ -12,6 +14,7 @@ export const config = {
   TOKEN_ENDPOINT: 'auth/token',
   PASSWORD_RESET_ENDPOINT: 'password-reset',
   PASSWORD_UPDATE_ENDPOINT: 'password-reset/reset',
+  GET_ORDER_INFO: 'orders/ ',
 
   headers: {
     'Content-Type': 'application/json; charset=UTF-8'
@@ -54,6 +57,14 @@ export const updateToken = () => {
       token: getCookie('refreshToken')
     })
   })
+  .then(refreshData => {
+    if (!refreshData.success) {
+      return Promise.reject(refreshData);
+    }
+    setCookie('refreshToken', refreshData.refreshToken);
+    setCookie('token', refreshData.accessToken.split("Bearer ")[1]);
+    return Promise.resolve();
+  })
 }
 
 // ф-я для выполнения и проверки запросов, требующих авторизации
@@ -61,25 +72,16 @@ export const authorizedRequest = (endpoint, options) => {
   return request(endpoint, options)
     .catch((err) => {
       if (err.message === "jwt expired" || err.message === "jwt malformed") {
-        return updateToken()
-          .then(refreshData => {
-            if (!refreshData.success) {
-              return Promise.reject(refreshData);
+        return updateToken().then(() => {
+          const updatedOptions = {
+            ...options,
+            headers: {
+              ...options.headers,
+              'Authorization': `Bearer ${getCookie('token')}`
             }
-            setCookie('refreshToken', refreshData.refreshToken);
-            setCookie('token', refreshData.accessToken.split("Bearer ")[1], { expires: 1200 });
-
-            const updatedOptions = {
-              ...options,
-              headers: {
-                ...options.headers,
-                'Authorization': refreshData.accessToken
-              }
-            };
-
-            return fetch(`${config.BASE_URL}${endpoint}`, updatedOptions);
-          })
-          .then(checkResponse);
+          };
+          return request(endpoint, updatedOptions);
+        });
       } else {
         return Promise.reject(err);
       }
@@ -93,11 +95,14 @@ export const getIngredients = () => {
   })
 }
 
-// отправка данных о заказе на сервер
+// отправка данных о заказе на сервер (теперь с авторизацией)
 export const postOrder = (arr) => {
-  return request(config.ORDERS_ENDPOINT, {
+  return authorizedRequest(config.ORDERS_ENDPOINT, {
     method: 'POST',
-    headers: config.headers,
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      Authorization: 'Bearer ' + getCookie('token')
+    },
     body: JSON.stringify({
       ingredients: arr,
     })
@@ -187,5 +192,13 @@ export const updateUserInfo = (form) => {
       password: form.password,
       name: form.name
     })
+  })
+}
+
+// получение данных об открытом заказе
+export const getOrderInfo = (number) => {
+  return request(`${config.GET_ORDER_INFO}${number}`, {
+    method: 'GET',
+    headers: config.headers
   })
 }

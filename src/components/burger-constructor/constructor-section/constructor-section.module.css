@@ -5,14 +5,11 @@
   flex-direction: column;
   gap: calc(var(--offset-base-size)*4);
 
-  margin: 0;
-  padding-top: 0;
   padding-right: calc(var(--offset-base-size)*2);
   padding-left: calc(var(--offset-base-size)*4);
-  list-style-type: none;
 
   overflow: auto;
-  composes: custom-scroll from global;
+  composes: custom-scroll list-reset from global;
 }
 
 .wrapper::-webkit-scrollbar {

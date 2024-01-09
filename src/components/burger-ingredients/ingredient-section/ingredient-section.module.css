@@ -12,5 +12,5 @@
   padding-top: 24px;
   padding-bottom: calc(var(--offset-base-size)*10);
 
-  composes: pl-4 pr-2 from global;
+  composes: list-reset pl-4 pr-2 from global;
 }
