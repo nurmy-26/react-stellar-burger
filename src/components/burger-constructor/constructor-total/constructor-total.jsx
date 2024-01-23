@@ -7,7 +7,6 @@ import { getConstructorData } from "../../../services/selectors/burger-construct
 import PriceCount from "../../common/price-count/price-count";
 
 
-// на вход data
 function ConstructorTotal({children, onOpen}) {
   const constructorData = useSelector(getConstructorData);
   const MemoButton = React.memo(Button);

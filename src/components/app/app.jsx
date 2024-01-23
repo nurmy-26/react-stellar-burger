@@ -8,12 +8,12 @@ import { OnlyAuth, OnlyUnAuth } from "../protected-component";
 import { FeedPage, ForgotPasswordPage, LoginPage, MainPage, NotFound404,
   ProfilePage, RegisterPage, ResetPasswordPage } from "../../pages";
 import ProfileInfo from "../profile/profile-info/profile-info";
+import ProfileHistory from "../profile/profile-history/profile-history";
 import DetailsWrapper from "../common/details-wrapper/details-wrapper";
 import OrderDetailsWrapper from "../orders/order-details/order-details-wrapper/order-details-wrapper";
 import IngredientDetails from "../burger-ingredients/ingredient-details/ingredient-details";
 import OrderDetails from "../orders/order-details/order-details";
 import Modal from "../modal/modal";
-import ProfileHistory from "../profile/profile-history/profile-history";
 
 
 function App() {

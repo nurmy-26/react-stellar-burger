@@ -7,7 +7,6 @@ import {
 
 
 const orderInitialState = {
-  // name и number будут массивами, если нужно будет сохранять все сделанные заказы
   name: '',
   order: {
     number: null

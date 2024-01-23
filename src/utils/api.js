@@ -45,7 +45,6 @@ export const checkSuccess = (res) => {
 
 // универсальная ф-я для запроса с проверкой ответа (url вместо endpoint - если нужны будут разные сервера)
 export const request = (endpoint, options) => {
-  console.log(`${CONFIG.ROUTES.BASE_URL}${endpoint}`)
   return fetch(`${CONFIG.ROUTES.BASE_URL}${endpoint}`, options)
     .then(checkResponse)
     .then(checkSuccess)
@@ -79,7 +78,7 @@ export const authorizedRequest = (endpoint, options) => {
           const updatedOptions = {
             ...options,
             headers: {
-              ...options.HEADERS,
+              ...options.headers,
               'Authorization': `Bearer ${getCookie('token')}`
             }
           };
@@ -100,9 +99,9 @@ export const getIngredients = () => {
 
 // отправка данных о заказе на сервер (теперь с авторизацией)
 export const postOrder = (arr) => {
-  return authorizedRequest(CONFIG.ORDERS_ENDPOINT, {
+  return authorizedRequest(CONFIG.ENDPOINTS.ORDERS_ENDPOINT, {
     method: 'POST',
-    HEADERS: {
+    headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       Authorization: 'Bearer ' + getCookie('token')
     },

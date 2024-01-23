@@ -3,15 +3,18 @@ export const findItem = (arr, value) => {
   return arr.find(item => item._id === value);
 }
 
+
 // достаем рандомную фразу из массива
 export const randomPhrase = (phrases) => {
   return phrases[Math.floor(Math.random() * phrases.length)];
 }
 
+
 // фильтрация массива на уникальные итемы
 export const getUniqueItems = (arr) => {
   return arr.filter((item, index, array) => array.indexOf(item) === index);
 }
+
 
 // вычисление суммарной стоимости переданных ингредиентов (берем стоимость из переданного ingredientList с данными)
 export const calculateTotalCost = (ingredients, ingredientList) => {
@@ -29,6 +32,7 @@ export const calculateTotalCost = (ingredients, ingredientList) => {
 
   return totalCost;
 }
+
 
 // описываем правила рендера номеров заказов в списке
 export const renderOrderNumbers = (orderNumbers) => {
@@ -57,6 +61,7 @@ export const renderOrderNumbers = (orderNumbers) => {
     );
   });
 }
+
 
 // сортируем переданный список ингредиентов на списки из одинаковых id и записываем в объект, где ключ - это id
 export const sortIngredients = (ingredientList) => {

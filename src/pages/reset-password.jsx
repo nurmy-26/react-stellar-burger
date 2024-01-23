@@ -1,6 +1,5 @@
 import React from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import styles from "./page.module.css";
 import MainContainer from "../components/common/main-container/main-container";
 import RequestForm from "../components/common/request-form/request-form";
 import ActionString from "../components/common/action-string/action-string";
@@ -32,7 +31,7 @@ function ResetPasswordPage() {
 
   // на страницу пустит только при наличии переменной в localStorage, записанной на предыдущем роуте
   return hasSendPassword ?
-    (<MainContainer extraClass={styles.marginLarge}>
+    (<MainContainer extraClass="ps-l">
 
       <RequestForm title="Восстановление пароля" formName="reset-password" onSubmit={handleSubmit}>
 

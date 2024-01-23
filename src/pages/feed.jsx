@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "./page.module.css";
 import { CONFIG } from "../utils/api";
 import { connect, disconnect } from "../services/actions/web-socket";
 import { getOrderList, getTotal, getTotalToday } from "../services/selectors/web-socket";
@@ -31,7 +30,7 @@ function FeedPage() {
 
 
   return (
-    <MainContainer extraClass={styles.marginMedium}>
+    <MainContainer extraClass="ps-m">
 
       <section>
         <h1 className="text text_type_main-large mb-5">Лента заказов</h1>

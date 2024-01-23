@@ -31,4 +31,4 @@ function ProfileHistory() {
   );
 }
 
-export default React.memo(ProfileHistory);
+export default ProfileHistory;

@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import styles from "./page.module.css";
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useForm } from "../hooks/useForm";
 import { login } from "../services/actions/auth";
@@ -22,7 +21,7 @@ function LoginPage() {
   }
 
   return (
-    <MainContainer extraClass={styles.marginLarge}>
+    <MainContainer extraClass="ps-l">
 
       <RequestForm title="Вход" formName="entry" onSubmit={handleSubmit}>
 

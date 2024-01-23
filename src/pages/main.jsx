@@ -2,7 +2,6 @@ import React from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { useSelector } from "react-redux";
-import styles from "./page.module.css";
 import { getIngredientsData } from "../services/selectors/ingredients";
 import MainContainer from "../components/common/main-container/main-container";
 import BurgerIngredients from "../components/burger-ingredients/burger-ingredients";
@@ -14,7 +13,7 @@ function MainPage() {
   const ingredientsData = useSelector(getIngredientsData);
 
   return (
-    <MainContainer extraClass={styles.marginSmall}>
+    <MainContainer extraClass="ps-s">
         {
           // если запрос прошел (и прошел успешно), рендерим ингредиенты и конструктор
         (ingredientsData.ingredients && ingredientsData.ingredients.length > 0 && !ingredientsData.isLoading && !ingredientsData.hasError) ? (

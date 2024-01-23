@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./page.module.css";
 import { Button, EmailInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { resetPassword } from "../utils/api";
 import { useForm } from "../hooks/useForm";
@@ -30,7 +29,7 @@ function ForgotPasswordPage() {
   }
 
   return (
-    <MainContainer extraClass={styles.marginLarge}>
+    <MainContainer extraClass="ps-l">
 
       <RequestForm title="Восстановление пароля" formName="forgot-password" onSubmit={handleSubmit}>
 
