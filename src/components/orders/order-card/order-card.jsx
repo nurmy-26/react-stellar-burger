@@ -38,6 +38,7 @@ function OrderCard({orderInfo, type='feed'}) {
   [ingredients, ingredientList]);
 
   const MemoFormattedDate = React.memo(FormattedDate);
+  const MemoImagesRow = React.memo(ImagesRow);
 
 
   return (
@@ -58,7 +59,7 @@ function OrderCard({orderInfo, type='feed'}) {
 
 
           <div className={styles.row}>
-            <ImagesRow idList={ingredients} />
+            <MemoImagesRow idList={ingredients} />
 
             <PriceCount>{totalCost}</PriceCount>
           </div>

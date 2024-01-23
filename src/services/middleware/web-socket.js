@@ -1,4 +1,4 @@
-import { updateToken, config } from "../../utils/api";
+import { updateToken, CONFIG } from "../../utils/api";
 import { getCookie } from "../../utils/cookie";
 
 export const socketMiddleware = (wsActions) => {
@@ -17,11 +17,11 @@ export const socketMiddleware = (wsActions) => {
         let token = getCookie('token');
 
         // если переданный url - WS_ALL, то обычный сокет
-        if (payload === config.WS_ALL) {
+        if (payload === CONFIG.ROUTES.WS_ALL) {
           socket = new WebSocket(payload);
 
           // если переданный url - WS_AUTH, то сокет для авторизованных пользователей
-        } else if (payload === config.WS_AUTH) {
+        } else if (payload === CONFIG.ROUTES.WS_AUTH) {
           socket = new WebSocket(`${payload}?token=${token}`);
         }
 

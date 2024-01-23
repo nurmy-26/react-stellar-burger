@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import styles from "./profile-nav.module.css";
-import { logout } from "../../services/actions/auth";
-import Logout from "./logout/logout";
+import { logout } from "../../../services/actions/auth";
+import Logout from "../logout/logout";
 
 
 function ProfileNav() {

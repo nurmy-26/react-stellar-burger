@@ -1,3 +1,8 @@
+// поиск по массиву (ищем элемент по id)
+export const findItem = (arr, value) => {
+  return arr.find(item => item._id === value);
+}
+
 // достаем рандомную фразу из массива
 export const randomPhrase = (phrases) => {
   return phrases[Math.floor(Math.random() * phrases.length)];

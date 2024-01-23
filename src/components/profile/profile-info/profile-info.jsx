@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./profile-info.module.css";
-import RequestForm from "../common/request-form/request-form";
+import RequestForm from "../../common/request-form/request-form";
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useForm } from "../../hooks/useForm";
+import { useForm } from "../../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../../services/selectors/auth";
-import { updateUser } from "../../services/actions/auth";
+import { getUser } from "../../../services/selectors/auth";
+import { updateUser } from "../../../services/actions/auth";
 
 
 function ProfileInfo() {

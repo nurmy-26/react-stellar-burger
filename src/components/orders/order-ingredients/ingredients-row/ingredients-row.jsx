@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import styles from "./ingredients-row.module.css";
+import { findItem } from "../../../../utils/helpers";
 import { getIngredientsList } from "../../../../services/selectors/ingredients";
 import PriceCount from "../../../common/price-count/price-count";
 import IngredientCircle from "../ingredient-circle/ingredient-circle";
@@ -12,7 +13,9 @@ function IngredientsRow({ id, count }) {
   const ingredientList = useSelector(getIngredientsList);
 
   // находим ингредиент, совпадающий по id с id из url (= открытый)
-  const ingredient = ingredientList.find(item => item._id === id)
+  const ingredient = React.useMemo(() =>
+    findItem(ingredientList, id),
+  [ingredientList]);
 
   if (!ingredient) {
     return null

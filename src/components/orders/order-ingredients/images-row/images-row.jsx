@@ -45,4 +45,4 @@ ImagesRow.propTypes = {
   idList: PropTypes.arrayOf(PropTypes.string).isRequired,
 }
 
-export default React.memo(ImagesRow);
+export default ImagesRow;

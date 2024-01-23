@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./price-count.module.css";
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+const MemoCurrencyIcon = React.memo(CurrencyIcon);
 
 
 function PriceCount({children, size='s'}) {
@@ -15,7 +16,6 @@ function PriceCount({children, size='s'}) {
       break;
   }
 
-  const MemoCurrencyIcon = React.memo(CurrencyIcon);
 
   return (
     <span className={totalClasses}>

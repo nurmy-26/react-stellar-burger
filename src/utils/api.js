@@ -1,22 +1,24 @@
 import { getCookie, setCookie } from "./cookie";
 
-export const config = {
-  BASE_URL: 'https://norma.nomoreparties.space/api/',
-  WS_ALL: 'wss://norma.nomoreparties.space/orders/all',
-  WS_AUTH: 'wss://norma.nomoreparties.space/orders',
-
-  INGREDIENTS_ENDPOINT: 'ingredients',
-  ORDERS_ENDPOINT: 'orders',
-  REGISTER_ENDPOINT: 'auth/register',
-  LOGIN_ENDPOINT: 'auth/login',
-  USER_ENDPOINT: 'auth/user',
-  LOGOUT_ENDPOINT: 'auth/logout',
-  TOKEN_ENDPOINT: 'auth/token',
-  PASSWORD_RESET_ENDPOINT: 'password-reset',
-  PASSWORD_UPDATE_ENDPOINT: 'password-reset/reset',
-  GET_ORDER_INFO: 'orders/ ',
-
-  headers: {
+export const CONFIG = {
+  ROUTES: {
+    BASE_URL: 'https://norma.nomoreparties.space/api/',
+    WS_ALL: 'wss://norma.nomoreparties.space/orders/all',
+    WS_AUTH: 'wss://norma.nomoreparties.space/orders'
+  },
+  ENDPOINTS: {
+    INGREDIENTS_ENDPOINT: 'ingredients',
+    ORDERS_ENDPOINT: 'orders',
+    REGISTER_ENDPOINT: 'auth/register',
+    LOGIN_ENDPOINT: 'auth/login',
+    USER_ENDPOINT: 'auth/user',
+    LOGOUT_ENDPOINT: 'auth/logout',
+    TOKEN_ENDPOINT: 'auth/token',
+    PASSWORD_RESET_ENDPOINT: 'password-reset',
+    PASSWORD_UPDATE_ENDPOINT: 'password-reset/reset',
+    GET_ORDER_INFO: 'orders/ '
+  },
+  HEADERS: {
     'Content-Type': 'application/json; charset=UTF-8'
   }
 }
@@ -43,16 +45,17 @@ export const checkSuccess = (res) => {
 
 // универсальная ф-я для запроса с проверкой ответа (url вместо endpoint - если нужны будут разные сервера)
 export const request = (endpoint, options) => {
-  return fetch(`${config.BASE_URL}${endpoint}`, options)
+  console.log(`${CONFIG.ROUTES.BASE_URL}${endpoint}`)
+  return fetch(`${CONFIG.ROUTES.BASE_URL}${endpoint}`, options)
     .then(checkResponse)
     .then(checkSuccess)
 }
 
 // ф-я обновления токена для запросов, требущих авторизации
 export const updateToken = () => {
-  return request(config.TOKEN_ENDPOINT, {
+  return request(CONFIG.ENDPOINTS.TOKEN_ENDPOINT, {
     method: 'POST',
-    headers: config.headers,
+    headers: CONFIG.HEADERS,
     body: JSON.stringify({
       token: getCookie('refreshToken')
     })
@@ -76,7 +79,7 @@ export const authorizedRequest = (endpoint, options) => {
           const updatedOptions = {
             ...options,
             headers: {
-              ...options.headers,
+              ...options.HEADERS,
               'Authorization': `Bearer ${getCookie('token')}`
             }
           };
@@ -90,16 +93,16 @@ export const authorizedRequest = (endpoint, options) => {
 
 // получение data ингредиентов с сервера
 export const getIngredients = () => {
-  return request(config.INGREDIENTS_ENDPOINT, {
-    headers: config.headers,
+  return request(CONFIG.ENDPOINTS.INGREDIENTS_ENDPOINT, {
+    headers: CONFIG.HEADERS,
   })
 }
 
 // отправка данных о заказе на сервер (теперь с авторизацией)
 export const postOrder = (arr) => {
-  return authorizedRequest(config.ORDERS_ENDPOINT, {
+  return authorizedRequest(CONFIG.ORDERS_ENDPOINT, {
     method: 'POST',
-    headers: {
+    HEADERS: {
       'Content-Type': 'application/json; charset=UTF-8',
       Authorization: 'Bearer ' + getCookie('token')
     },
@@ -112,9 +115,9 @@ export const postOrder = (arr) => {
 
 // регистрация пользователя
 export const registerRequest = (form) => {
-  return request(config.REGISTER_ENDPOINT, {
+  return request(CONFIG.ENDPOINTS.REGISTER_ENDPOINT, {
     method: 'POST',
-    headers: config.headers,
+    headers: CONFIG.HEADERS,
     body: JSON.stringify({
       email: form.email,
       password: form.password,
@@ -125,9 +128,9 @@ export const registerRequest = (form) => {
 
 // залогиниться
 export const loginRequest = (form) => {
-  return request(config.LOGIN_ENDPOINT, {
+  return request(CONFIG.ENDPOINTS.LOGIN_ENDPOINT, {
     method: 'POST',
-    headers: config.headers,
+    headers: CONFIG.HEADERS,
     body: JSON.stringify({
       email: form.email,
       password: form.password
@@ -137,9 +140,9 @@ export const loginRequest = (form) => {
 
 // разлогиниться
 export const logoutRequest = () => {
-  return request(config.LOGOUT_ENDPOINT, {
+  return request(CONFIG.ENDPOINTS.LOGOUT_ENDPOINT, {
     method: 'POST',
-    headers: config.headers,
+    headers: CONFIG.HEADERS,
     body: JSON.stringify({
       token: getCookie('refreshToken')
     })
@@ -148,9 +151,9 @@ export const logoutRequest = () => {
 
 // сбросить пароль
 export const resetPassword = (form) => {
-  return request(config.PASSWORD_RESET_ENDPOINT, {
+  return request(CONFIG.ENDPOINTS.PASSWORD_RESET_ENDPOINT, {
     method: 'POST',
-    headers: config.headers,
+    headers: CONFIG.HEADERS,
     body: JSON.stringify({
       email: form.email
     })
@@ -159,9 +162,9 @@ export const resetPassword = (form) => {
 
 // восстановить пароль
 export const updatePassword = (form) => {
-  return request(config.PASSWORD_UPDATE_ENDPOINT, {
+  return request(CONFIG.ENDPOINTS.PASSWORD_UPDATE_ENDPOINT, {
     method: 'POST',
-    headers: config.headers,
+    headers: CONFIG.HEADERS,
     body: JSON.stringify({
       password: form.password,
       token: form.token
@@ -171,7 +174,7 @@ export const updatePassword = (form) => {
 
 // получение данных пользователя с сервера
 export const getUserInfo = () => {
-  return authorizedRequest(config.USER_ENDPOINT, {
+  return authorizedRequest(CONFIG.ENDPOINTS.USER_ENDPOINT, {
     headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       Authorization: 'Bearer ' + getCookie('token')
@@ -181,7 +184,7 @@ export const getUserInfo = () => {
 
 // обновление данных пользователя с сервера
 export const updateUserInfo = (form) => {
-  return authorizedRequest(config.USER_ENDPOINT, {
+  return authorizedRequest(CONFIG.ENDPOINTS.USER_ENDPOINT, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json; charset=UTF-8',
@@ -197,8 +200,8 @@ export const updateUserInfo = (form) => {
 
 // получение данных об открытом заказе
 export const getOrderInfo = (number) => {
-  return request(`${config.GET_ORDER_INFO}${number}`, {
+  return request(`${CONFIG.ENDPOINTS.GET_ORDER_INFO}${number}`, {
     method: 'GET',
-    headers: config.headers
+    headers: CONFIG.HEADERS
   })
 }

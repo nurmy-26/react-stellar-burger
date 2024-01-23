@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styles from "./ingredient-details.module.css";
+import { findItem } from "../../../utils/helpers";
 import { getIngredientsData, getIngredientsList } from "../../../services/selectors/ingredients";
 import ModalLoader from "../../modal/modal-loader/modal-loader";
 
@@ -13,7 +14,10 @@ function IngredientDetails() {
   const ingredientsData = useSelector(getIngredientsData);
 
   // находим ингредиент, совпадающий по id с id из url (= открытый)
-  const detailsData = ingredientList.find(item => item._id === id)
+  const detailsData = React.useMemo(() =>
+    findItem(ingredientList, id),
+  [ingredientList]);
+
 
   const { isLoading, hasError } = ingredientsData;
 

@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import styles from "./page.module.css";
 import MainContainer from "../components/common/main-container/main-container";
-import ProfileNav from "../components/profile-nav/profile-nav";
+import ProfileNav from "../components/profile/profile-nav/profile-nav";
 
 
 function ProfilePage() {

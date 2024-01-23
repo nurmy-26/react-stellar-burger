@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./page.module.css";
-import { config } from "../utils/api";
+import { CONFIG } from "../utils/api";
 import { connect, disconnect } from "../services/actions/web-socket";
 import { getOrderList, getTotal, getTotalToday } from "../services/selectors/web-socket";
 import MainContainer from "../components/common/main-container/main-container";
@@ -17,7 +17,7 @@ function FeedPage() {
   const totalToday = useSelector(getTotalToday);
 
   React.useEffect(() => {
-    dispatch(connect(config.WS_ALL))
+    dispatch(connect(CONFIG.ROUTES.WS_ALL))
 
     return () => { dispatch(disconnect()) };
   }, []);
@@ -25,6 +25,8 @@ function FeedPage() {
   if (!orders) {
     return <Loading />
   }
+
+  // без мемоизации именно внутри компонента OrderFeed продолжает перерисовываться лишние разы
   const MemoOrderFeed = React.memo(OrderFeed);
 
 
