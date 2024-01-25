@@ -1,5 +1,5 @@
 // функция для получения значения куки с определённым именем name
-export function getCookie(name) {
+export function getCookie(name: string) {
   const matches = document.cookie.match(
     new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
   );
@@ -7,11 +7,12 @@ export function getCookie(name) {
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-
+// type conditionalType =
 // функция для установки или обновления куки
 // props - для доп. св-в, таких как expires (срок жизни куки в секундах)
 // если не установить expires или указать срок жизни 0, кука станет сессионной и удалится, когда пользователь закроет браузер
-export function setCookie(name, value, props = {}) {
+export function setCookie(name: string, value: string | number| boolean,
+  props: { expires?: any, path?: string, [key: string]: unknown} = {}) {
   props = {
     ...props,
     // задаем корневой path, чтоб куки были доступны с любой страницы приложения
@@ -43,6 +44,6 @@ export function setCookie(name, value, props = {}) {
 
 
 // функция удаления куки (установит expires в прошедшее время, что приведет к немедленному удалению куки браузером)
-export function deleteCookie(name) {
-  setCookie(name, null, { expires: -1 });
+export function deleteCookie(name: string) {
+  setCookie(name, "", { expires: -1 });
 }

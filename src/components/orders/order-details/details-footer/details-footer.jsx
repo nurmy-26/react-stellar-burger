@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styles from "./details-footer.module.css";
 import { FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
-import { orderPropType } from "../../../../utils/prop-types";
+import { orderPropType } from "../../../../utils/types";
 import { calculateTotalCost } from "../../../../utils/helpers";
 import { getIngredientsList } from "../../../../services/selectors/ingredients";
 import PriceCount from "../../../common/price-count/price-count";

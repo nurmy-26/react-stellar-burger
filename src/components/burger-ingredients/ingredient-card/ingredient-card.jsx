@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./ingredient-card.module.css";
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import {ingredientPropType} from "../../../utils/prop-types";
+import {ingredientPropType} from "../../../utils/types";
 import { getConstructorData } from "../../../services/selectors/burger-constructor";
 import PriceCount from "../../common/price-count/price-count";
 

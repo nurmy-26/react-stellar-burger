@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./digits.module.css";
-import { orderPropType } from "../../../utils/prop-types";
+import { orderPropType } from "../../../utils/types";
 import NumbersSection from "../numbers-section/numbers-section";
 import TotalInfo from "../total-info/total-info";
 

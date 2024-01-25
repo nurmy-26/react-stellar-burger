@@ -1,23 +1,24 @@
 // поиск по массиву (ищем элемент по id)
-export const findItem = (arr, value) => {
+export const findItem = <T extends { _id: string }>(arr: T[], value: string): T | undefined => {
   return arr.find(item => item._id === value);
 }
 
 
 // достаем рандомную фразу из массива
-export const randomPhrase = (phrases) => {
+export const randomPhrase = (phrases: string[]): string => {
   return phrases[Math.floor(Math.random() * phrases.length)];
 }
 
 
 // фильтрация массива на уникальные итемы
-export const getUniqueItems = (arr) => {
+export const getUniqueItems = <T>(arr: T[]): T[] => {
   return arr.filter((item, index, array) => array.indexOf(item) === index);
 }
 
 
 // вычисление суммарной стоимости переданных ингредиентов (берем стоимость из переданного ingredientList с данными)
-export const calculateTotalCost = (ingredients, ingredientList) => {
+export const calculateTotalCost = <T extends { _id: string, price: number }>(
+  ingredients: string[], ingredientList: T[]): number => {
   let totalCost = 0;
 
   // для каждого id в заказе ищем нужный ингредиент в общем списке ингредиентов
@@ -35,11 +36,11 @@ export const calculateTotalCost = (ingredients, ingredientList) => {
 
 
 // описываем правила рендера номеров заказов в списке
-export const renderOrderNumbers = (orderNumbers) => {
+export const getNumbersGridOrder = (orderNumbers: number[]) => {
   let columnIndex = 1;
   let rowIndex = 1;
 
-  return orderNumbers.map((order, index) => {
+  const content = orderNumbers.map((order, index) => {
     // переходим к след. колонке при достижении 10 заказов
     if (index % 10 === 0 && index !== 0) {
       columnIndex++;
@@ -53,19 +54,24 @@ export const renderOrderNumbers = (orderNumbers) => {
     };
     rowIndex++; // увеличиваем индекс строки
 
-    // возвращаем элемент списка
-    return (
-      <li key={index} style={itemStyle}>
-        {order}
-      </li>
-    );
+    // сохраняем в объект номер заказа и его позицию в grid-сетке
+    const item = {
+      style: itemStyle,
+      order: order
+    }
+    return item;
   });
+  // возвращаем массив объектов с полями style и order
+  return content;
 }
 
 
+type TDuplicates = {
+  [key: string]: string[];
+};
 // сортируем переданный список ингредиентов на списки из одинаковых id и записываем в объект, где ключ - это id
-export const sortIngredients = (ingredientList) => {
-  const duplicates = {};
+export const findDuplicates = (ingredientList: string[]): TDuplicates => {
+  const duplicates: TDuplicates = {};
 
   ingredientList.forEach((item) => {
     if (duplicates[item]) {

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./numbers-section.module.css";
-import { renderOrderNumbers } from "../../../utils/helpers";
+import { getNumbersGridOrder } from "../../../utils/helpers";
 
 
 function NumbersSection({ orderNumbers, type }) {
@@ -21,8 +21,14 @@ function NumbersSection({ orderNumbers, type }) {
 
   // получаем список номеров
   const numbersList = React.useMemo(() =>
-    renderOrderNumbers(orderNumbers),
+    getNumbersGridOrder(orderNumbers),
   [orderNumbers]);
+
+  const content = React.useMemo(() =>
+    numbersList.map((item, index) => {
+      return <li key={index} style={item.style}>{item.order}</li>
+  }),
+  [numbersList]);
 
   // горизонтальный скролл
   const containerRef = React.useRef(null);
@@ -52,7 +58,8 @@ function NumbersSection({ orderNumbers, type }) {
     <div>
       <h2 className="mb-6 text text_type_main-medium">{text}</h2>
       <ul ref={containerRef} className={`${styles.list} ${numberStyle}`}>
-        {numbersList}
+        {/* {numbersList} */}
+        {content}
       </ul>
     </div>
   );

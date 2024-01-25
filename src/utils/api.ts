@@ -1,4 +1,5 @@
 import { getCookie, setCookie } from "./cookie";
+import { TOrder, TEmail, TPassword, TName, TToken, TSuccess, TOptions, CustomResponse, TResponseBody } from './types';
 
 export const CONFIG = {
   ROUTES: {
@@ -25,26 +26,30 @@ export const CONFIG = {
 
 
 // универсальная ф-я проверки ответа от сервера
-export const checkResponse = (res) => {
+export const checkResponse = (res: Response): Promise<Response> => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 }
 
 // универсальная ф-я проверки ответа от сервера для запросов, требущих авторизации
 // (для позднейшего получения message из error)
-export const checkAuthResponse = (res) => {
+export const checkAuthResponse = (res: Response) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 }
 
+// #todo - разобраться с типами
+// res: Response & { success?: boolean }
 // универсальная ф-я проверки на success от сервера
-export const checkSuccess = (res) => {
+export const checkSuccess = (res: CustomResponse<TResponseBody>) => {
   if (res && res.success) {
+    // console.log(res)
+    // console.log(typeof res)
     return res;
   }
   return Promise.reject(`Статус success: ${res.success}`);
 }
 
 // универсальная ф-я для запроса с проверкой ответа (url вместо endpoint - если нужны будут разные сервера)
-export const request = (endpoint, options) => {
+export const request = (endpoint: string, options: TOptions) => {
   return fetch(`${CONFIG.ROUTES.BASE_URL}${endpoint}`, options)
     .then(checkResponse)
     .then(checkSuccess)
@@ -70,7 +75,7 @@ export const updateToken = () => {
 }
 
 // ф-я для выполнения и проверки запросов, требующих авторизации
-export const authorizedRequest = (endpoint, options) => {
+export const authorizedRequest = (endpoint: string, options: TOptions) => {
   return request(endpoint, options)
     .catch((err) => {
       if (err.message === "jwt expired" || err.message === "jwt malformed") {
@@ -98,7 +103,7 @@ export const getIngredients = () => {
 }
 
 // отправка данных о заказе на сервер (теперь с авторизацией)
-export const postOrder = (arr) => {
+export const postOrder = (arr: TOrder[]) => {
   return authorizedRequest(CONFIG.ENDPOINTS.ORDERS_ENDPOINT, {
     method: 'POST',
     headers: {
@@ -113,7 +118,7 @@ export const postOrder = (arr) => {
 
 
 // регистрация пользователя
-export const registerRequest = (form) => {
+export const registerRequest = (form: TEmail & TPassword & TName) => {
   return request(CONFIG.ENDPOINTS.REGISTER_ENDPOINT, {
     method: 'POST',
     headers: CONFIG.HEADERS,
@@ -126,7 +131,7 @@ export const registerRequest = (form) => {
 }
 
 // залогиниться
-export const loginRequest = (form) => {
+export const loginRequest = (form: TEmail & TPassword) => {
   return request(CONFIG.ENDPOINTS.LOGIN_ENDPOINT, {
     method: 'POST',
     headers: CONFIG.HEADERS,
@@ -149,7 +154,7 @@ export const logoutRequest = () => {
 }
 
 // сбросить пароль
-export const resetPassword = (form) => {
+export const resetPassword = (form: TEmail) => {
   return request(CONFIG.ENDPOINTS.PASSWORD_RESET_ENDPOINT, {
     method: 'POST',
     headers: CONFIG.HEADERS,
@@ -160,7 +165,7 @@ export const resetPassword = (form) => {
 }
 
 // восстановить пароль
-export const updatePassword = (form) => {
+export const updatePassword = (form: TPassword & TToken) => {
   return request(CONFIG.ENDPOINTS.PASSWORD_UPDATE_ENDPOINT, {
     method: 'POST',
     headers: CONFIG.HEADERS,
@@ -182,7 +187,7 @@ export const getUserInfo = () => {
 }
 
 // обновление данных пользователя с сервера
-export const updateUserInfo = (form) => {
+export const updateUserInfo = (form: TEmail & TPassword & TName) => {
   return authorizedRequest(CONFIG.ENDPOINTS.USER_ENDPOINT, {
     method: 'PATCH',
     headers: {
@@ -198,7 +203,7 @@ export const updateUserInfo = (form) => {
 }
 
 // получение данных об открытом заказе
-export const getOrderInfo = (number) => {
+export const getOrderInfo = (number: number) => {
   return request(`${CONFIG.ENDPOINTS.GET_ORDER_INFO}${number}`, {
     method: 'GET',
     headers: CONFIG.HEADERS

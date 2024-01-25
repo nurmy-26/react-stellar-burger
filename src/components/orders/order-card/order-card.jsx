@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./order-card.module.css";
 import { FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
-import { orderPropType } from "../../../utils/prop-types";
+import { orderPropType } from "../../../utils/types";
 import { calculateTotalCost } from "../../../utils/helpers";
 import { getIngredientsList } from "../../../services/selectors/ingredients";
 import PriceCount from "../../common/price-count/price-count";

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./order-feed.module.css";
-import { orderPropType } from "../../../utils/prop-types";
+import { orderPropType } from "../../../utils/types";
 import OrderCard from "../order-card/order-card";
 
 

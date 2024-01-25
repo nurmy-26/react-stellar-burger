@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import styles from "./constructor-item.module.css";
 import { DragIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import {ingredientPropType} from "../../../utils/prop-types";
+import {ingredientPropType} from "../../../utils/types";
 import { deleteIngredient } from "../../../services/actions/burger-constructor";
 import { exchangeOrder } from "../../../services/actions/burger-constructor";
 
