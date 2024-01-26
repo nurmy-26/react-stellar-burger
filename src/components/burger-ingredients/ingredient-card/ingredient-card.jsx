@@ -5,12 +5,16 @@ import { Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./ingredient-card.module.css";
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import {ingredientPropType} from "../../../utils/types";
+import {TIngredient, ingredientPropType} from "../../../utils/types";
 import { getConstructorData } from "../../../services/selectors/burger-constructor";
 import PriceCount from "../../common/price-count/price-count";
 
 
-function IngredientCard({itemInfo}) {
+// type Props = {
+//   itemInfo: TIngredient;
+// }
+
+function IngredientCard({ itemInfo }) {
   let location = useLocation();
 
   const {name, type, price, image, _id} = itemInfo;

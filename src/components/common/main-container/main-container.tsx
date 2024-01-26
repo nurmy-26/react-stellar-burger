@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import styles from './main-container.module.css';
 
 
-const MainContainer = ({ children, extraClass }) => {
+type Props = {
+  children?: ReactNode;
+  extraClass?: string;
+}
+
+const MainContainer = ({ children, extraClass }: Props) => {
   const className = `${styles.main} ${extraClass}`;
 
   return (

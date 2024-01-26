@@ -9,12 +9,20 @@ import { useSelector } from "react-redux";
 import { getOrderData } from "../../../services/selectors/order";
 
 
+type Props = {
+  hasError?: boolean;
+  errorMessage?: string;
+  loadingText?: string;
+  size?: 's' | 'm';
+  type?: 'common' | 'sendOrder';
+}
+
 function ModalLoader({
   hasError=false,
   errorMessage='Что-то пошло не так :(',
   loadingText='Ожидаем данные...',
   size='s',
-  type='common'}) {
+  type='common'}: Props) {
 
   const containerClasses = styles.container + ' ' + (size === 'm' ? styles.containerMedium : '')
   const textClasses = styles.status + (hasError ? '' : (' ' + styles.animated));
@@ -23,7 +31,7 @@ function ModalLoader({
 
   // обратный отсчет для отправки заказа
   const [countdown, setCountdown] = React.useState(15);
-  let countdownInterval = null;
+  let countdownInterval: NodeJS.Timeout | string | number | undefined = 0;
 
   React.useEffect(() => {
     if (type === 'sendOrder') {

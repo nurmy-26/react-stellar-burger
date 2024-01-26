@@ -1,11 +1,17 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./action-string.module.css";
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 
-function ActionString({ children, label, path }) {
+type Props = {
+  children: ReactNode;
+  label?: string;
+  path: string;
+}
+
+function ActionString({ children, label, path }: Props) {
 
   return (
     <p className={styles.text}>

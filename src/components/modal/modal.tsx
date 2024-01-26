@@ -1,4 +1,4 @@
-import React from "react";
+import React, { KeyboardEvent } from "react";
 import ReactDOM from "react-dom";
 import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -7,13 +7,20 @@ import ModalHeader from "./modal-header/modal-header";
 import ModalOverlay from "./modal-overlay/modal-overlay";
 
 
-function Modal({children, header, onClose, type}) {
+type Props = {
+  children: string;
+  header: string;
+  onClose: () => void;
+  type?: string;
+}
+
+function Modal({children, header, onClose, type}: Props) {
   // для модалки заказа достаем number из url
   const { number } = useParams();
 
   // слушатель по Ecs
   React.useEffect(() => {
-    function closeByEsc (evt) {
+    const closeByEsc = (evt: any) => { // evt: KeyboardEvent<Element>
       if (evt.key === 'Escape') {
         onClose();
       }
@@ -35,7 +42,7 @@ function Modal({children, header, onClose, type}) {
 
         <ModalOverlay onClose={onClose} />
       </>
-    ), document.getElementById("react-modals")
+    ), document.getElementById("react-modals") as Element
   );
 }
 

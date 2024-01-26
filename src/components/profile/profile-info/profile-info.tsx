@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent, RefObject } from "react";
 import styles from "./profile-info.module.css";
 import RequestForm from "../../common/request-form/request-form";
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -24,11 +24,13 @@ function ProfileInfo() {
   const emailRef = React.useRef(null);
   const passwordRef = React.useRef(null);
 
-  const onIconClick = (ref) => {
-    ref.current.focus();
+  const onIconClick = (ref: RefObject<HTMLInputElement>) => {
+    if (ref.current) {
+      ref.current.focus();
+    }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(updateUser(values));
   }

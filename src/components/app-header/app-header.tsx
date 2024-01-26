@@ -16,13 +16,13 @@ function AppHeader() {
             <ul className={`${styles.list} ${styles.link_start}`}>
               <li>
                 <NavLink to="/" className={({isActive}) => isActive ? activeClasses : styles.link}>
-                    <BurgerIcon />
+                    <BurgerIcon type="primary" />
                     Конструктор
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/feed" className={({isActive}) => isActive ? activeClasses : styles.link}>
-                  <ListIcon />
+                  <ListIcon type="primary" />
                   Лента заказов
                 </NavLink>
               </li>
@@ -36,7 +36,7 @@ function AppHeader() {
 
             <li className={styles.link_end}>
               <NavLink to="/profile" className={({isActive}) => isActive ? activeClasses : styles.link}>
-                <ProfileIcon />
+                <ProfileIcon type="primary" />
                 Личный кабинет
               </NavLink>
             </li>

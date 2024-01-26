@@ -5,7 +5,12 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 const MemoCurrencyIcon = React.memo(CurrencyIcon);
 
 
-function PriceCount({children, size='s'}) {
+type Props = {
+  children: string | number;
+  size: string;
+}
+
+function PriceCount({children, size='s'}: Props) {
   let totalClasses = styles.total;
   switch(size) {
     case "s":

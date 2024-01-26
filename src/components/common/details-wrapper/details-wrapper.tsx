@@ -1,9 +1,14 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import PropTypes from "prop-types";
 import styles from "./details-wrapper.module.css";
 
 
-const DetailsWrapper = ({ component, title }) => {
+type Props = {
+  component: ReactNode;
+  title?: string;
+}
+
+const DetailsWrapper = ({ component, title }: Props) => {
 
   return (
     <div className={styles.wrapper}>

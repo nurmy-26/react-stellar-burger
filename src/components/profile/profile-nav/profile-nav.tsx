@@ -13,7 +13,7 @@ function ProfileNav() {
 
   const activeClasses = styles.link + ' ' + styles.link_active;
 
-  const handleLogout = (e) => {
+  const handleLogout = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     dispatch(logout())
   }

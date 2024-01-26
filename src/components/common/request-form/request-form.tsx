@@ -1,9 +1,18 @@
-import React from "react";
+import React, { FormEvent, ReactNode } from "react";
 import PropTypes from "prop-types";
 import styles from "./request-form.module.css";
 
 
-function RequestForm({ children, extraClass, formName, onReset, onSubmit, title }) {
+type Props = {
+  children?: ReactNode;
+  extraClass?: string;
+  formName?: string;
+  onReset: () => void;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  title?: string;
+}
+
+function RequestForm({ children, extraClass, formName, onReset, onSubmit, title }: Props) {
   const formClasses = `${styles.form} ${extraClass}`;
 
   return (

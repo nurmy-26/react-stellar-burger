@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 import styles from "./logout.module.css";
 
 
-function Logout({ children, onClick }) {
+type Props = {
+  children: string;
+  onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+}
+
+function Logout({ children, onClick }: Props) {
 
   return (
     <button className={`${styles.btn} text text_type_main-medium`} onClick={onClick}>

@@ -1,9 +1,16 @@
+import { ReactElement, ReactNode } from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 import { getAuthChecked, getUser } from "../services/selectors/auth";
 
-const Protected = ({ onlyUnAuth = false, component }) => {
+
+type Props = {
+  onlyUnAuth?: boolean;
+  component: JSX.Element | null;
+}
+// ReactNode | JSX.Element
+const Protected = ({ onlyUnAuth = false, component }: Props): JSX.Element | null => {
   // isAuthChecked это флаг, показывающий что проверка токена произведена
   const isAuthChecked = useSelector(getAuthChecked);
   const user = useSelector(getUser);
@@ -31,12 +38,12 @@ const Protected = ({ onlyUnAuth = false, component }) => {
   return component;
 };
 
-Protected.propTypes = {
-  onlyUnAuth: PropTypes.bool,
-  component: PropTypes.node.isRequired
-}
+// Protected.propTypes = {
+//   onlyUnAuth: PropTypes.bool,
+//   component: PropTypes.node.isRequired
+// }
 
 export const OnlyAuth = Protected;
-export const OnlyUnAuth = ({ component }) => (
+export const OnlyUnAuth = ({ component }: Props) => (
   <Protected onlyUnAuth={true} component={component} />
 );
