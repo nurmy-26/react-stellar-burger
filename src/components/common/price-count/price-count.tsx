@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styles from "./price-count.module.css";
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 const MemoCurrencyIcon = React.memo(CurrencyIcon);
@@ -7,7 +6,7 @@ const MemoCurrencyIcon = React.memo(CurrencyIcon);
 
 type Props = {
   children: string | number;
-  size: string;
+  size?: string;
 }
 
 function PriceCount({children, size='s'}: Props) {
@@ -29,10 +28,5 @@ function PriceCount({children, size='s'}: Props) {
     </span>
   );
 };
-
-PriceCount.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  size: PropTypes.string
-}
 
 export default React.memo(PriceCount);

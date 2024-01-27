@@ -1,20 +1,22 @@
 import React, { FormEvent, RefObject } from "react";
+import { ThunkDispatch } from "redux-thunk";
+import { Action } from "redux";
 import styles from "./profile-info.module.css";
 import RequestForm from "../../common/request-form/request-form";
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useForm } from "../../../hooks/useForm";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../../hooks/redux-hooks";
 import { getUser } from "../../../services/selectors/auth";
 import { updateUser } from "../../../services/actions/auth";
 
 
 function ProfileInfo() {
-  const dispatch = useDispatch();
+  const dispatch: ThunkDispatch<any, any, Action> = useDispatch();
   const user = useSelector(getUser);
 
   const initialForm = {
-    name: user.name,
-    email: user.email,
+    name: user ? user.name : '',
+    email: user ? user.email : '',
     password: ''
   }
 

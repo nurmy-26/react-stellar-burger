@@ -1,5 +1,5 @@
 import { getCookie, setCookie } from "./cookie";
-import { TOrder, TEmail, TPassword, TName, TToken, TSuccess, TOptions, CustomResponse, TResponseBody } from './types';
+import { TOrder, TEmail, TPassword, TName, TToken, TSuccess, TOptions, CustomResponse, TResponseBody, CustomRefreshTokenResponse, CommonCustomResponse } from './types';
 
 export const CONFIG = {
   ROUTES: {
@@ -36,10 +36,10 @@ export const checkAuthResponse = (res: Response) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 }
 
-// #todo - разобраться с типами
-// res: Response & { success?: boolean }
 // универсальная ф-я проверки на success от сервера
-export const checkSuccess = (res: CustomResponse<TResponseBody>) => {
+// #todo: res: CustomResponse<TResponseBody>
+// CommonCustomResponse
+export const checkSuccess = (res: any) => {
   if (res && res.success) {
     // console.log(res)
     // console.log(typeof res)
@@ -103,7 +103,7 @@ export const getIngredients = () => {
 }
 
 // отправка данных о заказе на сервер (теперь с авторизацией)
-export const postOrder = (arr: TOrder[]) => {
+export const postOrder = (arr: string[]) => {
   return authorizedRequest(CONFIG.ENDPOINTS.ORDERS_ENDPOINT, {
     method: 'POST',
     headers: {

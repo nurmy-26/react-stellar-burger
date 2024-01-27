@@ -1,11 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styles from "./modal-loader.module.css";
 import { InfoIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import pentagonA from "../../../images/pentagon-1.svg"
 import pentagonB from "../../../images/pentagon-2.svg"
 import pentagonC from "../../../images/pentagon-3.svg"
-import { useSelector } from "react-redux";
+import { useSelector } from "../../../hooks/redux-hooks";
 import { getOrderData } from "../../../services/selectors/order";
 
 
@@ -83,12 +82,6 @@ function ModalLoader({
       }
     </div>
   );
-}
-
-ModalLoader.propTypes = {
-  hasError: PropTypes.bool,
-  errorMessage: PropTypes.string,
-  loadingText: PropTypes.string
 }
 
 export default ModalLoader;

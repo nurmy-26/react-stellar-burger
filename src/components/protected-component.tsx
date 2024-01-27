@@ -1,6 +1,5 @@
 import { ReactElement, ReactNode } from "react";
-import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useSelector } from "../hooks/redux-hooks";
 import { Navigate, useLocation } from "react-router-dom";
 import { getAuthChecked, getUser } from "../services/selectors/auth";
 
@@ -37,11 +36,6 @@ const Protected = ({ onlyUnAuth = false, component }: Props): JSX.Element | null
   // если тип пользователя и тип маршрута совпадают, то рендерим компонент
   return component;
 };
-
-// Protected.propTypes = {
-//   onlyUnAuth: PropTypes.bool,
-//   component: PropTypes.node.isRequired
-// }
 
 export const OnlyAuth = Protected;
 export const OnlyUnAuth = ({ component }: Props) => (

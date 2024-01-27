@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import PropTypes from 'prop-types';
 import styles from './main-container.module.css';
 
 
@@ -17,10 +16,5 @@ const MainContainer = ({ children, extraClass }: Props) => {
     </main>
   );
 };
-
-MainContainer.propTypes = {
-  children: PropTypes.node,
-  extraClass: PropTypes.string
-}
 
 export default MainContainer;
