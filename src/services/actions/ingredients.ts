@@ -23,7 +23,7 @@ export type TIngredientsActions = TGetIngredientsAction | TGetIngredientsSuccess
 
 
 export const requestIngredientsData: AppThunk = () => {
-  return function(dispatch: AppDispatch) {
+  return function(dispatch) {
     dispatch({
       type: GET_INGREDIENTS
     });

@@ -1,6 +1,4 @@
 import React from "react";
-import { ThunkDispatch } from "redux-thunk";
-import { Action } from "redux";
 import { useDispatch, useSelector } from "../../hooks/redux-hooks";
 import { useNavigate } from "react-router-dom";
 import styles from "./burger-constructor.module.css";
@@ -19,7 +17,7 @@ import BunContainer from "./bun-container/bun-container";
 function BurgerConstructor() {
   const constructorData = useSelector(getConstructorData);
   const user = useSelector(getUser);
-  const dispatch: ThunkDispatch<any, any, Action> = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   // деструктуризуем кастомный хук для управления модальным окном

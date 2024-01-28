@@ -1,6 +1,6 @@
 import { getUserInfo, loginRequest, logoutRequest, registerRequest, updateUserInfo } from '../../utils/api';
 import { getCookie, deleteCookie, setCookie } from "../../utils/cookie";
-import { TEmail, TPassword, TName, AppDispatch, AppThunk, TUser } from '../../utils/types';
+import { TEmail, TPassword, TName, AppDispatch, AppThunk, TUser, TResponseBody } from '../../utils/types';
 
 
 export const USER_REQUEST = 'USER_REQUEST';
@@ -37,7 +37,7 @@ const setAuthChecked = (bool: boolean): TSetAuthCheckedAction => {
 // экшены со вторым return вернут промис
 // генератор асинхронного экшена регистрации
 export const register: AppThunk = (form: TEmail & TPassword & TName) => {
-  return function(dispatch: AppDispatch) {
+  return function(dispatch) {
     dispatch({ type: USER_REQUEST });
 
     return registerRequest(form).then(res => {
@@ -61,7 +61,7 @@ export const register: AppThunk = (form: TEmail & TPassword & TName) => {
 
 // генератор асинхронного экшена логина
 export const login: AppThunk = (form: TEmail & TPassword) => {
-  return function(dispatch: AppDispatch) {
+  return function(dispatch) {
     dispatch({ type: USER_REQUEST });
 
     return loginRequest(form).then(res => {
@@ -106,8 +106,8 @@ export const logout: AppThunk = () => {
 }
 
 // генератор асинхронного экшена получения данных пользователя
-export const getUserData: any = () => {
-  return function(dispatch: AppDispatch) {
+export const getUserData: AppThunk<Promise<TResponseBody> | Promise<void>> = () => {
+  return function(dispatch) {
     dispatch({ type: USER_REQUEST });
 
     return getUserInfo().then(res => {
@@ -127,13 +127,13 @@ export const getUserData: any = () => {
 
 // генератор асинхронного экшена обновления данных пользователя
 export const updateUser: AppThunk = (form: TEmail & TPassword & TName) => {
-  return function(dispatch: AppDispatch) {
+  return function(dispatch) {
     dispatch({ type: USER_REQUEST });
 
     return updateUserInfo(form).then(res => {
       dispatch({
         type: USER_REQUEST_SUCCESS,
-        user: res.user
+        user: res?.user
       })
     })
     .catch(err => {
@@ -147,7 +147,7 @@ export const updateUser: AppThunk = (form: TEmail & TPassword & TName) => {
 
 // генератор асинхронного экшена проверки авторизации по токену
 export const checkUserAuth: AppThunk = () => {
-  return (dispatch: AppDispatch) => {
+  return (dispatch) => {
     // если токен есть, выполняем запрос на получение данных пользователя и сохраняем их в store
     if (getCookie('token') || getCookie('refreshToken')) {
       dispatch(getUserData())

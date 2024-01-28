@@ -34,7 +34,7 @@ export const resetOrder = (): TResetOrderAction => {
 }
 
 export const requestOrder: AppThunk = (arr: string[]) => {
-  return function(dispatch: AppDispatch) {
+  return function(dispatch) {
     dispatch({
       type: ORDER_REQUEST
     });

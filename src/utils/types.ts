@@ -23,10 +23,8 @@ export type AppThunk<TReturn = void> = ActionCreator<
 
 // типизация метода dispatch для проверки на валидность отправляемого экшена
 // подставляем в AppThunk<Promise<void>> вместо void
-export type AppDispatch<T = Promise<void>> = (
-  action: TApplicationActions | AppThunk<T>
-) => T;
-// export type AppDispatch = typeof store.dispatch;
+// export type AppDispatch = ThunkDispatch<RootState, undefined, TApplicationActions>;
+export type AppDispatch = typeof store.dispatch;
 // export type AppDispatch = Dispatch<TApplicationActions>;
 
 
@@ -98,7 +96,6 @@ export type TOptions = {
 }
 
 // Тела ответов сервера:
-
 export type TIngredientsResponse = TSuccess & {
   data: TIngredient[];
 }
@@ -106,7 +103,6 @@ export type TIngredientsResponse = TSuccess & {
 export type TOrderResponse = TSuccess & TName & {
   order: TOrder;
 }
-
 export type TOrdersResponse = TSuccess & TOrders;
 
 export type TUserResponse = TSuccess & TUser;
@@ -118,66 +114,33 @@ export type TLogoutResponse = TSuccess & {
   message: string;
 };
 
-export type TResponseBody = TIngredientsResponse | TOrderResponse | TOrdersResponse | TUserResponse |
-  TRegistrationResponse | TAuthorizationResponse | TRefreshTokenResponse | TLogoutResponse;
+// export interface CustomResponse<T> extends Body {
+//   readonly success?: boolean;
+//   readonly headers: Headers;
+//   readonly ok: boolean;
+//   readonly redirected: boolean;
+//   readonly status: number;
+//   readonly statusText: string;
+//   // readonly trailer: Promise<Headers>;
+//   accessToken?: string;
+//   refreshToken?: string;
+//   readonly type: ResponseType;
+//   readonly url: string;
+//   clone(): Response;
+//   json(): Promise<T>; // сюда попадет то, что в CustomResponse<...>
+// }
 
-export interface CustomResponse<T> extends Body {
-  readonly success?: boolean;
-  readonly headers: Headers;
-  readonly ok: boolean;
-  readonly redirected: boolean;
-  readonly status: number;
-  readonly statusText: string;
-  // readonly trailer: Promise<Headers>;
-  accessToken?: any;
-  refreshToken?: any;
-  readonly type: ResponseType;
-  readonly url: string;
-  clone(): Response;
-  json(): Promise<T>; // сюда попадет то, что в CustomResponse<...>
-
-  // readonly data?: TIngredientsResponse;
-  // readonly order?: TOrder;
-  // readonly orders?: TOrder[];
-  // readonly total?: number;
-  // readonly totalToday?: number;
-  // readonly user: TUser;
-  // readonly message?: string;
-}
-
-// запрос ингредиентов
-export interface CustomIngredientsResponse extends CustomResponse<TIngredientsResponse> {
-  readonly data: TIngredientsResponse;
-}
-// конкретный заказ
-export interface CustomOrderResponse extends CustomResponse<TOrderResponse> {
+export type TResponseBody<TDataKey extends string = '', TDataType = {}> = {
+  [key in TDataKey]: TDataType
+} & {
+  success: boolean;
+  readonly data: TIngredient[];
+  readonly user: TUser;
   readonly order: TOrder;
-}
-// список заказов
-export interface CustomOrdersResponse extends CustomResponse<TOrdersResponse> {
   readonly orders: TOrder[];
   readonly total: number;
   readonly totalToday: number;
-}
-// инфо о пользователе (запрос/обновление)
-export interface CustomUserResponse extends CustomResponse<TUserResponse> {
-  readonly user: TUserResponse;
-}
-// регистрация, авторизация
-export interface CustomAuthResponse extends CustomResponse<TRegistrationResponse> {
+  readonly message: string;
   readonly accessToken: string;
   readonly refreshToken: string;
-}
-// обновить токен
-export interface CustomRefreshTokenResponse extends CustomResponse<TRefreshTokenResponse> {
-  readonly accessToken: string;
-  readonly refreshToken: string;
-}
-// разлогиниться
-export interface CustomLogoutResponse extends CustomResponse<TLogoutResponse> {
-  readonly message?: string;
-}
-
-export type CommonCustomResponse = CustomIngredientsResponse | CustomOrderResponse |
-CustomOrdersResponse | CustomUserResponse | CustomAuthResponse | CustomRefreshTokenResponse |
-CustomLogoutResponse;
+};

@@ -1,6 +1,4 @@
 import React from "react";
-import { ThunkDispatch } from "redux-thunk";
-import { Action } from "redux";
 import { useDispatch } from "../hooks/redux-hooks";
 import { Button, EmailInput, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useForm } from "../hooks/useForm";
@@ -11,7 +9,7 @@ import ActionString from "../components/common/action-string/action-string";
 
 
 function LoginPage() {
-  const dispatch: ThunkDispatch<any, any, Action> = useDispatch();
+  const dispatch = useDispatch();
 
   const { handleChange, values, visible, toggleIcon } = useForm({
     email: '', password: ''
@@ -28,6 +26,7 @@ function LoginPage() {
       <RequestForm title="Вход" formName="entry" onSubmit={handleSubmit}>
 
         <EmailInput
+          autoComplete='on'
           onChange={handleChange}
           value={values.email}
           name={'email'}

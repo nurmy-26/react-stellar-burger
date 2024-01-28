@@ -1,6 +1,4 @@
 import React from "react";
-import { ThunkDispatch } from "redux-thunk";
-import { Action } from "redux";
 import { useDispatch } from "../../hooks/redux-hooks";
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { checkUserAuth } from "../../services/actions/auth";
@@ -20,7 +18,7 @@ import Modal from "../modal/modal";
 
 
 function App() {
-  const dispatch: ThunkDispatch<any, any, Action> = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 

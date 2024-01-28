@@ -1,6 +1,4 @@
 import React from "react";
-import { ThunkDispatch } from "redux-thunk";
-import { Action } from "redux";
 import { useDispatch } from "../../../hooks/redux-hooks";
 import { useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
@@ -10,7 +8,7 @@ import Logout from "../logout/logout";
 
 
 function ProfileNav() {
-  const dispatch: ThunkDispatch<any, any, Action> = useDispatch();
+  const dispatch = useDispatch();
   let location = useLocation();
 
   const activeClasses = styles.link + ' ' + styles.link_active;

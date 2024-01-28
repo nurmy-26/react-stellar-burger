@@ -11,8 +11,8 @@ export function getCookie(name: string) {
 // функция для установки или обновления куки
 // props - для доп. св-в, таких как expires (срок жизни куки в секундах)
 // если не установить expires или указать срок жизни 0, кука станет сессионной и удалится, когда пользователь закроет браузер
-export function setCookie(name: string, value: string | number| boolean,
-  props: { expires?: any, path?: string, [key: string]: unknown} = {}) {
+export function setCookie(name: string, value: string,
+  props: { [key: string]: unknown } & { expires?: number | Date | string } = {}) {
   props = {
     ...props,
     // задаем корневой path, чтоб куки были доступны с любой страницы приложения
@@ -27,8 +27,8 @@ export function setCookie(name: string, value: string | number| boolean,
     exp = props.expires = d;
   }
   // eсли expires не number, оно преобразуется в соответствующее время, а затем - в UTC-строку
-  if (exp && exp.toUTCString) {
-    props.expires = exp.toUTCString();
+  if (exp && (exp as Date).toUTCString) {
+    props.expires = (exp as Date).toUTCString();
   }
   value = encodeURIComponent(value);
   let updatedCookie = name + '=' + value;

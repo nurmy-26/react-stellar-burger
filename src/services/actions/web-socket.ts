@@ -71,7 +71,7 @@ export const disconnect = (): TWsDisconnectAction => ({ type: WS_DISCONNECT })
 
 // генератор экшена получения информации о заказе
 export const requestOrderInfo: AppThunk = (number: number) => {
-  return function(dispatch: AppDispatch) {
+  return function(dispatch) {
     dispatch({
       type: GET_ORDER
     });

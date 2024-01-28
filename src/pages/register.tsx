@@ -1,7 +1,5 @@
 import React from "react";
-import { ThunkDispatch } from "redux-thunk";
-import { Action } from "redux";
-import { useDispatch, useSelector } from "../hooks/redux-hooks";
+import { useDispatch } from "../hooks/redux-hooks";
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useForm } from "../hooks/useForm";
 import { register } from "../services/actions/auth";
@@ -11,7 +9,7 @@ import ActionString from "../components/common/action-string/action-string";
 
 
 function RegisterPage() {
-  const dispatch: ThunkDispatch<any, any, Action> = useDispatch();
+  const dispatch = useDispatch();
 
   const { handleChange, values, visible, toggleIcon } = useForm({
     name: '', email: '', password: ''
@@ -29,6 +27,7 @@ function RegisterPage() {
       <RequestForm title="Регистрация" formName="register" onSubmit={handleSubmit}>
         <Input
           type={'text'}
+          autoComplete='name'
           placeholder={'Имя'}
           onChange={handleChange}
           value={values.name}
@@ -39,6 +38,7 @@ function RegisterPage() {
         />
 
         <EmailInput
+          autoComplete='on'
           onChange={handleChange}
           value={values.email}
           name={'email'}

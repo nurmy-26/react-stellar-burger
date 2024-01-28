@@ -34,6 +34,7 @@ function ForgotPasswordPage() {
       <RequestForm title="Восстановление пароля" formName="forgot-password" onSubmit={handleSubmit}>
 
         <EmailInput
+          autoComplete='on'
           placeholder={'Укажите e-mail'}
           onChange={handleChange}
           value={values.email}

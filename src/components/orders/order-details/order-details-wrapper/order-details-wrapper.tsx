@@ -1,6 +1,4 @@
 import React from "react";
-import { ThunkDispatch } from "redux-thunk";
-import { Action } from "redux";
 import { useDispatch, useSelector } from "../../../../hooks/redux-hooks";
 import { useParams } from "react-router-dom";
 import styles from "./order-details-wrapper.module.css";
@@ -11,7 +9,7 @@ import OrderDetails from "../order-details";
 
 const OrderDetailsWrapper = () => {
   const { number } = useParams();
-  const dispatch: ThunkDispatch<any, any, Action> = useDispatch();
+  const dispatch = useDispatch();
 
   // при открытии отдельной страницы (а не модалки) получаем инфо о заказе через запрос к серверу
   React.useEffect(() => {

@@ -1,6 +1,4 @@
 import React, { FormEvent, RefObject } from "react";
-import { ThunkDispatch } from "redux-thunk";
-import { Action } from "redux";
 import styles from "./profile-info.module.css";
 import RequestForm from "../../common/request-form/request-form";
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -11,7 +9,7 @@ import { updateUser } from "../../../services/actions/auth";
 
 
 function ProfileInfo() {
-  const dispatch: ThunkDispatch<any, any, Action> = useDispatch();
+  const dispatch = useDispatch();
   const user = useSelector(getUser);
 
   const initialForm = {
@@ -48,6 +46,7 @@ function ProfileInfo() {
         onBlur={() => toggleIcon()}
         onFocus={() => toggleIcon()}
         type='text'
+        autoComplete='name'
         placeholder={'Имя'}
         onChange={handleChange}
         value={values.name}
@@ -64,6 +63,7 @@ function ProfileInfo() {
         onBlur={() => toggleIcon()}
         onFocus={() => toggleIcon()}
         type='text'
+        autoComplete='email'
         placeholder={'Логин'}
         onChange={handleChange}
         value={values.email}

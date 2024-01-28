@@ -51,6 +51,7 @@ function ResetPasswordPage() {
 
         <Input
           type={'text'}
+          autoComplete='off'
           placeholder={'Введите код из письма'}
           onChange={handleChange}
           value={values.token}
