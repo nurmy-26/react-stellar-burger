@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "../hooks/redux-hooks";
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useForm } from "../hooks/useForm";
-import { register } from "../services/actions/auth";
+import { register } from "../services/slices/auth";
 import MainContainer from "../components/common/main-container/main-container";
 import RequestForm from "../components/common/request-form/request-form";
 import ActionString from "../components/common/action-string/action-string";

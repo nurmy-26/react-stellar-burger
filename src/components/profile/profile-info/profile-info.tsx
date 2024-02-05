@@ -5,7 +5,7 @@ import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-component
 import { useForm } from "../../../hooks/useForm";
 import { useDispatch, useSelector } from "../../../hooks/redux-hooks";
 import { getUser } from "../../../services/selectors/auth";
-import { updateUser } from "../../../services/actions/auth";
+import { updateUser } from "../../../services/slices/auth";
 
 
 function ProfileInfo() {

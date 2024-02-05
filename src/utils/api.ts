@@ -33,8 +33,6 @@ export const checkResponse = (res: Response): Promise<TResponseBody> => {
 // универсальная ф-я проверки на success от сервера
 export const checkSuccess = (res: TResponseBody) => {
   if (res && res.success) {
-    // console.log(res)
-    // console.log(typeof res)
     return res;
   }
   return Promise.reject(`Статус success: ${res.success}`);

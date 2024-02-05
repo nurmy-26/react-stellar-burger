@@ -3,7 +3,7 @@ import { useDispatch } from "../../../hooks/redux-hooks";
 import { useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import styles from "./profile-nav.module.css";
-import { logout } from "../../../services/actions/auth";
+import { logout } from "../../../services/slices/auth";
 import Logout from "../logout/logout";
 
 

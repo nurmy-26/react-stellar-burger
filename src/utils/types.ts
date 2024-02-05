@@ -1,19 +1,20 @@
-import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { ThunkAction } from 'redux-thunk';
 import { Action, ActionCreator } from 'redux';
 
 import { store } from '../services/store';
-import { TAuthActions } from "../services/actions/auth";
-import { TConstructorActions } from "../services/actions/burger-constructor";
-import { TIngredientsActions } from "../services/actions/ingredients";
-import { TOrderActions } from "../services/actions/order";
-import { TWebSocketActions } from "../services/actions/web-socket";
+import { TAuthActions } from "../services/slices/auth";
+import { TConstructorActions } from "../services/slices/burger-constructor";
+import { TIngredientsActions } from "../services/slices/ingredients";
+import { TOrderActions } from "../services/slices/order";
+import { TWebSocketActions } from "../services/slices/socket";
 
 
 // типизация store
 export type RootState = ReturnType<typeof store.getState>;
 
 // типизация всех экшенов приложения
-type TApplicationActions = TAuthActions | TConstructorActions | TIngredientsActions | TOrderActions | TWebSocketActions;
+type TApplicationActions = TAuthActions | TConstructorActions | TIngredientsActions
+   | TOrderActions | TWebSocketActions;
 
 // типизация thunk в приложении; TReturn = Promise<void> | void
 // по умолчанию AppThunk<void>
@@ -22,10 +23,7 @@ export type AppThunk<TReturn = void> = ActionCreator<
 >;
 
 // типизация метода dispatch для проверки на валидность отправляемого экшена
-// подставляем в AppThunk<Promise<void>> вместо void
-// export type AppDispatch = ThunkDispatch<RootState, undefined, TApplicationActions>;
 export type AppDispatch = typeof store.dispatch;
-// export type AppDispatch = Dispatch<TApplicationActions>;
 
 
 export type TIngredient = {
@@ -96,39 +94,23 @@ export type TOptions = {
 }
 
 // Тела ответов сервера:
-export type TIngredientsResponse = TSuccess & {
-  data: TIngredient[];
-}
+// export type TIngredientsResponse = TSuccess & {
+//   data: TIngredient[];
+// }
 
 export type TOrderResponse = TSuccess & TName & {
   order: TOrder;
 }
-export type TOrdersResponse = TSuccess & TOrders;
+// export type TOrdersResponse = TSuccess & TOrders;
 
-export type TUserResponse = TSuccess & TUser;
+// export type TUserResponse = TSuccess & TUser;
 
-export type TRegistrationResponse = TSuccess & TUser & TTokens;
-export type TAuthorizationResponse = TRegistrationResponse;
-export type TRefreshTokenResponse = TSuccess & TTokens;
-export type TLogoutResponse = TSuccess & {
-  message: string;
-};
-
-// export interface CustomResponse<T> extends Body {
-//   readonly success?: boolean;
-//   readonly headers: Headers;
-//   readonly ok: boolean;
-//   readonly redirected: boolean;
-//   readonly status: number;
-//   readonly statusText: string;
-//   // readonly trailer: Promise<Headers>;
-//   accessToken?: string;
-//   refreshToken?: string;
-//   readonly type: ResponseType;
-//   readonly url: string;
-//   clone(): Response;
-//   json(): Promise<T>; // сюда попадет то, что в CustomResponse<...>
-// }
+// export type TRegistrationResponse = TSuccess & TUser & TTokens;
+// export type TAuthorizationResponse = TRegistrationResponse;
+// export type TRefreshTokenResponse = TSuccess & TTokens;
+// export type TLogoutResponse = TSuccess & {
+//   message: string;
+// };
 
 export type TResponseBody<TDataKey extends string = '', TDataType = {}> = {
   [key in TDataKey]: TDataType

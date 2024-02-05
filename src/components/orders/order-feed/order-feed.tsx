@@ -9,7 +9,7 @@ type Props = {
   orderList: TOrder[];
 }
 
-function OrderFeed({type, orderList}: Props) {
+function OrderFeed({ type, orderList }: Props) {
   const MemoOrderCard = React.memo(OrderCard);
   const section = React.useMemo(() => {
     return orderList.map((item) => {

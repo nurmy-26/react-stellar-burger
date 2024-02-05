@@ -1,29 +1,37 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { rootReducer } from './reducers/index';
 import { socketMiddleware } from './middleware/web-socket';
-import {
-  WS_CONNECT,
-  WS_DISCONNECT,
-  WS_CONNECTION_START,
-  WS_CONNECTION_SUCCESS,
-  WS_CONNECTION_ERROR,
-  WS_CONNECTION_CLOSED,
-  WS_GET_MESSAGE
-} from './actions/web-socket';
+import authReducer from './slices/auth';
+import constructorReducer from './slices/burger-constructor';
+import ingredientsReducer from './slices/ingredients';
+import orderReducer from './slices/order';
+import socketReducer, {
+  connect,
+  disconnect,
+  wsConnectionStart,
+  wsConnectionSuccess,
+  wsConnectionError,
+  wsConnectionClosed,
+  wsGetMessage } from './slices/socket';
 
 const wsActions = {
-  wsConnect: WS_CONNECT,
-  wsDisconnect: WS_DISCONNECT,
-  wsConnecting: WS_CONNECTION_START,
-  onOpen: WS_CONNECTION_SUCCESS,
-  onClose: WS_CONNECTION_CLOSED,
-  onError: WS_CONNECTION_ERROR,
-  onMessage: WS_GET_MESSAGE
-};
+  wsConnect: connect.type,
+  wsDisconnect: disconnect.type,
+  wsConnecting: wsConnectionStart.type,
+  onOpen: wsConnectionSuccess.type,
+  onClose: wsConnectionClosed.type,
+  onError: wsConnectionError.type,
+  onMessage: wsGetMessage.type
+}
 
 // инициализируем хранилище
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    ingredientsData: ingredientsReducer,
+    constructorData: constructorReducer,
+    orderData: orderReducer,
+    auth: authReducer,
+    socket: socketReducer
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(socketMiddleware(wsActions)),
   // Redux DevTools инструменты будут установлены автоматически

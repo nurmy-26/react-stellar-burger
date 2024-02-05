@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "../../../hooks/redux-hooks";
 import styles from "./profile-history.module.css";
 import { CONFIG } from "../../../utils/api";
-import { connect, disconnect } from "../../../services/actions/web-socket";
+import { connect, disconnect } from "../../../services/slices/socket";
 import { getOrderList } from "../../../services/selectors/web-socket";
 import OrderFeed from "../../orders/order-feed/order-feed";
 import Loading from "../../common/loading/loading";

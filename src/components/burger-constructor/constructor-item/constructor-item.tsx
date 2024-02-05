@@ -4,8 +4,7 @@ import { useDispatch } from "../../../hooks/redux-hooks";
 import styles from "./constructor-item.module.css";
 import { DragIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { TIngredient } from "../../../utils/types";
-import { deleteIngredient } from "../../../services/actions/burger-constructor";
-import { exchangeOrder } from "../../../services/actions/burger-constructor";
+import { deleteIngredient, exchangeOrder } from "../../../services/slices/burger-constructor";
 
 
 type Props = {
@@ -59,7 +58,7 @@ function ConstructorItem({ item, index }: Props) {
       }
 
       // только если ни одно из условий выше не сработало - меняем порядок
-      dispatch(exchangeOrder(dragIndex, hoverIndex));
+      dispatch(exchangeOrder({dragIndex, hoverIndex}));
       item.index = hoverIndex;
       }
   });

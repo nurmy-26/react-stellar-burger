@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "../../hooks/redux-hooks";
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
-import { checkUserAuth } from "../../services/actions/auth";
-import { requestIngredientsData } from '../../services/actions/ingredients'
+import { checkUserAuth } from "../../services/slices/auth";
+import { fetchIngredients } from '../../services/slices/ingredients'
 import AppHeader from "../app-header/app-header";
 import { OnlyAuth, OnlyUnAuth } from "../protected-component";
 import { FeedPage, ForgotPasswordPage, LoginPage, MainPage, NotFound404,
@@ -33,7 +33,7 @@ function App() {
 
   React.useEffect(() => {
     dispatch(checkUserAuth());
-    dispatch(requestIngredientsData());
+    dispatch(fetchIngredients());
     // запрашиваем список ингредиентов именно здесь (1 раз при запуске приложения), а не в компоненте ингредиентов, чтобы не посылать запрос каждый раз при ре-рендере секции
   }, []);
 

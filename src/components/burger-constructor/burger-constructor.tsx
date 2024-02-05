@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import styles from "./burger-constructor.module.css";
 import { useModal } from "../../hooks/useModal";
 import { getConstructorData } from "../../services/selectors/burger-constructor";
-import { requestOrder, resetOrder } from "../../services/actions/order";
-import { clearOrder } from "../../services/actions/burger-constructor";
+import { requestOrder, resetOrder } from "../../services/slices/order";
+import { clearOrder } from "../../services/slices/burger-constructor";
 import { getUser } from "../../services/selectors/auth";
 import Modal from "../modal/modal";
 import ConstructorSection from "./constructor-section/constructor-section";
@@ -31,9 +31,9 @@ function BurgerConstructor() {
       return;
     }
 
-    const bunId = constructorData.bun?._id;
-    const ingredientsArr = constructorData.ingredients.map(item => item._id)
-    const constructorIdList = [bunId, ...ingredientsArr, bunId]
+    const bunId: string = constructorData.bun?._id!;
+    const ingredientsArr: string[] = constructorData.ingredients.map(item => item._id)
+    const constructorIdList: string[] = [bunId, ...ingredientsArr, bunId]
 
     dispatch(requestOrder(constructorIdList));
     openModal();

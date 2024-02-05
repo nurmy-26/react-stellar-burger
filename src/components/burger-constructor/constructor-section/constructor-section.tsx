@@ -4,7 +4,7 @@ import { useDrop } from "react-dnd";
 import styles from "./constructor-section.module.css";
 import {TIngredient} from "../../../utils/types";
 import { getConstructorData } from "../../../services/selectors/burger-constructor";
-import { addIngredient } from "../../../services/actions/burger-constructor";
+import { addIngredient } from "../../../services/slices/burger-constructor";
 import ConstructorItem from "../constructor-item/constructor-item";
 import ConstructorPlaceholder from "../constructor-placeholder/constructor-placeholder";
 

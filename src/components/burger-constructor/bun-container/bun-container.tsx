@@ -5,7 +5,7 @@ import styles from "./bun-container.module.css";
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import {TIngredient} from "../../../utils/types";
 import { getConstructorData } from "../../../services/selectors/burger-constructor";
-import { addBun } from "../../../services/actions/burger-constructor";
+import { addBun } from "../../../services/slices/burger-constructor";
 import ConstructorPlaceholder from "../constructor-placeholder/constructor-placeholder";
 
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "../hooks/redux-hooks";
 import { CONFIG } from "../utils/api";
-import { connect, disconnect } from "../services/actions/web-socket";
+import { connect, disconnect } from "../services/slices/socket";
 import { getOrderList, getTotal, getTotalToday } from "../services/selectors/web-socket";
 import MainContainer from "../components/common/main-container/main-container";
 import OrderFeed from "../components/orders/order-feed/order-feed";
