@@ -9,3 +9,25 @@
   padding: 0;
   list-style: none;
 }
+
+/* page style "s" */
+.ps-s {
+  justify-content: space-between;
+  gap: calc(var(--offset-base-size)*10);
+  margin: calc(var(--offset-base-size)*10) auto auto;
+}
+
+/* page style "m" */
+.ps-m {
+  justify-content: center;
+  gap: calc(var(--offset-base-size)*15);
+  margin: calc(var(--offset-base-size)*10) auto auto;
+}
+
+/* page style "l" */
+.ps-l {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: calc(var(--offset-base-size)*45) auto auto;
+}
