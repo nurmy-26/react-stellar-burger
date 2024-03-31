@@ -1,4 +1,4 @@
-# Проект Stellar Burger
+# [Проект Stellar Burger](https://nurmy-26.github.io/react-stellar-burger/)
 
 ## Обзор
 *Приложение "Космическая бургерная" - создайте свой уникальный бургер!*
